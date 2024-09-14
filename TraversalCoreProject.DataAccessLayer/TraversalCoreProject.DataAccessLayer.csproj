@@ -20,10 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-    <Folder Include="Context\" />
     <Folder Include="EntityFramework\" />
     <Folder Include="Abstract\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TraversalCoreProject.EntityLayer\TraversalCoreProject.EntityLayer.csproj" />
   </ItemGroup>
 
 </Project>
