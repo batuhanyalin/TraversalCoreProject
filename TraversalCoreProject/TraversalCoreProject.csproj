@@ -25,7 +25,6 @@
     <Folder Include="Areas\Member\Data\" />
     <Folder Include="Areas\Member\Models\" />
     <Folder Include="Areas\Member\Views\" />
-    <Folder Include="Mapping\" />
     <Folder Include="Areas\" />
   </ItemGroup>
 

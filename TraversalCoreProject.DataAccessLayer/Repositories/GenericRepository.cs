@@ -8,7 +8,7 @@ using TraversalCoreProject.DataAccessLayer.Context;
 
 namespace TraversalCoreProject.DataAccessLayer.Repositories
 {
-    public class GenericRepository<T> : IGenericDAL<T> where T : class
+    public class GenericRepository<T> : IGenericDAL<T> where T : class 
     {
         TraversalContext context = new TraversalContext();
         public void Delete(int id)
