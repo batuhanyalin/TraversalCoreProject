@@ -29,4 +29,9 @@
     <Folder Include="Areas\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TraversalCoreProject.BusinessLayer\TraversalCoreProject.BusinessLayer.csproj" />
+    <ProjectReference Include="..\TraversalCoreProject.DtoLayer\TraversalCoreProject.DtoLayer.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -13,8 +13,11 @@
 
   <ItemGroup>
     <Folder Include="ValidationRules\" />
-    <Folder Include="Concrete\" />
-    <Folder Include="Abstract\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TraversalCoreProject.DataAccessLayer\TraversalCoreProject.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\TraversalCoreProject.DtoLayer\TraversalCoreProject.DtoLayer.csproj" />
   </ItemGroup>
 
 </Project>
