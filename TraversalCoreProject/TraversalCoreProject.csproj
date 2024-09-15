@@ -22,12 +22,13 @@
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\Admin\ViewComponents\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\" />
     <Folder Include="Areas\Member\Controllers\" />
     <Folder Include="Areas\Member\Data\" />
     <Folder Include="Areas\Member\Models\" />
-    <Folder Include="Areas\Member\Views\" />
-    <Folder Include="Areas\" />
+    <Folder Include="Areas\Member\Views\Shared\Components\" />
+    <Folder Include="Areas\Member\ViewComponents\" />
   </ItemGroup>
 
   <ItemGroup>
