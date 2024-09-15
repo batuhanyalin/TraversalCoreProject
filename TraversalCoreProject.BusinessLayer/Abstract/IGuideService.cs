@@ -7,7 +7,7 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.BusinessLayer.Abstract
 {
-    public interface IGuideService : IGenericService<Guide>
+    public interface IGuideService : IGenericService<AppUser>
     {
     }
 }

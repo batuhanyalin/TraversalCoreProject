@@ -8,9 +8,11 @@ namespace TraversalCoreProject.EntityLayer.Concrete
 {
     public class DestinationMatchGuide
     {
-        public int DestinationId { get; set; }
+        public int DestinationMatchGuideId { get; set; }
         public Destination Destination { get; set; }
+        public int DestinationId { get; set; }
+        public AppUser Guide { get; set; }
         public int GuideId { get; set; }
-        public Guide Guide { get; set; }
+        
     }
 }

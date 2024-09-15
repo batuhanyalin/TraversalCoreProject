@@ -19,12 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\ViewComponents\" />
     <Folder Include="Areas\Admin\Views\Shared\Components\" />
-    <Folder Include="Areas\Member\Controllers\" />
     <Folder Include="Areas\Member\Data\" />
     <Folder Include="Areas\Member\Models\" />
     <Folder Include="Areas\Member\Views\Shared\Components\" />
@@ -33,6 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TraversalCoreProject.BusinessLayer\TraversalCoreProject.BusinessLayer.csproj" />
+    <ProjectReference Include="..\TraversalCoreProject.DataAccessLayer\TraversalCoreProject.DataAccessLayer.csproj" />
     <ProjectReference Include="..\TraversalCoreProject.DtoLayer\TraversalCoreProject.DtoLayer.csproj" />
   </ItemGroup>
 

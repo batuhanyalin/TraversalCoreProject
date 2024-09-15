@@ -23,22 +23,22 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _guideDAL.Delete(id);
         }
 
-        public Guide TGetById(int id)
+        public AppUser TGetById(int id)
         {
             return _guideDAL.GetById(id);
         }
 
-        public List<Guide> TGetListAll()
+        public List<AppUser> TGetListAll()
         {
             return _guideDAL.GetListAll();
         }
 
-        public void TInsert(Guide entity)
+        public void TInsert(AppUser entity)
         {
             _guideDAL.Insert(entity);
         }
 
-        public void TUpdate(Guide entity)
+        public void TUpdate(AppUser entity)
         {
           _guideDAL.Update(entity);
         }

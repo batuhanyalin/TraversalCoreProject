@@ -7,7 +7,7 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.DataAccessLayer.Abstract
 {
-    public interface IGuideDAL : IGenericDAL<Guide>
+    public interface IGuideDAL : IGenericDAL<AppUser>
     {
     }
 }

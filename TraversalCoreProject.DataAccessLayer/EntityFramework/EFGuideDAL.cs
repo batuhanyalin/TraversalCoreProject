@@ -9,7 +9,7 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.DataAccessLayer.EntityFramework
 {
-    public class EFGuideDAL:GenericRepository<Guide>,IGuideDAL
+    public class EFGuideDAL:GenericRepository<AppUser>,IGuideDAL
     {
     }
 }

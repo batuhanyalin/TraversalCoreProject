@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TraversalCoreProject.DtoLayer.LoginDtos;
 
 namespace TraversalCoreProject.Controllers
 {
@@ -10,7 +11,7 @@ namespace TraversalCoreProject.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index()
+        public IActionResult Index(LoginDto loginDto)
         {
             return View();
         }

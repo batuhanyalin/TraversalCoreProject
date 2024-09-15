@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.DataAccessLayer.Context
 {
-    public class TraversalContext:DbContext
+    public class TraversalContext:IdentityDbContext<AppUser,AppRole,int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -19,8 +20,8 @@ namespace TraversalCoreProject.DataAccessLayer.Context
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactPage> ContactPages { get; set; }
         public DbSet<Destination> Destinations { get; set; }
-        public DbSet<Guide> Guides { get; set; }
         public DbSet<Newsletter> Newsletters { get; set; }
+        public DbSet<IndexBanner> IndexBanners { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<SubAbout> SubAbouts { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
