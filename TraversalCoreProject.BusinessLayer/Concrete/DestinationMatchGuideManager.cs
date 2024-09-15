@@ -9,11 +9,11 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.BusinessLayer.Concrete
 {
-    public class DestinationMatchGuideServiceManager : IDestinationMatchGuideService
+    public class DestinationMatchGuideManager : IDestinationMatchGuideService
     {
         private readonly IDestinationMatchGuideDAL _destinationMatchGuideDAL;
 
-        public DestinationMatchGuideServiceManager(IDestinationMatchGuideDAL destinationMatchGuideDAL)
+        public DestinationMatchGuideManager(IDestinationMatchGuideDAL destinationMatchGuideDAL)
         {
             _destinationMatchGuideDAL = destinationMatchGuideDAL;
         }

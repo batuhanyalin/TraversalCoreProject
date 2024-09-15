@@ -9,7 +9,7 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.BusinessLayer.Concrete
 {
-    public class AboutManager : INewsletterService
+    public class AboutManager : IAboutService
     {
         private readonly IAboutDAL _aboutDAL;
 
