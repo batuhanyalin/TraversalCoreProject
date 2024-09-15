@@ -28,6 +28,8 @@
     <Folder Include="Areas\Member\Models\" />
     <Folder Include="Areas\Member\Views\" />
     <Folder Include="Areas\" />
+    <Folder Include="ViewComponents\" />
+    <Folder Include="Views\Shared\Components\" />
   </ItemGroup>
 
   <ItemGroup>

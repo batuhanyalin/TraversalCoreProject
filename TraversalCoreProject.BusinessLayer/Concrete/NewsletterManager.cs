@@ -20,7 +20,7 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
 
         public void TDelete(int id)
         {
-          _newsletterDAL.Delete(id);
+            _newsletterDAL.Delete(id);
         }
 
         public Newsletter TGetById(int id)
@@ -41,5 +41,6 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
         public void TUpdate(Newsletter entity)
         {
             _newsletterDAL.Update(entity);
+        }
     }
 }
