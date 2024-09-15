@@ -15615,12 +15615,12 @@ a.hnys-title {
 
 /*--/w3l-bottom--*/
 .w3l-bottom {
-  background: url(../images/banner2.jpg) no-repeat center;
-  background-size: cover;
-  position: relative;
-  z-index: 0;
-  display: grid;
-  align-items: center;
+    background-size: cover;
+    position: relative;
+    z-index: 0;
+    display: grid;
+    align-items: center;
+    background: url(~/Traversal/assets/images/banner2.jpg);
 }
 
 .w3l-bottom::before {
