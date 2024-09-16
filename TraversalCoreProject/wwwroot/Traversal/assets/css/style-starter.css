@@ -15620,7 +15620,7 @@ a.hnys-title {
     z-index: 0;
     display: grid;
     align-items: center;
-    background: url(/Traversal/assets/images/banner2.jpg);
+    /*    background: url(/Traversal/assets/images/banner2.jpg); */ /*   dinamik hale getirdiğim için yorum satırına çevirdim. */
 }
 
 .w3l-bottom::before {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TraversalCoreProject.EntityLayer.Concrete
 {
-    public class AppUser:IdentityUser<int>
+    public class AppUser : IdentityUser<int>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -24,6 +24,7 @@ namespace TraversalCoreProject.EntityLayer.Concrete
         public string? TwitterUrl { get; set; }
         public DateTime Birtday { get; set; }
         public bool IsActive { get; set; }
+        public List<Testimonial> Testimonials { get; set; }
         public List<DestinationMatchGuide> DestinationMatchGuides { get; set; }
     }
 }

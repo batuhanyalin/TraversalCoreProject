@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IAboutDAL,EFAboutDAL>();
 builder.Services.AddScoped<IAbout2DAL,EFAbout2DAL>();
+builder.Services.AddScoped<IIndexBannerDAL,EFIndexBannerDAL>();
 builder.Services.AddScoped<IContactDAL,EFContactDAL>();
 builder.Services.AddScoped<IContactPageDAL, EFContactPageDAL>();
 builder.Services.AddScoped<IDestinationDAL, EFDestinationDAL>();
@@ -32,6 +33,10 @@ builder.Services.AddScoped<INewsletterService, NewsletterManager>();
 builder.Services.AddScoped<ISocialMediaService, SocialMediaManager>();
 builder.Services.AddScoped<ISubAboutService, SubAboutManager>();
 builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
+builder.Services.AddScoped<IIndexBannerService, IndexBannerManager>();
+
+
+
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<TraversalContext>();
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<TraversalContext>();
