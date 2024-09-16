@@ -1,7 +1,10 @@
+using System.Reflection;
 using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.BusinessLayer.Concrete;
 using TraversalCoreProject.DataAccessLayer.Abstract;
+using TraversalCoreProject.DataAccessLayer.Context;
 using TraversalCoreProject.DataAccessLayer.EntityFramework;
+using TraversalCoreProject.EntityLayer.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +32,9 @@ builder.Services.AddScoped<INewsletterService, NewsletterManager>();
 builder.Services.AddScoped<ISocialMediaService, SocialMediaManager>();
 builder.Services.AddScoped<ISubAboutService, SubAboutManager>();
 builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
-
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddDbContext<TraversalContext>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<TraversalContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

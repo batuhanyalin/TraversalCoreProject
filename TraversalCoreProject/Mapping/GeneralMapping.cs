@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
+using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.Mapping
 {
@@ -6,7 +8,8 @@ namespace TraversalCoreProject.Mapping
     {
         public GeneralMapping()
         {
-            
+            CreateMap<Destination,DestinationListDto>().ReverseMap();
+            CreateMap<Destination,PopularDestinationListDto>().ReverseMap();
         }
     }
 }
