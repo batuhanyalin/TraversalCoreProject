@@ -11,6 +11,8 @@ namespace TraversalCoreProject.EntityLayer.Concrete
         public int TestimonialId { get; set; }
         public AppUser Member { get; set; }
         public int MemberId { get; set; }
+        public Destination Destination { get; set; }
+        public int DestinationId { get; set; }
         public string Comment { get; set; }
         public DateTime CommentDate { get; set; }
         public bool IsApproved { get; set; }
