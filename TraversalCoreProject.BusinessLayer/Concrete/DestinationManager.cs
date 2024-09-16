@@ -25,7 +25,12 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
 
         public Destination TGetById(int id)
         {
-            return _destinationDAL.GetById(id); 
+            return _destinationDAL.GetById(id);
+        }
+
+        public List<Destination> TGetFeaturePosts()
+        {
+            return _destinationDAL.GetFeaturePosts();
         }
 
         public List<Destination> TGetListAll()
@@ -35,7 +40,7 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
 
         public void TInsert(Destination entity)
         {
-           _destinationDAL.Insert(entity);
+            _destinationDAL.Insert(entity);
         }
 
         public void TUpdate(Destination entity)
