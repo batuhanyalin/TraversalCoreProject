@@ -16,12 +16,12 @@ namespace TraversalCoreProject.EntityLayer.Concrete
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Profession { get; set; }
-        public string HomeTown { get; set; }
-        public string MainLanguage { get; set; }
-        public string OtherLanguage { get; set; }
+        public string? HomeTown { get; set; }
+        public string? MainLanguage { get; set; }
+        public string? OtherLanguage { get; set; }
         public string ImageUrl { get; set; }
-        public string InstagramUrl { get; set; }
-        public string TwitterUrl { get; set; }
+        public string? InstagramUrl { get; set; }
+        public string? TwitterUrl { get; set; }
         public DateTime Birtday { get; set; }
         public bool IsActive { get; set; }
         public List<DestinationMatchGuide> DestinationMatchGuides { get; set; }
