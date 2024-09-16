@@ -24,7 +24,7 @@ namespace TraversalCoreProject.EntityLayer.Concrete
         public string? TwitterUrl { get; set; }
         public DateTime Birtday { get; set; }
         public bool IsActive { get; set; }
-        public List<Testimonial> Testimonials { get; set; }
+        public List<Comment> Comments { get; set; }
         public List<DestinationMatchGuide> DestinationMatchGuides { get; set; }
     }
 }

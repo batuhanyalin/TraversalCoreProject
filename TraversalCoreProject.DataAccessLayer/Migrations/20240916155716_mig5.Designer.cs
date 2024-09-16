@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TraversalCoreProject.DataAccessLayer.Context;
 
@@ -11,9 +12,10 @@ using TraversalCoreProject.DataAccessLayer.Context;
 namespace TraversalCoreProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(TraversalContext))]
-    partial class TraversalContextModelSnapshot : ModelSnapshot
+    [Migration("20240916155716_mig5")]
+    partial class mig5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -439,6 +441,9 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DestinationId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Detail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -460,6 +465,8 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("DestinationId");
+
+                    b.HasIndex("DestinationId1");
 
                     b.ToTable("Destinations");
                 });
@@ -665,6 +672,13 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TraversalCoreProject.EntityLayer.Concrete.Destination", b =>
+                {
+                    b.HasOne("TraversalCoreProject.EntityLayer.Concrete.Destination", null)
+                        .WithMany("Destinations")
+                        .HasForeignKey("DestinationId1");
+                });
+
             modelBuilder.Entity("TraversalCoreProject.EntityLayer.Concrete.DestinationMatchGuide", b =>
                 {
                     b.HasOne("TraversalCoreProject.EntityLayer.Concrete.Destination", "Destination")
@@ -687,7 +701,7 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
             modelBuilder.Entity("TraversalCoreProject.EntityLayer.Concrete.Testimonial", b =>
                 {
                     b.HasOne("TraversalCoreProject.EntityLayer.Concrete.Destination", "Destination")
-                        .WithMany("Testimonials")
+                        .WithMany()
                         .HasForeignKey("DestinationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -714,7 +728,7 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
                 {
                     b.Navigation("DestinationMatchGuides");
 
-                    b.Navigation("Testimonials");
+                    b.Navigation("Destinations");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,12 +9,11 @@ namespace TraversalCoreProject.EntityLayer.Concrete
     public class Testimonial
     {
         public int TestimonialId { get; set; }
-        public AppUser Member { get; set; }
-        public int MemberId { get; set; }
-        public Destination Destination { get; set; }
-        public int DestinationId { get; set; }
+        public string ClientName { get; set; }
+        public string ClientSurname { get; set; }
         public string Comment { get; set; }
         public DateTime CommentDate { get; set; }
+        public string ClientImageUrl { get; set; }
         public bool IsApproved { get; set; }
     }
 }
