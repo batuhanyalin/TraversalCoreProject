@@ -20,6 +20,8 @@ builder.Services.AddScoped<IGuideDAL, EFGuideDAL>();
 builder.Services.AddScoped<INewsletterDAL, EFNewsletterDAL>();
 builder.Services.AddScoped<ISocialMediaDAL, EFSocialMediaDAL>();
 builder.Services.AddScoped<ITestimonialDAL, EFTestimonialDAL>();
+builder.Services.AddScoped<ITagDAL, EFTagDAL>();
+builder.Services.AddScoped<IDestinationTagDAL, EFDestinationTagDAL>();
 
 builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IContactService, ContactManager>();
@@ -31,6 +33,8 @@ builder.Services.AddScoped<INewsletterService, NewsletterManager>();
 builder.Services.AddScoped<ISocialMediaService, SocialMediaManager>();
 builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
 builder.Services.AddScoped<IIndexBannerService, IndexBannerManager>();
+builder.Services.AddScoped<ITagService, TagManager>();
+builder.Services.AddScoped<IDestinationTagService, DestinationTagManager>();
 
 
 

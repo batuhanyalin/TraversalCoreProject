@@ -24,6 +24,7 @@ namespace TraversalCoreProject.EntityLayer.Concrete
         public int Capacity { get; set; }
         public bool Status { get; set; }
         public bool IsFeaturePost { get; set; }
+        public List<DestinationTag> DestinationTags { get; set; }
         public List<Comment> Comments { get; set; }
         public List<DestinationMatchGuide> DestinationMatchGuides { get; set; }
     }
