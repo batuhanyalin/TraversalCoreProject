@@ -4,7 +4,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
 {
     public class ContactController : Controller
     {
-        public IActionResult Index()
+        public IActionResult ListContact()
         {
             return View();
         }

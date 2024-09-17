@@ -4,7 +4,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
 {
     public class DestinationController : Controller
     {
-        public IActionResult Index()
+        public IActionResult ListDestination()
         {
             return View();
         }

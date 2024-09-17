@@ -20,6 +20,7 @@ builder.Services.AddScoped<IGuideDAL, EFGuideDAL>();
 builder.Services.AddScoped<INewsletterDAL, EFNewsletterDAL>();
 builder.Services.AddScoped<ISocialMediaDAL, EFSocialMediaDAL>();
 builder.Services.AddScoped<ITestimonialDAL, EFTestimonialDAL>();
+
 builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IContactService, ContactManager>();
 builder.Services.AddScoped<IContactPageService, ContactPageManager>();
@@ -28,7 +29,6 @@ builder.Services.AddScoped<IDestinationMatchGuideService, DestinationMatchGuideM
 builder.Services.AddScoped<IGuideService, GuideManager>();
 builder.Services.AddScoped<INewsletterService, NewsletterManager>();
 builder.Services.AddScoped<ISocialMediaService, SocialMediaManager>();
-
 builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
 builder.Services.AddScoped<IIndexBannerService, IndexBannerManager>();
 

@@ -10,4 +10,8 @@
     <ProjectReference Include="..\TraversalCoreProject.EntityLayer\TraversalCoreProject.EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AdminAreaDtos\ContactDtos\" />
+  </ItemGroup>
+
 </Project>

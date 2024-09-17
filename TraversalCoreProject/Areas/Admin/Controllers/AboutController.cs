@@ -1,12 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using TraversalCoreProject.BusinessLayer.Abstract;
+using TraversalCoreProject.DtoLayer.AdminAreaDtos.AboutDtos;
 
 namespace TraversalCoreProject.Areas.Admin.Controllers
 {
     public class AboutController : Controller
     {
-        public IActionResult Index()
+        private readonly IAboutService _aboutService;
+        private readonly IMapper _mapper;
+
+        public AboutController(IAboutService aboutService)
         {
-            return View();
+            _aboutService = aboutService;
+        }
+
+        public IActionResult ListAbout()
+        {
+            var values = _aboutService.TGetListAll();
+            var map = _mapper.Map<List<AboutListDto>>(values);
+            return View(map);
         }
     }
 }

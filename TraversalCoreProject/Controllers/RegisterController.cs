@@ -37,6 +37,10 @@ namespace TraversalCoreProject.Controllers
                 var register = await _userManager.CreateAsync(value, registerDto.Password);
                 if (register.Succeeded)
                 {
+                    var user = await _userManager.FindByNameAsync(registerDto.UserName);
+                    var currentRoles = await _userManager.GetRolesAsync(user);
+                    await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                    await _userManager.AddToRoleAsync(user, "Member");
                     return RedirectToAction("Index", "Login");
                 }
                 else

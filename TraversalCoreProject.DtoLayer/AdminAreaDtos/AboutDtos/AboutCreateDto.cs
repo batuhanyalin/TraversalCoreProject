@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TraversalCoreProject.EntityLayer.Concrete
+namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.AboutDtos
 {
-    public class About
+    public class AboutCreateDto
     {
-        public int AboutId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string ImageUrl1 { get; set; }

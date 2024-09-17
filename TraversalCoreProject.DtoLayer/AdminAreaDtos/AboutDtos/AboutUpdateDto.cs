@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TraversalCoreProject.EntityLayer.Concrete
+namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.AboutDtos
 {
-    public class About
+    public class AboutUpdateDto
     {
         public int AboutId { get; set; }
         public string Title { get; set; }
