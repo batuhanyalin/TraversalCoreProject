@@ -1,33 +1,29 @@
-﻿<div class="author-card col m-3" style="text-align:center">
-    <div>
-        <a href="/Guide/GuideDetail/id">
-            <img src="~/Traversal/assets/images/c3.jpg" alt="" class="rounded-circle img-fluid">
-        </a>
+﻿@model List<DestinationMatchGuide>
+@foreach (var item in Model)
+{
+    <div class="author-card col m-3" style="text-align:center">
+        <div>
+            <a href="/Guide/GuideDetail/@item.Guide.Id">
+                <img src="@item.Guide.ImageUrl" alt="" class="rounded-circle img-fluid">
+            </a>
+        </div>
+        <h3 class="mb-3 title">@item.Guide.Name @item.Guide.Surname</h3>
+        <p>
+            @item.Guide.About
+        </p>
+        <ul class="author-icons mt-4">
+            <li>
+                <a class="twitter" href="@item.Guide.InstagramUrl">
+                    <span class="fa fa-twitter"
+                          aria-hidden="true"></span>
+                </a>
+            </li>
+            <li>
+                <a class="instagram" href="@item.Guide.TwitterUrl">
+                    <span class="fa fa-instagram"
+                          aria-hidden="true"></span>
+                </a>
+            </li>
+        </ul>
     </div>
-    <h3 class="mb-3 title">Alexander Ronald</h3>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, sed et excepturi.
-            
-        Distinctio fugit odit? Fugit ipsam. Lorem ipsum dolor sit.
-    </p>
-    <ul class="author-icons mt-4">
-        <li>
-            <a class="youtube" href="#url">
-                <span class="fa fa-youtube"
-                      aria-hidden="true"></span>
-            </a>
-        </li>
-        <li>
-            <a class="twitter" href="#url">
-                <span class="fa fa-twitter"
-                      aria-hidden="true"></span>
-            </a>
-        </li>
-        <li>
-            <a class="instagram" href="#url">
-                <span class="fa fa-instagram"
-                      aria-hidden="true"></span>
-            </a>
-        </li>
-    </ul>
-</div>
+}

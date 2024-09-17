@@ -9,5 +9,6 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
 {
     public interface IDestinationMatchGuideDAL : IGenericDAL<DestinationMatchGuide>
     {
+        public List<DestinationMatchGuide> GetGuideAllByDestinationId(int id);
     }
 }
