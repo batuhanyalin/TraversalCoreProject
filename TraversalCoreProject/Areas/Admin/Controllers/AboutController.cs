@@ -10,9 +10,10 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         private readonly IAboutService _aboutService;
         private readonly IMapper _mapper;
 
-        public AboutController(IAboutService aboutService)
+        public AboutController(IAboutService aboutService, IMapper mapper)
         {
             _aboutService = aboutService;
+            _mapper = mapper;
         }
 
         public IActionResult ListAbout()

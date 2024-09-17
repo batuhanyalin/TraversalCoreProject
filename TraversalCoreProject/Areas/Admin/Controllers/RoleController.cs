@@ -57,10 +57,10 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Rol kaydetme işlemi sırasında bir hata oluştu" });
             }
         }
-        public IActionResult DeleteRole(int id)
+        public async Task<IActionResult> DeleteRole(int id)
         {
             var values = _roleManager.Roles.FirstOrDefault(x => x.Id == id);
-            var result = _roleManager.DeleteAsync(values);
+            var result = await _roleManager.DeleteAsync(values);
             return Json(new { success = true });
         }
     }

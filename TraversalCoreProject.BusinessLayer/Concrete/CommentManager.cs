@@ -33,6 +33,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _commentDAL.GetListAll();
         }
 
+        public List<Comment> TGetListAllWithAllInfoByDestinationId(int id)
+        {
+           return _commentDAL.GetListAllWithAllInfoByDestinationId(id);
+        }
+
         public void TInsert(Comment entity)
         {
            _commentDAL.Insert(entity);

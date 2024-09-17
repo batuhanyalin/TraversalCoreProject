@@ -19,6 +19,9 @@ namespace TraversalCoreProject.DataAccessLayer.Context
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactPage> ContactPages { get; set; }
         public DbSet<Destination> Destinations { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<DestinationTag> DestinationTags { get; set; }
         public DbSet<Newsletter> Newsletters { get; set; }
         public DbSet<IndexBanner> IndexBanners { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }

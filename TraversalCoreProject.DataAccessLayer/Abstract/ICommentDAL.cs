@@ -9,5 +9,6 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
 {
     public interface ICommentDAL:IGenericDAL<Comment>
     {
+        public List<Comment> GetListAllWithAllInfoByDestinationId(int id);
     }
 }

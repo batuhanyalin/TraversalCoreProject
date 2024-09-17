@@ -9,5 +9,6 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
 {
     public interface ICommentService:IGenericService<Comment>
     {
+        public List<Comment> TGetListAllWithAllInfoByDestinationId(int id);
     }
 }
