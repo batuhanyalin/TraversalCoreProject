@@ -17,23 +17,23 @@
 </section>
 <!-- //about breadcrumb -->
 <!--  Work gallery section -->
+
 <section class="grids-1 py-5">
     <div class="grids py-lg-5 py-md-4">
         <div class="container">
-            <h3 class="hny-title mb-5">Güncel Turlar</h3>
+            <h3 class="hny-title mb-5">Destinations</h3>
             <div class="row">
                 @foreach (var item in Model)
                 {
-                    <div class="col-lg-4 col-md-4 col-6 mt-md-3 mt-4">
+                    <div class="col-lg-4 col-md-4 col-6 mt-md-0 mt-4">
                         <div class="column">
                             <a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.ImageUrl" alt="" class="img-fluid"></a>
                             <div class="info">
                                 <h4><a href="blog-single.html">@item.Country - @item.City</a></h4>
                                 <p>@item.DayNight </p>
                                 <div class="dst-btm">
-                                    <h6 class="">Fiyat </h6>
+                                    <h6 class="">Fiyat: </h6>
                                     <span>$@item.Price</span>
-                                    <br />
                                     <small style="color:darkred">Kontenjan: @item.Capacity</small>
                                 </div>
                             </div>
