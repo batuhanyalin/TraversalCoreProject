@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using TraversalCoreProject.DtoLayer.DefaultDtos.ApplicationDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.CommentDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.ContactDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
@@ -36,7 +35,6 @@ namespace TraversalCoreProject.Mapping
             CreateMap<Testimonial,TestimonialListDto>().ReverseMap();
 
             CreateMap<Contact, ContactCreateDto>().ReverseMap();
-            CreateMap<Application, ApplicationCreateDto>().ReverseMap();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TraversalCoreProject.DtoLayer.DefaultDtos.ApplicationDtos;
 using TraversalCoreProject.DtoLayer.RegisterDtos;
 using TraversalCoreProject.EntityLayer.Concrete;
 

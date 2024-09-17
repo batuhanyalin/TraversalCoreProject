@@ -16,14 +16,12 @@ namespace TraversalCoreProject.DataAccessLayer.Context
             optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;initial catalog=TraversalDb;integrated security=true");
         }
         public DbSet<About> Abouts { get; set; }
-        public DbSet<About2> Abouts2 { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactPage> ContactPages { get; set; }
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Newsletter> Newsletters { get; set; }
         public DbSet<IndexBanner> IndexBanners { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
-        public DbSet<SubAbout> SubAbouts { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<DestinationMatchGuide> DestinationMatchGuides { get; set; }
     }
