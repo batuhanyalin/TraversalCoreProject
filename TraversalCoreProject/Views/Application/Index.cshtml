@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RegisterDto
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
@@ -23,51 +24,50 @@
                     <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
                         <div class="input-grids">
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Adınız" class="contact-input" />
+                                <input type="text" name="w3lName" id="w3lName" placeholder="Adınız" class="contact-input" required="" />
                             </div>
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Soyadınız" class="contact-input" />
+                                <input type="text" name="w3lName" id="w3lName" placeholder="Soyadınız" class="contact-input" required="" />
                             </div>
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Telefon Numaranız" class="contact-input" />
+                                <input type="text" name="w3lName" id="w3lName" placeholder="Telefon Numaranız" class="contact-input" required="" />
                             </div>
                             <div class="form-group">
                                 <input type="email" name="w3lSender" id="w3lSender" placeholder="E-posta Adresiniz" class="contact-input" required="" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="w3lSubect" id="w3lSubect" placeholder="Konu" class="contact-input" />
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
                         <div class="input-grids">
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Adınız" class="contact-input" />
+                                <input type="text" name="w3lName" id="w3lName" placeholder="Doğum Yeri" class="contact-input" required="" />
                             </div>
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Soyadınız" class="contact-input" />
+                                <input type="text" name="w3lName" id="w3lName" placeholder="Meslek" class="contact-input" required="" />
                             </div>
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Telefon Numaranız" class="contact-input" />
+                                <input type="text" name="w3lName" id="w3lName" placeholder="Ana Dil" class="contact-input" required="" />
                             </div>
                             <div class="form-group">
-                                <input type="email" name="w3lSender" id="w3lSender" placeholder="E-posta Adresiniz" class="contact-input" required="" />
+                                <input type="text" name="w3lName" id="w3lName" placeholder="2. Dil" class="contact-input" />
                             </div>
-                            <div class="form-group">
-                                <input type="text" name="w3lSubect" id="w3lSubect" placeholder="Konu" class="contact-input" />
-                            </div>
+
                         </div>
                     </div>
                 </div>
                 <div class="contact-grids row">
-                    <div class="col">
+                    <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
                         <div class="form-group">
-                            <textarea name="w3lMessage" id="w3lMessage" placeholder="Mesajınız" required=""></textarea>
+                            <label clas="form-label">Doğum Tarihi</label> <input type="date" name="w3lSender" id="w3lSender" placeholder="Doğum Tarihi" class="contact-input" required="" />
                         </div>
                     </div>
-                   
+                    <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
+                        <div class="form-group">
+                            <label clas="form-label">Hakkında</label> <textarea name="w3lMessage" id="w3lMessage" required=""></textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="contact-grids row">                 
+                <div class="contact-grids row">
                     <div class="text-right">
                         <button class="btn btn-style btn-primary">Başvuru Gönder</button>
                     </div>

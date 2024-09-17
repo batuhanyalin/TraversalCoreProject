@@ -1,0 +1,11 @@
+﻿@model List<SocialMediaDtos>
+<div class="columns-2 mt-lg-0 mt-3">
+    <ul class="social">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="@item.LinkUrl"><span class="@item.LogoUrl" aria-hidden="true"></span></a>
+            </li>
+        }        
+    </ul>
+</div>

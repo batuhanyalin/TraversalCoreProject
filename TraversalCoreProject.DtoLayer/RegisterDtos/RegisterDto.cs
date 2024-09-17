@@ -16,6 +16,7 @@ namespace TraversalCoreProject.DtoLayer.RegisterDtos
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Profession { get; set; }
+        public DateTime ApplicationDate { get; set; }
         public DateTime Birtday { get; set; }
         public bool IsActive { get; set; }
         public List<DestinationMatchGuide> DestinationMatchGuides { get; set; }

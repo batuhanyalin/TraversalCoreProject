@@ -7,33 +7,34 @@
                     <div class="col-lg-6 column">
                         <div class="row">
                             <div class="col-md-4 column">
-                                <h3>Company</h3>
+                                <h3>Şirketimiz</h3>
                                 <ul class="footer-gd-16">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="services.html">Services</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
+                                    <li><a href="/Default/Index">Anasayfa</a></li>
+                                    <li><a href="/About/Index">Hakkımızda</a></li>
+                                    <li><a href="/Destination/Index">Rotalar</a></li>
+                                    <li><a href="/Guide/Index">Rehberler</a></li>
+                                    <li><a href="/Contact/Index">Contact Us</a></li>
+                                    <li><a href="/Application/Index">Rehber Ol</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4 column mt-md-0 mt-4">
-                                <h3>Useful Links</h3>
+                                <h3>Faydalı Linkler</h3>
                                 <ul class="footer-gd-16">
-                                    <li><a href="#url">Destinations</a></li>
-                                    <li><a href="#url">Our Branches</a></li>
-                                    <li><a href="#url">Latest Media</a></li>
-                                    <li><a href="about.html">About Company</a></li>
-                                    <li><a href="#url">Our Packages</a></li>
+                                    <li><a href="#url">Havayolları</a></li>
+                                    <li><a href="#url">Hastaneler</a></li>
+                                    <li><a href="#url">Döviz Ofisleri</a></li>
+                                    <li><a href="about.html">Turizm Bürosu</a></li>
+                                    <li><a href="#url">Bize Yazın</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4 column mt-md-0 mt-4">
-                                <h3>Our Services</h3>
+                                <h3>Hizmetlerimiz</h3>
                                 <ul class="footer-gd-16">
-                                    <li><a href="#url">Privacy Policy</a></li>
-                                    <li><a href="#url">Our Terms</a></li>
+                                    <li><a href="#url">Servisler</a></li>
+                                    <li><a href="#url">Ring Seferler</a></li>
                                     <li><a href="services.html">Services</a></li>
-                                    <li><a href="landing-single.html">Landing Page</a></li>
-                                    <li><a href="#url">Our Guides</a></li>
+                                    <li><a href="landing-single.html">Türkiye Ofisi</a></li>
+                                    <li><a href="#url">Ukrayna Ofisi</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -53,30 +54,12 @@
                 <div class="d-flex below-section justify-content-between align-items-center pt-4 mt-5">
                     <div class="columns text-lg-left text-center">
                         <p>
-                            &copy; 2024 Traversal. Tüm Hakları Saklıdır.<a title="batuhanyalin.com" href="https://www.batuhanyalin.com/" target="_blank">
+                            &copy; @DateTime.Now.Year Traversal. Tüm Hakları Saklıdır.<a title="Proje kodlarına gitmek için" href="https://www.github.com/batuhanyalin/TraversalCoreProject" target="_blank">
                                 Batuhan YALIN
                             </a> tarafından yapılmıştır.
                         </p>
                     </div>
-                    <div class="columns-2 mt-lg-0 mt-3">
-                        <ul class="social">
-                            <li>
-                                <a href="#facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                            </li>
-                            <li>
-                                <a href="#linkedin"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
-                            </li>
-                            <li>
-                                <a href="#twitter"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                            </li>
-                            <li>
-                                <a href="#google"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                            </li>
-                            <li>
-                                <a href="#github"><span class="fa fa-github" aria-hidden="true"></span></a>
-                            </li>
-                        </ul>
-                    </div>
+                    @await Component.InvokeAsync("_FooterSocialMediaComponentPartial")
                 </div>
             </div>
         </div>

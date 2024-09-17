@@ -23,6 +23,7 @@ namespace TraversalCoreProject.EntityLayer.Concrete
         public string? InstagramUrl { get; set; }
         public string? TwitterUrl { get; set; }
         public DateTime Birtday { get; set; }
+        public DateTime ApplicationDate { get; set; }
         public bool IsActive { get; set; }
         public List<Comment> Comments { get; set; }
         public List<DestinationMatchGuide> DestinationMatchGuides { get; set; }

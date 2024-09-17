@@ -4,6 +4,7 @@ using TraversalCoreProject.DtoLayer.DefaultDtos.CommentDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.ContactDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.FooterDtos;
+using TraversalCoreProject.DtoLayer.DefaultDtos.GuideDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.IndexBannerDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.TestimonialDtos;
 using TraversalCoreProject.DtoLayer.LoginDtos;
@@ -27,6 +28,7 @@ namespace TraversalCoreProject.Mapping
 
             CreateMap<AppUser,RegisterDto>().ReverseMap();
             CreateMap<AppUser,LoginDto>().ReverseMap();
+            CreateMap<AppUser,GuideListDto>().ReverseMap();
 
             CreateMap<Newsletter,NewsletterSubscribeDto>().ReverseMap();
             CreateMap<SocialMedia,SocialMediaDtos>().ReverseMap();
