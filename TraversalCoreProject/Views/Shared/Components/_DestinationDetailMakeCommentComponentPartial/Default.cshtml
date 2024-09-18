@@ -4,10 +4,10 @@
     <p class="mb-4">
         E-posta adresiniz paylaşılmayacaktır.
     </p>
-    <form action="#" method="post">
-
+    <form asp-controller="Comment" asp-action="Index" method="post">
         <div class="form-group">
-            <textarea name="Comment" class="form-control" placeholder="Yorumunuz" required=""
+            <input type="hidden" asp-for="DestinationId" />
+            <textarea asp-for=Text class="form-control" placeholder="Yorumunuz" required=""
                       spellcheck="false"></textarea>
         </div>
         <div class="submit text-right">
