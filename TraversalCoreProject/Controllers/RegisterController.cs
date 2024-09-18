@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TraversalCoreProject.BusinessLayer.ValidationRules;
 using TraversalCoreProject.DtoLayer.RegisterDtos;
 using TraversalCoreProject.EntityLayer.Concrete;
 
@@ -27,11 +28,21 @@ namespace TraversalCoreProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(RegisterDto registerDto)
         {
+            var validation = new RegisterValidator().Validate(registerDto);
+            if (!validation.IsValid)
+            {
+                foreach (var error in validation.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+                return View(registerDto);
+            }
+
+            registerDto.ApplicationDate = DateTime.Now;
+            registerDto.IsActive = false;
             if (ModelState.IsValid)
             {
-				registerDto.UserName = (registerDto.Name + registerDto.Surname).ToLower();
-				var value = _mapper.Map<AppUser>(registerDto);
-                value.IsActive = false;
+                var value = _mapper.Map<AppUser>(registerDto);
                 if (value.ImageUrl == null)
                 {
                     value.ImageUrl = $"/images/users/no-image-users.jpg";

@@ -27,7 +27,7 @@ namespace TraversalCoreProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(RegisterDto registerDto)
         {
-            registerDto.UserName = (registerDto.Name + registerDto.Surname).ToLower();
+          
             registerDto.Password = "Deneme.123";
             registerDto.ApplicationDate = DateTime.Now;
             registerDto.IsActive = false;
@@ -35,7 +35,7 @@ namespace TraversalCoreProject.Controllers
             map.ImageUrl = $"/images/users/no-image-users.jpg";
             var result = await _userManager.CreateAsync(map, registerDto.Password);
             if (result.Succeeded)
-            {
+            {            
                 var user = await _userManager.FindByNameAsync(registerDto.UserName);
                 var currentRoles = await _userManager.GetRolesAsync(user);
                 await _userManager.RemoveFromRolesAsync(user, currentRoles);

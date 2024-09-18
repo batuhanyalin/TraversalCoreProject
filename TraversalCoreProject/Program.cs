@@ -1,8 +1,12 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Reflection;
+using TraversalCoreProject.BusinessLayer;
 using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.BusinessLayer.Concrete;
+using TraversalCoreProject.BusinessLayer.ValidationRules;
 using TraversalCoreProject.DataAccessLayer.Abstract;
 using TraversalCoreProject.DataAccessLayer.Context;
 using TraversalCoreProject.DataAccessLayer.EntityFramework;
@@ -10,8 +14,12 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<TraversalContext>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<TraversalContext>().AddErrorDescriber<CustomIdentityValidator>();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddFluentValidation(x=>x.RegisterValidatorsFromAssemblyContaining<validatorFinder>()); //Burada fluentvalidationý sisteme tanýmlýyoruz. Burada validator olarak oluþturduðum sýnýflarý bulabilmesi için validationFinder sýnýfýný Business katmaný içinde oluþturup burada tanýmlýyorum.
 builder.Services.AddScoped<IAboutDAL, EFAboutDAL>();
 builder.Services.AddScoped<IIndexBannerDAL, EFIndexBannerDAL>();
 builder.Services.AddScoped<IContactDAL, EFContactDAL>();
@@ -41,10 +49,6 @@ builder.Services.AddScoped<IDestinationTagService, DestinationTagManager>();
 builder.Services.AddScoped<ICommentService, CommentManager>();
 
 
-
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.AddDbContext<TraversalContext>();
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<TraversalContext>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

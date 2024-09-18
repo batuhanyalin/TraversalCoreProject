@@ -1,74 +1,141 @@
 ﻿@model RegisterDto
 @{
     Layout = null;
+    RegisterDto registerDto = new RegisterDto();
 }
 
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Traversal - Yeni Üyelik Oluştur</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
 
-	<!-- LINEARICONS -->
-	<link rel="stylesheet" href="~/colorlib-regform-26/fonts/linearicons/style.css">
-	<script src="https://kit.fontawesome.com/a5532d615c.js" crossorigin="anonymous"></script>
-	<!-- STYLE CSS -->
-	<link rel="stylesheet" href="~/colorlib-regform-26/css/style.css">
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Traversal - Yeni Üyelik Oluştur</title>
+
+    <!-- Icons font CSS-->
+    <link href="~/colorlib-regform-4/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="~/colorlib-regform-4/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="~/colorlib-regform-4/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/colorlib-regform-4/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="~/colorlib-regform-4/css/main.css" rel="stylesheet" media="all">
 </head>
 
 <body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Hesabınızı Oluşturun</h2>
+                    <form method="post">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Ad</label>
+                                    <input class="input--style-4" asp-for="Name" type="text" required="">
+                                    <span asp-validation-for="Name" style="color:darkred;font-size:smaller"></span>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Soyad</label>
+                                    <input class="input--style-4" asp-for="Surname" type="text" required="">
+                                    <span asp-validation-for="Surname" style="color:darkred;font-size:smaller"></span>
+                                </div>
+                            </div>
+                        </div>                      
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Doğum Tarihi</label>
+                                    <div class="input-group-icon">
+                                        <input class="input--style-4" asp-for="Birtday" type="date" required="">
+                                        <span asp-validation-for="Birtday" style="color:darkred;font-size:smaller"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Meslek</label>
+                                    <input class="input--style-4" type="text" asp-for="Profession">
+                                    <span asp-validation-for="Profession" style="color:darkred;font-size:smaller"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">E-posta</label>
+                                    <input class="input--style-4" type="email" asp-for="Email" required="">
+                                    <span asp-validation-for="Email" style="color:darkred;font-size:smaller"></span>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Telefon</label>
+                                    <input class="input--style-4" type="text" asp-for="Phone" required="">
+                                    <span asp-validation-for="Phone" style="color:darkred;font-size:smaller"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Kullanıcı Adı</label>
+                                    <input class="input--style-4" type="text" asp-for="UserName" required="">
+                                    <span asp-validation-for="UserName" style="color:darkred;font-size:smaller"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Parola</label>
+                                    <input class="input--style-4" type="password" asp-for="Password" required="">
 
-	<div class="wrapper">
-		<div class="inner">
-			<img src="~/colorlib-regform-26/images/image-1.png" alt="" class="image-1">
-			<form method="post">
-				<h3>Yeni Hesap Oluştur</h3>
-				<div class="form-holder">
-					<span class="fas fa-user"></span>
-					<input type="text" class="form-control" asp-for="Name" placeholder="Adınız" required="">
-				</div>
-				<div class="form-holder">
-					<span class="fas fa-signature"></span>
-					<input type="text" class="form-control" asp-for="Surname" placeholder="Soyadınız" required="">
-				</div>
-				<div class="form-holder">
-					<span class="fas fa-birthday-cake"></span>
-					<input type="date" class="form-control" asp-for="Birtday" placeholder="Doğum Tarihi" required="">
-				</div>
-				<div class="form-holder">
-					<span class="fas fa-phone"></span>
-					<input type="text" class="form-control" asp-for="Phone" placeholder="Telefon" required="">
-				</div>
-				<div class="form-holder">
-					<span class="fas fa-envelope"></span>
-					<input type="text" class="form-control" asp-for="Email" placeholder="E-posta" required="">
-				</div>
-				<div class="form-holder">
-					<span class="fas fa-key"></span>
-					<input type="password" class="form-control" asp-for="Password" placeholder="Parolanız" required="">
-				</div>
-				<div asp-validation-summary=ModelOnly class="form-holder">
-					<span class="fas fa-lock"></span>
-					<input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Parolanızı Onaylayın" required="">
-				</div>
-				<button>
-					<span>Hesap Oluştur</span>
-				</button>
-				<br />
-				<div class="text-center">
-					<a class="txt2" href="/Login/Index">
-						Zaten bir hesabınız var mı? Giriş Yapın
-						<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-					</a>
-				</div>
-			</form>
-			<img src="~/colorlib-regform-26/images/image-2.png" alt="" class="image-2">
-		</div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Tekrar Parola</label>
+                                    <input class="input--style-4" type="password" asp-for="ConfirmPassword" required="">
+                                    <span asp-validation-for="ConfirmPassword" style="color:darkred;font-size:smaller"></span>
+                                </div>
+                            </div>
+                        </div>
+                           <div class="text-danger" asp-validation-summary="ModelOnly">
+                        </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Hesap Oluştur</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	</div>
+    <!-- Jquery JS-->
+    <script src="~/colorlib-regform-4/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="~/colorlib-regform-4/vendor/select2/select2.min.js"></script>
+    <script src="~/colorlib-regform-4/vendor/datepicker/moment.min.js"></script>
+    <script src="~/colorlib-regform-4/vendor/datepicker/daterangepicker.js"></script>
 
-	<script src="~/colorlib-regform-26/js/jquery-3.3.1.min.js"></script>
-	<script src="~/colorlib-regform-26/js/main.js"></script>
+    <!-- Main JS-->
+    <script src="~/colorlib-regform-4/js/global.js"></script>
+
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
 </html>
+<!-- end document-->
