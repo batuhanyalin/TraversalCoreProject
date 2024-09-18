@@ -54,7 +54,7 @@
                                     <span asp-validation-for="Surname" style="color:darkred;font-size:smaller"></span>
                                 </div>
                             </div>
-                        </div>                      
+                        </div>
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -92,6 +92,13 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
+                                    <label class="label">Parola</label>
+                                    <input class="input--style-4" type="password" asp-for="Password" required="">
+
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
                                     <label class="label">Kullanıcı Adı</label>
                                     <input class="input--style-4" type="text" asp-for="UserName" required="">
                                     <span asp-validation-for="UserName" style="color:darkred;font-size:smaller"></span>
@@ -101,20 +108,23 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">Parola</label>
-                                    <input class="input--style-4" type="password" asp-for="Password" required="">
-
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
                                     <label class="label">Tekrar Parola</label>
                                     <input class="input--style-4" type="password" asp-for="ConfirmPassword" required="">
                                     <span asp-validation-for="ConfirmPassword" style="color:darkred;font-size:smaller"></span>
                                 </div>
                             </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <div>
+                                        <input required="" type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                        <label for="agreeTerms">
+                                            <a href="/Register/PrivacyPolicy">Kullanım koşullarını</a> okudum, anladım, kabul ediyorum.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                           <div class="text-danger" asp-validation-summary="ModelOnly">
+                        <div class="text-danger" asp-validation-summary="ModelOnly">
                         </div>
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--blue" type="submit">Hesap Oluştur</button>
@@ -135,7 +145,6 @@
     <!-- Main JS-->
     <script src="~/colorlib-regform-4/js/global.js"></script>
 
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-
+</body>
 </html>
 <!-- end document-->
