@@ -28,8 +28,8 @@ namespace TraversalCoreProject.Controllers
         }
         public async Task<IActionResult> DestinationDetail(int id)
         {
-            var x = User.Identity.Name;
-            ViewBag.user = 8;
+            //var user = _userManager.FindByNameAsync(User.Identity.Name);
+            ViewBag.user = 8; //user.Id gelecek
             ViewBag.id = id;
             var value = _destinationService.TGetById(id);
             var map = _mapper.Map<DestinationListDto>(value);

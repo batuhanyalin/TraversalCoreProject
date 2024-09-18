@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TraversalCoreProject.DtoLayer.LoginDtos;
 using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -35,10 +37,14 @@ namespace TraversalCoreProject.Controllers
                 {
                     return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }
-                else
+                if (userRole.FirstOrDefault() =="Member")
                 {
                     return RedirectToAction("Index", "Dashboard", new { area = "Member" });
                 }
+                else
+                {
+					return RedirectToAction("Index", "Default");
+				}
             }
             else
             {

@@ -15,7 +15,7 @@ namespace TraversalCoreProject.EntityLayer.Concrete
         public string About { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public string Profession { get; set; }
+        public string? Profession { get; set; }
         public string? HomeTown { get; set; }
         public string? MainLanguage { get; set; }
         public string? OtherLanguage { get; set; }

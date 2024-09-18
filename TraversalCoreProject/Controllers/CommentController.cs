@@ -22,7 +22,7 @@ namespace TraversalCoreProject.Controllers
         public async Task<IActionResult> Index(CommentCreateDto commentCreateDto)
         {
             //var user = await _userManager.FindByNameAsync(User.Identity.Name); 
-            commentCreateDto.MemberId = 9;
+            commentCreateDto.MemberId = 9; //user gelecek
             commentCreateDto.IsApproved=false;
             commentCreateDto.CommentDate = DateTime.Now;         
             var map = _mapper.Map<Comment>(commentCreateDto);
