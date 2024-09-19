@@ -15,12 +15,5 @@ namespace TraversalCoreProject.BusinessLayer.ValidationRules
         {
             RuleFor(x => x.PersonCount).GreaterThan(0).WithMessage("Kişi sayısı 0'dan büyük olmalıdır.").WithMessage("Kişi sayısı boş geçilemez.");
         }
-
-        //RuleFor(x => x.PersonCount).NotEmpty().WithMessage("Kişi sayısı boş geçilemez.").Must(BeAValidInteger).WithMessage("Lütfen yalnızca sayı girin.").MaximumLength(2).WithMessage("Kişi sayısı en fazla 2 basamaklı olabilir.");
-
-        //private bool BeAValidInteger(string personCount)
-        //{
-        //    return int.TryParse(personCount, out _);
-        //}
     }
 }

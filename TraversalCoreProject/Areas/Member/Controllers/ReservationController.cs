@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json.Linq;
 using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.BusinessLayer.ValidationRules;
 using TraversalCoreProject.DtoLayer.MemberAreaDtos.ReservationDtos;
@@ -85,15 +86,30 @@ namespace TraversalCoreProject.Areas.Member.Controllers
         }
         [HttpGet]
         [Route("MyCurrentReservation")]
-        public IActionResult MyCurrentReservation()
+        public async Task<IActionResult> MyCurrentReservation()
         {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            //var values = _reservationService.TGetMyCurrentReservationListByUserId(user.Id);
+            //var map = _mapper.Map<List<MemberListMyReservationDto>>(values);
             return View();
         }
         [HttpGet]
-        [Route("MyOldReservation")]
-        public IActionResult MyOldReservation()
+        [Route("MyApprovalReservation")]
+        public async Task<IActionResult> MyApprovalReservation()
         {
-            return View();
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var values = _reservationService.TGetMyApprovalReservationListByUserId(user.Id);
+            var map = _mapper.Map< List<MemberListMyReservationDto>>(values);
+            return View(map);
+        }
+        [HttpGet]
+        [Route("MyOldReservation")]
+        public async Task<IActionResult> MyOldReservation()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var values= _reservationService.TGetMyOldReservationListByUserId(user.Id);
+            var map = _mapper.Map<List<MemberListMyReservationDto>>(values);
+            return View(map);
         }
     }
 }

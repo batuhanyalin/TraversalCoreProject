@@ -9,5 +9,7 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
 {
     public interface IReservationService:IGenericService<Reservation>
     {
+        public List<Reservation> TGetMyOldReservationListByUserId(int id);
+        public List<Reservation> TGetMyApprovalReservationListByUserId(int id);
     }
 }

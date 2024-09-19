@@ -9,5 +9,7 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
 {
     public interface IReservationDAL:IGenericDAL<Reservation>
     {
+        public List<Reservation> GetMyOldReservationListByUserId(int id);
+        public List<Reservation> GetMyApprovalReservationListByUserId(int id);
     }
 }
