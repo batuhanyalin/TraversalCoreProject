@@ -26,6 +26,7 @@ namespace TraversalCoreProject.EntityLayer.Concrete
         public DateTime ApplicationDate { get; set; }
         public bool IsActive { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Reservation> Reservations { get; set; }
         public List<DestinationMatchGuide> DestinationMatchGuides { get; set; }
     }
 }
