@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraversalCoreProject.EntityLayer.Concrete;
 
-namespace TraversalCoreProject.DtoLayer.MemberAreaDtos.ProfileDtos
+namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.ProfileDtos
 {
-    public class MyProfileUpdateDto
+    public class AdminMyProfileUpdateDto
     {
-        public int Id { get; set; }
         public string UserName { get; set; }
-        public string Password { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string? About { get; set; }
@@ -25,6 +23,5 @@ namespace TraversalCoreProject.DtoLayer.MemberAreaDtos.ProfileDtos
         public string? InstagramUrl { get; set; }
         public string? TwitterUrl { get; set; }
         public DateTime Birtday { get; set; }
-        public IFormFile Image { get; set; }
     }
 }

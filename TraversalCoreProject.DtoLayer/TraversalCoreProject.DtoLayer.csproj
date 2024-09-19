@@ -14,4 +14,8 @@
     <Folder Include="AdminAreaDtos\ContactDtos\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+  </ItemGroup>
+
 </Project>

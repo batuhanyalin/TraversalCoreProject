@@ -10,5 +10,6 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
     public interface IDestinationDAL : IGenericDAL<Destination>
     {
         public List<Destination> GetFeaturePosts();
+        public List<Destination> GetAllDestinationWithAllInfo();
     }
 }

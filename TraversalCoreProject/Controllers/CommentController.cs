@@ -21,8 +21,8 @@ namespace TraversalCoreProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(CommentCreateDto commentCreateDto)
         {
-            //var user = await _userManager.FindByNameAsync(User.Identity.Name); 
-            commentCreateDto.MemberId = 9; //user gelecek
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            commentCreateDto.MemberId = user.Id;
             commentCreateDto.IsApproved=false;
             commentCreateDto.CommentDate = DateTime.Now;         
             var map = _mapper.Map<Comment>(commentCreateDto);

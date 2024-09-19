@@ -10,5 +10,6 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
     public interface IDestinationService : IGenericService<Destination>
     {
         public List<Destination> TGetFeaturePosts();
+        public List<Destination> TGetAllDestinationWithAllInfo();
     }
 }

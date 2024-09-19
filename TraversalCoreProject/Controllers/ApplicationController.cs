@@ -32,7 +32,7 @@ namespace TraversalCoreProject.Controllers
             registerDto.ApplicationDate = DateTime.Now;
             registerDto.IsActive = false;
             var map = _mapper.Map<AppUser>(registerDto);
-            map.ImageUrl = $"/images/users/no-image-users.jpg";
+            map.ImageUrl = $"/images/users/no-image-users.png";
             var result = await _userManager.CreateAsync(map, registerDto.Password);
             if (result.Succeeded)
             {            
