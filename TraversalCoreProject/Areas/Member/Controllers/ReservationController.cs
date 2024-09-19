@@ -66,12 +66,13 @@ namespace TraversalCoreProject.Areas.Member.Controllers
             var findDestination = _destinationService.TGetById(memberNewReservationDto.DestinationId);
             if (findDestination.Capacity < memberNewReservationDto.PersonCount)
             {
+                //Burada dto içerisine ekstra validationCode alanı açarak özel olarak istenen mesajı validasyon hatası olarak span içerisine gönderiyorum.
                 ModelState.AddModelError("validationCode", "Kişi sayısı kapasitenin üzerinde olamaz.");
                 return View();
             }
 
             memberNewReservationDto.MemberId = user.Id;
-            memberNewReservationDto.Status = "Rezervasyon Alındı";
+            memberNewReservationDto.Status = "Onay Bekliyor";
             memberNewReservationDto.ReservationDate = DateTime.Now;
             int capacity1 = findDestination.Capacity;
             int personCount = memberNewReservationDto.PersonCount;
