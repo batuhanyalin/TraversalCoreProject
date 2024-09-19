@@ -9,6 +9,7 @@ using TraversalCoreProject.DtoLayer.DefaultDtos.IndexBannerDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.TestimonialDtos;
 using TraversalCoreProject.DtoLayer.LoginDtos;
 using TraversalCoreProject.DtoLayer.MemberAreaDtos.ProfileDtos;
+using TraversalCoreProject.DtoLayer.MemberAreaDtos.ReservationDtos;
 using TraversalCoreProject.DtoLayer.RegisterDtos;
 using TraversalCoreProject.EntityLayer.Concrete;
 
@@ -39,6 +40,8 @@ namespace TraversalCoreProject.Mapping
             CreateMap<Testimonial,TestimonialListDto>().ReverseMap();
 
             CreateMap<Contact, ContactCreateDto>().ReverseMap();
+
+            CreateMap<Reservation, MemberNewReservationDto>().ReverseMap();
         }
     }
 }

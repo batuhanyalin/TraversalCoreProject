@@ -22,6 +22,7 @@ namespace TraversalCoreProject.DataAccessLayer.Context
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<DestinationTag> DestinationTags { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Newsletter> Newsletters { get; set; }
         public DbSet<IndexBanner> IndexBanners { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
