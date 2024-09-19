@@ -11,7 +11,7 @@ namespace TraversalCoreProject.EntityLayer.Concrete
         public int ReservationId { get; set; }
         public AppUser Member { get; set; }
         public int MemberId { get; set; }
-        public string PersonCount { get; set; }
+        public int PersonCount { get; set; }
         public Destination Destination { get; set; }
         public int DestinationId { get; set; }
         public DateTime ReservationDate { get; set; }
