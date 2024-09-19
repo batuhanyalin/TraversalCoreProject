@@ -9,7 +9,7 @@
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
-                <h6>Güncel Turlar</h6>
+                <h6>Aktif Rezervasyonlarım</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -27,6 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                           <h2 style="text-align:center">@ViewBag.reservationError</h2>
                             @foreach (var item in Model)
                             {
                                 count++;
@@ -36,7 +37,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="@item.Destination.ImageUrl" class="avatar avatar-sm me-3" alt="user1">
+                                                <img src="@item.Destination.ImageUrl" style=" border-radius: 10%" height="100px;" width="80px;">
                                             </div>
                                         </div>
                                     </td>
@@ -61,7 +62,7 @@
                                         <span class="badge badge-sm bg-gradient-success">@item.PersonCount $</span>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <i class="fas fa-info-circle"></i>
+                                        <p class="text-xs font-weight-bold mb-0">@item.Description</p>
                                     </td>
                                 </tr>
                             }

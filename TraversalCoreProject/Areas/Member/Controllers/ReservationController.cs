@@ -89,9 +89,19 @@ namespace TraversalCoreProject.Areas.Member.Controllers
         public async Task<IActionResult> MyCurrentReservation()
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            //var values = _reservationService.TGetMyCurrentReservationListByUserId(user.Id);
-            //var map = _mapper.Map<List<MemberListMyReservationDto>>(values);
-            return View();
+            var values = _reservationService.TGetMyCurrentReservationListByUserId(user.Id);
+            var map = _mapper.Map<List<MemberListMyReservationDto>>(values);
+            if (map.Count == 0)
+            {
+                var error = new List<MemberListMyReservationDto>();
+                ViewBag.reservationError = "Aktif Rezervasyonunuz Bulunmamaktadır.";
+                return View(error);
+            }
+            else
+            {
+                return View(map);
+            }
+
         }
         [HttpGet]
         [Route("MyApprovalReservation")]
@@ -99,17 +109,35 @@ namespace TraversalCoreProject.Areas.Member.Controllers
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var values = _reservationService.TGetMyApprovalReservationListByUserId(user.Id);
-            var map = _mapper.Map< List<MemberListMyReservationDto>>(values);
-            return View(map);
+            var map = _mapper.Map<List<MemberListMyReservationDto>>(values);
+            if (map.Count == 0)
+            {
+                var error = new List<MemberListMyReservationDto>();
+                ViewBag.reservationError = "Onay Bekleyen Rezervasyonunuz Bulunmamaktadır.";
+                return View(error);
+            }
+            else
+            {
+                return View(map);
+            }
         }
         [HttpGet]
         [Route("MyOldReservation")]
         public async Task<IActionResult> MyOldReservation()
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var values= _reservationService.TGetMyOldReservationListByUserId(user.Id);
+            var values = _reservationService.TGetMyOldReservationListByUserId(user.Id);
             var map = _mapper.Map<List<MemberListMyReservationDto>>(values);
-            return View(map);
+            if (map.Count == 0)
+            {
+                var error = new List<MemberListMyReservationDto>();
+                ViewBag.reservationError = "Geçmiş Rezervasyonunuz Bulunmamaktadır.";
+                return View(error);
+            }
+            else
+            {
+                return View(map);
+            }
         }
     }
 }

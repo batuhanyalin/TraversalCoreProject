@@ -38,6 +38,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _reservationDAL.GetMyApprovalReservationListByUserId(id);
         }
 
+        public List<Reservation> TGetMyCurrentReservationListByUserId(int id)
+        {
+            return _reservationDAL.GetMyCurrentReservationListByUserId(id);
+        }
+
         public List<Reservation> TGetMyOldReservationListByUserId(int id)
         {
            return _reservationDAL.GetMyOldReservationListByUserId(id);

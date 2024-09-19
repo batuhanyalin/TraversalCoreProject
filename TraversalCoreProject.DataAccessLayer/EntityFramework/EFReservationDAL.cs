@@ -17,7 +17,7 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
         TraversalContext context = new TraversalContext();
         public List<Reservation> GetMyOldReservationListByUserId(int id)
         {
-            var values= context.Reservations.Where(x=>x.MemberId==id).Where(x=>x.Status=="Tamamlandı" || x.Destination.StartDate < DateTime.Now).Include(x=>x.Destination).Include(x=>x.Member).ToList();
+            var values= context.Reservations.Where(x=>x.MemberId==id).Where(x=>x.Status=="Geçmiş Rezervasyon" || x.Destination.StartDate < DateTime.Now).Include(x=>x.Destination).Include(x=>x.Member).ToList();
             return values;  
            
         }
@@ -27,9 +27,9 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
             return values;
 
         }
-        public List<Reservation> GetMyCurentReservationListByUserId(int id)
+        public List<Reservation> GetMyCurrentReservationListByUserId(int id)
         {
-            var values = context.Reservations.Where(x => x.MemberId == id).Where(x => x.Status == "Onay Bekliyor").Include(x => x.Destination).Include(x => x.Member).ToList();
+            var values = context.Reservations.Where(x => x.MemberId == id).Where(x => x.Status == "Onaylandı").Include(x => x.Destination).Include(x => x.Member).ToList();
             return values;
 
         }
