@@ -6,7 +6,8 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.Areas.Admin.Controllers
 {
-
+    [Area("Admin")]
+    [Route("Admin/[controller]")]
     public class RoleController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;

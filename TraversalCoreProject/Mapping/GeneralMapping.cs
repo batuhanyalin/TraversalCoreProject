@@ -42,7 +42,7 @@ namespace TraversalCoreProject.Mapping
 
             CreateMap<Contact, ContactCreateDto>().ReverseMap();
 
-            CreateMap<Reservation, MemberNewReservationDto>().ReverseMap();
+            CreateMap<Reservation, AdminNewReservationDto>().ReverseMap();
             CreateMap<Reservation, MemberListMyReservationDto>().ReverseMap();
         }
     }

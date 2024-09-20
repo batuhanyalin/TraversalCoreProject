@@ -1,0 +1,58 @@
+﻿@model List<DestinationListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+    int count = 0;
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Turlar</h4>
+    <div class="card">
+        <h5 class="card-header">Turlar</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Görsel</th>
+                        <th>Ülke</th>
+                        <th>Şehir</th>
+                        <th>Gün</th>
+                        <th>Kapasite</th>
+                        <th>Tur Rehberleri</th>
+                        <th>Durum</th>
+                        <th>Aksiyon</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td><img src="@item.ImageUrl" style="height:50px;width:auto;border-radius:10%;" /></td>
+                            <td>@item.Country</td>
+                            <td>@item.City</td>
+                            <td>@item.DayNight</td>
+                            <td>@item.Capacity</td>
+                            <td>
+                                @await Component.InvokeAsync("_AdminDestinationListGuideComponentPartial", new { id = item.DestinationId })
+                            </td>
+                            <td><span class="badge bg-label-primary me-1">@item.Status</span></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

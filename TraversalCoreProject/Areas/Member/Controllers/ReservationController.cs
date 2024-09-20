@@ -43,7 +43,7 @@ namespace TraversalCoreProject.Areas.Member.Controllers
         }
         [Route("NewReservation")]
         [HttpPost]
-        public async Task<IActionResult> NewReservation(MemberNewReservationDto memberNewReservationDto)
+        public async Task<IActionResult> NewReservation(AdminNewReservationDto memberNewReservationDto)
         {
             var destin = _destinationService.TGetAllDestinationWithAllInfo();
             List<SelectListItem> destinationListItem = (from x in destin.ToList()

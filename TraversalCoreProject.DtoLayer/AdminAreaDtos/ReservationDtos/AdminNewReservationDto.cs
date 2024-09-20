@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TraversalCoreProject.EntityLayer.Concrete;
 
-namespace TraversalCoreProject.DtoLayer.MemberAreaDtos.ReservationDtos
+namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.ReservationDtos
 {
     public class AdminNewReservationDto
     {

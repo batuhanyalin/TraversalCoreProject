@@ -9,7 +9,7 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.BusinessLayer.ValidationRules
 {
-    public class MemberNewReservationValidator : AbstractValidator<MemberNewReservationDto>
+    public class MemberNewReservationValidator : AbstractValidator<AdminNewReservationDto>
     {
         public MemberNewReservationValidator()
         {

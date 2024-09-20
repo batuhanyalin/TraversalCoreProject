@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,9 @@ namespace TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos
         public bool IsFeaturePost { get; set; }
         public List<DestinationTag> DestinationTags { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Reservation> Reservations { get; set; }
         public List<DestinationMatchGuide> DestinationMatchGuides { get; set; }
+   
+
     }
 }
