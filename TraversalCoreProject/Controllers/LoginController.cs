@@ -59,11 +59,16 @@ namespace TraversalCoreProject.Controllers
 					{
 						return RedirectToAction("Index", "Dashboard", new { area = "Member" });
 					}
-					if (userRole.FirstOrDefault() == "GuideApplication")
+                    if (userRole.FirstOrDefault() == "Guide")
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Member" });
+                    }
+                    if (userRole.FirstOrDefault() == "GuideApplication")
 					{
 						await _signInManager.SignOutAsync();
 						return RedirectToAction("GuideApplicationCheck", "Login");
 					}
+
 				}
 				else
 				{

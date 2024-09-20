@@ -31,6 +31,7 @@ namespace TraversalCoreProject.Mapping
             CreateMap<AppUser,RegisterDto>().ReverseMap();
             CreateMap<AppUser,LoginDto>().ReverseMap();
             CreateMap<AppUser,GuideListDto>().ReverseMap();
+            CreateMap<AppUser,GuideDetailDto>().ReverseMap();
             CreateMap<AppUser,MyProfileUpdateDto>().ReverseMap();
             CreateMap<AppUser,AdminMyProfileUpdateDto>().ReverseMap();
 

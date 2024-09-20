@@ -45,7 +45,7 @@ namespace TraversalCoreProject.Controllers
                 var value = _mapper.Map<AppUser>(registerDto);
                 if (value.ImageUrl == null)
                 {
-                    value.ImageUrl = $"/images/users/no-image-users.jpg";
+                    value.ImageUrl = $"/images/users/no-image-users.png";
                 }
 
                 var register = await _userManager.CreateAsync(value, registerDto.Password);

@@ -30,9 +30,9 @@
 
                     <div class="col-lg-3 col-6 mt-lg-5 mt-4">
                         <div class="box16">
-                            <a href="/Guide/GuideDetail/@item.Id"><img src="~/Traversal/assets/images/team1.jpg" alt="" class="img-fluid" /></a>
+                            <a href="/Guide/GuideDetail/@item.Id"><img style="height:300px;width:auto;" src="@item.ImageUrl" alt="@item.Name @item.Surname" class="img-fluid" /></a>
                             <div class="box-content">
-                                <h3 class="title"><a href="#url">@item.Name @item.Surname</a></h3>
+                                <h3 class="title"><a href="/Guide/GuideDetail/@item.Id">@item.Name @item.Surname</a></h3>
                                 <span class="post">@item.Profession</span>
                                 <ul class="social">
                                     <li>

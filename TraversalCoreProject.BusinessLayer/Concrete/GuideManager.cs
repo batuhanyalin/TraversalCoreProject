@@ -28,6 +28,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _guideDAL.GetById(id);
         }
 
+        public AppUser TGetGuideDetailById(int id)
+        {
+         return _guideDAL.GetGuideDetailById(id);
+        }
+
         public List<AppUser> TGetListAll()
         {
             return _guideDAL.GetListAll();
