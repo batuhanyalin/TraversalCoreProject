@@ -5,7 +5,6 @@ namespace TraversalCoreProject.Areas.Member.Controllers
 {
     [Area("Member")]
     [Route("Member/[controller]")]
-    [AllowAnonymous]
     public class DashboardController : Controller
     {
         [Route("Index")]
