@@ -11,5 +11,6 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
     {
         public List<Destination> GetFeaturePosts();
         public List<Destination> GetAllDestinationWithAllInfo();
+        public List<DestinationTag> GetAllDestinationByTagId(int id);
     }
 }

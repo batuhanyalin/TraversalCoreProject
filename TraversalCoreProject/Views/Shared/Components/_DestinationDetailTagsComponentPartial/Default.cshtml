@@ -1,7 +1,8 @@
-﻿<div class="buttons-singles tags">
-    <h4>Tags :</h4>
-    <a href="#blog-tag">Travel</a>
-    <a href="#blog-tag">Culture</a>
-    <a href="#blog-tag">Hotel</a>
-    <a href="#blog-tag">Food</a>
+﻿@model List<DestinationTag>
+<div class="buttons-singles tags">
+    <h4>Etiketler :</h4>
+    @foreach (var item in Model)
+    {
+        <a href="/Destination/DestinationListForTag/@item.TagId">@item.Tag.TagName</a>
+    }
 </div>

@@ -1,12 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TraversalCoreProject.BusinessLayer.Abstract;
 
 namespace TraversalCoreProject.ViewComponents
 {
     public class _DestinationDetailTagsComponentPartial : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        private readonly IDestinationTagService _destinationTagService;
+
+        public _DestinationDetailTagsComponentPartial(IDestinationTagService destinationTagService)
         {
-            return View();
+            _destinationTagService = destinationTagService;
+        }
+
+        public IViewComponentResult Invoke(int id)
+        {
+            var values= _destinationTagService.TGetTagsAllByDestinationId(id);
+            return View(values);
         }
     }
 }

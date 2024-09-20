@@ -1,7 +1,7 @@
 ﻿@model List<DestinationMatchGuide>
 @foreach (var item in Model)
 {
-    <div class="author-card col m-3" style="text-align:center">
+    <div class="author-card col-md-3 m-3" style="text-align:center">
         <div>
             <a href="/Guide/GuideDetail/@item.Guide.Id">
                 <img src="@item.Guide.ImageUrl" alt="" class="rounded-circle img-fluid">

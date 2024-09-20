@@ -11,5 +11,6 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
     {
         public List<Destination> TGetFeaturePosts();
         public List<Destination> TGetAllDestinationWithAllInfo();
+        public List<DestinationTag> TGetAllDestinationByTagId(int id);
     }
 }

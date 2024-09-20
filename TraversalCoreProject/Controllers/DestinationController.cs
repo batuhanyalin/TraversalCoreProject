@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
 using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.Controllers
 {
+    [AllowAnonymous]
     public class DestinationController : Controller
     {
         private readonly IDestinationService _destinationService;
@@ -28,12 +31,16 @@ namespace TraversalCoreProject.Controllers
         }
         public async Task<IActionResult> DestinationDetail(int id)
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            ViewBag.user = user.Id; 
+            ViewBag.user = User.Identity.Name;
             ViewBag.id = id;
             var value = _destinationService.TGetById(id);
             var map = _mapper.Map<DestinationListDto>(value);
             return View(map);
+        }
+        public async Task<IActionResult> DestinationListForTag(int id)
+        {
+            var values = _destinationService.TGetAllDestinationByTagId(id);
+            return View(values);
         }
     }
 }

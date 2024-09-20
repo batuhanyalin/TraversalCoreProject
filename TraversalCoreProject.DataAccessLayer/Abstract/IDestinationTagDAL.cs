@@ -9,5 +9,6 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
 {
     public interface IDestinationTagDAL:IGenericDAL<DestinationTag>
     {
+        public List<DestinationTag> GetTagsAllByDestinationId(int id);
     }
 }

@@ -55,7 +55,7 @@
                 </blockquote>
 
                 <div class="d-grid left-right mt-5 pb-md-5">
-                    @await Component.InvokeAsync("_DestinationDetailTagsComponentPartial")
+                    @await Component.InvokeAsync("_DestinationDetailTagsComponentPartial",new{id=ViewBag.id})
                     <div class="buttons-singles">
                         <h4>Share :</h4>
                         <a href="#blog-share"><span class="fa fa-facebook" aria-hidden="true"></span></a>
@@ -81,7 +81,6 @@
                         @await Component.InvokeAsync("_DestinationDetailMakeCommentComponentPartial", new { id = ViewBag.id })
                     }
                 }
-
             </div>
         </div>
     </div>

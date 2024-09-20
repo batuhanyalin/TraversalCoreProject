@@ -1,0 +1,46 @@
+﻿@model List<DestinationTag>
+@{
+    ViewData["Title"] = "DestinationListForTag";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+        <div class="container">
+            <h2 class="title">Turlar </h2>
+            <ul class="breadcrumbs-custom-path mt-2">
+                <li><a href="/Default/Index">Anasayfa</a></li>
+                <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Turlar </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- //about breadcrumb -->
+<!--  Work gallery section -->
+
+<section class="grids-1 py-5">
+    <div class="grids py-lg-5 py-md-4">
+        <div class="container">
+            <h3 class="hny-title mb-5">Destinations</h3>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-4 col-6 mt-md-0 mt-4">
+                        <div class="column">
+                            <a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.Destination.ImageUrl" alt="" class="img-fluid"></a>
+                            <div class="info">
+                                <h4><a href="blog-single.html">@item.Destination.Country - @item.Destination.City</a></h4>
+                                <p>@item.Destination.DayNight </p>
+                                <div class="dst-btm">
+                                    <h6 class="">Fiyat: </h6>
+                                    <span>$@item.Destination.Price</span>
+                                    <small style="color:darkred">Kontenjan: @item.Destination.Capacity</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

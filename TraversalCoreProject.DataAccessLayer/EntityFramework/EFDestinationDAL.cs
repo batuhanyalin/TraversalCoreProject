@@ -24,5 +24,10 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
             var values = context.Destinations.Include(x => x.DestinationMatchGuides).Include(x => x.Comments).Include(x => x.DestinationTags).ToList();
             return values;
         }
+        public List<DestinationTag> GetAllDestinationByTagId(int id)
+        {
+            var values = context.DestinationTags.Where(x=>x.TagId==id).Include(x=>x.Destination).Include(x=>x.Tag).ToList();
+            return values;
+        }
     }
 }

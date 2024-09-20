@@ -33,6 +33,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _destinationTagDAL.GetListAll();
         }
 
+        public List<DestinationTag> TGetTagsAllByDestinationId(int id)
+        {
+           return _destinationTagDAL.GetTagsAllByDestinationId(id);
+        }
+
         public void TInsert(DestinationTag entity)
         {
             _destinationTagDAL.Insert(entity);

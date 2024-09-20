@@ -7,20 +7,21 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.ViewComponents
 {
-    public class _DestinationDetailMakeCommentComponentPartial:ViewComponent
-    { private readonly UserManager<IdentityUser> _userManager;
+    public class _DestinationDetailMakeCommentComponentPartial : ViewComponent
+    {
+        private readonly UserManager<AppUser> _userManager;
 
-        public _DestinationDetailMakeCommentComponentPartial(UserManager<IdentityUser> userManager)
+        public _DestinationDetailMakeCommentComponentPartial(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }
 
-        public IViewComponentResult Invoke(int id)
+        public async Task<IViewComponentResult> InvokeAsync(int id)
         {
-            //var user = _userManager.FindByNameAsync(User.Identity.Name);
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
             CommentCreateDto commentCreateDto = new CommentCreateDto();
             commentCreateDto.DestinationId = id;
-            commentCreateDto.MemberId = 4; //user.Id gelecek.
+            commentCreateDto.MemberId = user.Id;
             return View(commentCreateDto);
         }
     }

@@ -9,5 +9,6 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
 {
     public interface IDestinationTagService:IGenericService<DestinationTag>
     {
+        public List<DestinationTag> TGetTagsAllByDestinationId(int id);
     }
 }

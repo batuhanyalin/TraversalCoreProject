@@ -23,6 +23,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _destinationDAL.Delete(id);
         }
 
+        public List<DestinationTag> TGetAllDestinationByTagId(int id)
+        {
+           return _destinationDAL.GetAllDestinationByTagId(id);
+        }
+
         public List<Destination> TGetAllDestinationWithAllInfo()
         {
            return _destinationDAL.GetAllDestinationWithAllInfo();
