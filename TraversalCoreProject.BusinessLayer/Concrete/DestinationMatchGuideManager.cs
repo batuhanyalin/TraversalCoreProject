@@ -28,6 +28,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _destinationMatchGuideDAL.GetById(id);
         }
 
+        public List<DestinationMatchGuide> TGetDestinationAllByGuideId(int id)
+        {
+          return _destinationMatchGuideDAL.GetDestinationAllByGuideId(id);
+        }
+
         public List<DestinationMatchGuide> TGetGuideAllByDestinationId(int id)
         {
             return _destinationMatchGuideDAL.GetGuideAllByDestinationId(id);

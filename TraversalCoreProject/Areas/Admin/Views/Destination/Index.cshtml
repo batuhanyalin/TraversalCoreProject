@@ -19,7 +19,6 @@
                         <th>Gün</th>
                         <th>Kapasite</th>
                         <th>Tur Rehberleri</th>
-                        <th>Sitede Gör</th>
                         <th>Durum</th>
                         <th>Aksiyon</th>
                     </tr>
@@ -30,7 +29,7 @@
                         count++;
                         <tr>
                             <td>@count</td>
-                            <td><img src="@item.ImageUrl" style="height:50px;width:auto;border-radius:10%;" /></td>
+                            <td><a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.ImageUrl" style="height:50px;width:auto;border-radius:10%;" /></a></td>
                             <td>@item.Country</td>
                             <td>@item.City</td>
                             <td>@item.DayNight</td>
@@ -38,8 +37,21 @@
                             <td>
                                 @await Component.InvokeAsync("_AdminDestinationListGuideComponentPartial", new { id = item.DestinationId })
                             </td>
-                            <td><a href="/Destination/DestinationDetail/@item.DestinationId"><span class="badge bg-label-warning me-1"><i class="fas fa-paper-plane"></i></span></a></td>
-                            <td><span class="badge bg-label-primary me-1">@item.Status</span></td>
+                            <td>
+                                <a href="/Admin/Destination/IsApproved/@item.DestinationId">
+                                    @{
+                                        if (item.Status == true)
+                                        {
+                                            <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
+                                        }
+                                        else
+                                        {
+                                            <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
+                                        }
+                                    }
+                                </a>
+
+                            </td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

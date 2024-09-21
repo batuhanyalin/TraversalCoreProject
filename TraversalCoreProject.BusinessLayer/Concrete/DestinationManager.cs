@@ -53,6 +53,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _destinationDAL.Insert(entity);
         }
 
+        public Destination TIsApprovedByDestinationId(int id)
+        {
+            return _destinationDAL.IsApprovedByDestinationId(id);
+        }
+
         public void TUpdate(Destination entity)
         {
             _destinationDAL.Update(entity);

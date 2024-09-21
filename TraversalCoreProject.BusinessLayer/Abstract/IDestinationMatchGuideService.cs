@@ -10,5 +10,6 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
     public interface IDestinationMatchGuideService : IGenericService<DestinationMatchGuide>
     {
         public List<DestinationMatchGuide> TGetGuideAllByDestinationId(int id);
+        public List<DestinationMatchGuide> TGetDestinationAllByGuideId(int id);
     }
 }

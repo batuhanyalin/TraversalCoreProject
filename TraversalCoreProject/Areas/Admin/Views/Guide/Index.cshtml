@@ -1,0 +1,58 @@
+﻿@model List<GuideListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+    int count = 0;
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Rehberler</h4>
+    <div class="card">
+        <h5 class="card-header">Rehber Listesi</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Profil</th>
+                        <th>Adı Soyadı</th>
+                        <th>Meslek</th>
+                        <th>Telefon</th>
+                        <th>E-posta</th>
+                        <th>Katıldığı Turlar</th>
+                        <th>Durum</th>
+                        <th>Aksiyon</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td><a href="/Guide/GuideDetail/@item.Id"><img src="@item.ImageUrl" style="height:50px;width:auto;border-radius:10%;" /></a></td>
+                            <td>@item.Name @item.Surname</td>
+                            <td>@item.Profession</td>
+                            <td><a href="tel:@item.Phone">@item.Phone</a></td>
+                            <td><a href="mailto:@item.Email">@item.Email</a></td>
+                            <td>
+                                @await Component.InvokeAsync("_AdminGuideListDestinationComponentPartial", new { id = item.Id })
+                            </td>
+                            <td><span class="badge bg-label-primary me-1">@item.IsActive</span></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/Admin/Guide/UpdateGuide/@item.Id"><i class="bx bx-edit-alt me-1"></i> Güncelleme</a>
+                                        <a class="dropdown-item" href="/Admin/Guide/DeleteGuide/@item.Id"><i class="bx bx-trash me-1"></i> Sil</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

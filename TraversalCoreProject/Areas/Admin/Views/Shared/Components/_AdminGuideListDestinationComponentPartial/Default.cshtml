@@ -1,0 +1,15 @@
+﻿@model List<DestinationMatchGuide>
+<ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+    @foreach (var item in Model)
+    {
+        <li data-bs-toggle="tooltip"
+            data-popup="tooltip-custom"
+            data-bs-placement="top"
+            class="avatar avatar-xs pull-up"
+            title="@item.Destination.Country @item.Destination.City">
+            <a href="/Destination/DestinationDetail/@item.Destination.DestinationId">
+                <img src="@item.Destination.ImageUrl" alt="Avatar" class="rounded-circle" />
+            </a>
+        </li>
+    }
+</ul>

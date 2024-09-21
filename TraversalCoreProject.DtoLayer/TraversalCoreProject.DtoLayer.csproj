@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="AdminAreaDtos\ContactDtos\" />
+    <Folder Include="AdminAreaDtos\DashboardDtos\" />
   </ItemGroup>
 
   <ItemGroup>

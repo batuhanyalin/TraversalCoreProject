@@ -28,6 +28,12 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             _tagService = tagService;
             _destinationMatchGuideService = destinationMatchGuideService;
         }
+        [Route("IsApproved/{id:int}")]
+        public IActionResult IsApproved(int id)
+        {
+            _destinationService.TIsApprovedByDestinationId(id);
+            return RedirectToAction("Index");
+        }
 
         [Route("Index")]
         public async Task<IActionResult> Index()

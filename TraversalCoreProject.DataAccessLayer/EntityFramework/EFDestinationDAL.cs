@@ -29,5 +29,19 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
             var values = context.DestinationTags.Where(x=>x.TagId==id).Include(x=>x.Destination).Include(x=>x.Tag).ToList();
             return values;
         }
+        public Destination IsApprovedByDestinationId(int id)
+        {
+            var value= context.Destinations.Where(x=>x.DestinationId==id).FirstOrDefault();
+            if (value.Status==false)
+            {
+                value.Status = true;
+            }
+            else
+            {
+                value.Status=false;
+            }
+            context.SaveChanges();
+            return value;
+        }
     }
 }

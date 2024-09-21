@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using TraversalCoreProject.DtoLayer.DefaultDtos.GuideDtos;
+using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.Areas.Admin.Controllers
 {
@@ -6,9 +10,21 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
     [Route("Admin/[controller]")]
     public class GuideController : Controller
     {
-        public IActionResult ListGuide()
+        private readonly UserManager<AppUser> _userManager;
+        private IMapper _mapper;
+
+        public GuideController(UserManager<AppUser> userManager, IMapper mapper)
         {
-            return View();
+            _userManager = userManager;
+            _mapper = mapper;
+        }
+
+        [Route("Index")]
+        public async Task<IActionResult> Index()
+        {
+            var values = await _userManager.GetUsersInRoleAsync("Guide");
+            var map = _mapper.Map<List<GuideListDto>>(values);
+            return View(map);
         }
     }
 }
