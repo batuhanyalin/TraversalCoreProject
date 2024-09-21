@@ -44,7 +44,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         }
         [HttpPost]
         [Route("CreateDestination")]
-        public IActionResult CreateDestination(DestinationCreateDto destinationCreateDto)
+        public async Task<IActionResult> CreateDestination(DestinationCreateDto destinationCreateDto, IFormFile ImageUpload, IFormFile CoverImageUpload)
         {
             var validator = new DestinationCreateValidator().Validate(destinationCreateDto);
             if (!validator.IsValid)
@@ -54,6 +54,40 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
                 return View(destinationCreateDto);
+            }
+            if (ImageUpload != null && ImageUpload.Length > 0)
+            {
+                var source = Directory.GetCurrentDirectory();
+                var extension = Path.GetExtension(ImageUpload.FileName);
+                var imageName = Guid.NewGuid() + extension;
+                var saveLocation = Path.Combine(source, "wwwroot/images/destinations/", imageName);
+                using (var stream = new FileStream(saveLocation, FileMode.Create))
+                {
+                    await ImageUpload.CopyToAsync(stream);
+                }
+                destinationCreateDto.ImageUrl = $"/images/destinations/{imageName}";
+
+            }
+            if (CoverImageUpload != null && CoverImageUpload.Length > 0)
+            {
+                var source2 = Directory.GetCurrentDirectory();
+                var extension2 = Path.GetExtension(CoverImageUpload.FileName);
+                var imageName2 = Guid.NewGuid() + extension2;
+                var saveLocation2 = Path.Combine(source2, "wwwroot/images/destinations/", imageName2);
+                using (var stream2 = new FileStream(saveLocation2, FileMode.Create))
+                {
+                    await CoverImageUpload.CopyToAsync(stream2);
+                }
+                destinationCreateDto.CoverImage = $"/images/destinations/{imageName2}";
+            }
+
+            if (ImageUpload == null)
+            {
+                destinationCreateDto.ImageUrl = $"/images/no-image.jpg";
+            }
+            if (CoverImageUpload == null)
+            {
+                destinationCreateDto.CoverImage = $"/images/no-image.jpg";
             }
             var map = _mapper.Map<Destination>(destinationCreateDto);
             _destinationService.TInsert(map);

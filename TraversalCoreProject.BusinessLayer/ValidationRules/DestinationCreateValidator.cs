@@ -15,7 +15,7 @@ namespace TraversalCoreProject.BusinessLayer.ValidationRules
         {
             RuleFor(x=>x.Price).NotEmpty().WithMessage("Fiyat bilgisi boş geçilemez.");
             RuleFor(x=>x.DayNight).NotEmpty().WithMessage("Gün bilgisi boş geçilemez.");
-            RuleFor(x=>x.Text1).NotEmpty().WithMessage("Metin bilgisi boş geçilemez.").MinimumLength(3).WithMessage("Metin bilgisi en az 3 karakter olmalıdır.").MaximumLength(2000).WithMessage("Metin bilgisi en fazla 2000 karakter olabilir.");
+            RuleFor(x=>x.Text1).NotEmpty().WithMessage("Metin bilgisi boş geçilemez.").MinimumLength(3).WithMessage("Metin bilgisi en az 3 karakter olmalıdır.").MaximumLength(10000).WithMessage("Metin bilgisi en fazla 10000 karakter olabilir.");
             RuleFor(x=>x.StartDate).NotEmpty().WithMessage("Tarih bilgisi boş geçilemez.");
             RuleFor(x=>x.Capacity).NotEmpty().WithMessage("Kapasite bilgisi boş geçilemez.");
             RuleFor(x=>x.City).NotEmpty().WithMessage("Şehir bilgisi boş geçilemez.").MinimumLength(3).WithMessage("Şehir bilgisi en az 3 karakter olmalıdır.").MaximumLength(50).WithMessage("Şehir bilgisi en fazla 50 karakter olabilir.");

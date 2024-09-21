@@ -39,13 +39,13 @@
     <!--/blog-post-->
     <div class="blog-content-inf pb-5">
         <div class="container pb-lg-4">
-            <div class="single-post-image">
+            <div class="single-post-image" style="text-align:center">
                 <div class="post-content">
                     <img src="@Model.CoverImage" class="radius-image img-fluid mb-5" alt="" />
                 </div>
             </div>
             <div class="single-post-content">
-                <div id="summernoteRead" class="alphabet mb-4">@Model.Text1</div>
+                <p id="summernoteRead" class="alphabet mb-4">@Html.Raw(Model.Text1)</p>
                 <blockquote class="blockquote my-5">
                     <div class="icon-quote"><span class="fa fa-quote-left" aria-hidden="true"></span></div>
                     "Dünyayı dolaşın. Görebileceğiniz bütün rüyaların en muhteşemi!"
@@ -88,13 +88,12 @@
 </section>
 
 <script>
-
     $(document).ready(function () {
-        $('#summernoteRead').summernote({
+        $('#summernote').summernote({
             toolbar: true, // Toolbar'ı gizler
             airMode: true, // Sadece görüntüleme modu
-            height: 500, // Yüksekliği içeriğe göre ayarlar
-            minHeight: 500, // Minimum yüksekliği ayarlar
+            height: 'auto', // Yüksekliği içeriğe göre ayarlar
+            minHeight: 200, // Minimum yüksekliği ayarlar
             maxHeight: 800, // Maksimum yüksekliği ayarlar
             focus: true // Başlangıçta odaklanır
         });
