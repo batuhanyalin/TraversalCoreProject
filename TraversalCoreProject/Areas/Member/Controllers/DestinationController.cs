@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TraversalCoreProject.BusinessLayer.Abstract;
+using TraversalCoreProject.BusinessLayer.ValidationRules;
+using TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
+using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.Areas.Member.Controllers
 {
@@ -22,9 +25,10 @@ namespace TraversalCoreProject.Areas.Member.Controllers
         [Route("Index")]
         public async Task<IActionResult> Index()
         {
-            var values= _destinationService.TGetAllDestinationWithAllInfo();
+            var values = _destinationService.TGetAllDestinationWithAllInfo();
             var map = _mapper.Map<List<DestinationListDto>>(values);
             return View(map);
-        }
+        }      
     }
 }
+

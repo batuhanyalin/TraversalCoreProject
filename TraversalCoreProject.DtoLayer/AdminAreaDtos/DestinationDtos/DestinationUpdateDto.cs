@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +8,9 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
 {
-    public class DestinationCreateDto
+    public class DestinationUpdateDto
     {
+        public int DestinationId { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
         public string DayNight { get; set; }
@@ -26,5 +28,7 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
         public List<Comment> Comments { get; set; }
         public List<Reservation> Reservations { get; set; }
         public List<DestinationMatchGuide> DestinationMatchGuides { get; set; }
+        public IFormFile ImageUpload { get; set; }
+        public IFormFile CoverImageUpload { get; set; }
     }
 }

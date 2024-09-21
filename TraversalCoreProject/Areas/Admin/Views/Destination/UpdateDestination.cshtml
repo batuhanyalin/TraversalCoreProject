@@ -1,0 +1,138 @@
+﻿@model DestinationUpdateDto
+@{
+    ViewData["Title"] = "UpdateDestination";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Turlar /</span> Tur Güncelleme</h4>
+        <div class="row">
+            <h5 class="card-header">Tur Detayları </h5>
+            <!-- Form controls -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <input type="hidden" asp-for="DestinationId" />
+                            <label class="form-label">Ülke</label>
+                            <input type="text" class="form-control" asp-for="Country" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="Country"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Şehir</label>
+                            <input type="text" class="form-control" asp-for="City" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="City"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gün</label>
+                            <input type="text" class="form-control" asp-for="DayNight" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="DayNight"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Fiyat</label>
+                            <input type="text" class="form-control" asp-for="Price" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="Price"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Tarih</label>
+                            <input type="date" class="form-control" asp-for="StartDate" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="StartDate"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Öne Çıkarıldı </label>
+                            <input asp-for="IsFeaturePost" type="checkbox" class="form-check-input" />
+                            <input type="hidden" asp-for="IsFeaturePost" value="false" />
+
+                            <label class="form-label">Durum </label>
+                            <input asp-for="Status" type="checkbox" class="form-check-input" />
+                            <input type="hidden" asp-for="Status" value="false" />
+                        </div>
+                        <div class="mb-3">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Kapasite</label>
+                            <input type="text" class="form-control" asp-for="Capacity" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="Capacity"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Açıklama</label>
+                            <textarea class="form-control" asp-for="Description"></textarea>
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="Description"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="form-label">Güncel Resim</label>
+                                <br />
+                                <img style="height:100px;width:auto" src="@Model.ImageUrl" />
+                            </div>
+                            <div class="col">
+                                <label class="form-label">Güncel Kapak Görseli</label>
+                                <br />
+                                <img style="height:100px;width:auto" src="@Model.CoverImage" />
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-3">
+                            <div class="col">
+
+                                <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                    <span class="d-none d-sm-block">Fotoğraf Yükle</span>
+                                    <i class="bx bx-upload d-block d-sm-none"></i>
+                                    <input type="file" name="ImageUpload" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
+                                </label>
+
+                            </div>
+                            <div class="col">
+
+                                <label for="upload2" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                    <span class="d-none d-sm-block">Kapak Yükle</span>
+                                    <i class="bx bx-upload d-block d-sm-none"></i>
+                                    <input type="file" name="CoverImageUpload" id="upload2" class="account-file-input" hidden accept="image/png, image/jpeg" />
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="form-label">Detaylar</label>
+                            <textarea class="form-control" asp-for="Detail"></textarea>
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="Detail"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">İçerik</label>
+                            <textarea asp-for=Text1 class="form-control" id="summernote" rows="3"></textarea>
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="Text1"></span>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <button class="btn btn-success">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $('#summernote').summernote({
+        tabsize: 2,
+        height: 200
+    });
+</script>

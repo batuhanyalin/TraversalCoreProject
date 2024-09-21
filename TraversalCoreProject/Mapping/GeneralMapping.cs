@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.ProfileDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.CommentDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.ContactDtos;
@@ -22,6 +23,8 @@ namespace TraversalCoreProject.Mapping
             CreateMap<Destination,DestinationListDto>().ReverseMap();
             CreateMap<Destination,PopularDestinationListDto>().ReverseMap();
             CreateMap<Destination,FeaturePostListDto>().ReverseMap();
+            CreateMap<Destination,DestinationCreateDto>().ReverseMap();
+            CreateMap<Destination,DestinationUpdateDto>().ReverseMap();
 
             CreateMap<Comment,CommentCreateDto>().ReverseMap();
             CreateMap<Comment,CommentListDto>().ReverseMap();
