@@ -24,5 +24,6 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
             var values = context.DestinationMatchGuides.Where(x => x.GuideId == id).Include(x => x.Guide).Include(x => x.Destination).ToList();
             return values;
         }
+
     }
 }

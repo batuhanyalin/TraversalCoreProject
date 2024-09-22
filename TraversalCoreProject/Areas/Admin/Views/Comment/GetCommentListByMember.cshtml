@@ -1,53 +1,45 @@
-﻿@model List<DestinationListDto>
+﻿@model List<CommentListDto>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "GetCommentListByMember";
     Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
     int count = 0;
 }
+
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Turlar</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> @ViewBag.name Kullanıcısının Yaptığı Yorumlar </h4>
     <div class="card">
-        <h5 class="card-header">Turlar</h5>
-        <div class="table-responsive text-nowrap" id="destinationList">
+        <h5 class="card-header"> </h5>
+        <div class="table-responsive text-nowrap" id="commentListByMember">
             <table class="table">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Görsel</th>
-                        <th>Ülke</th>
-                        <th>Şehir</th>
-                        <th>Gün</th>
-                        <th>Kapasite</th>
-                        <th>Tur Rehberleri</th>
+                        <th>Tur</th>
+                        <th>Yorum</th>
+                        <th>Tarih</th>
                         <th>Durum</th>
                         <th>Aksiyon</th>
                     </tr>
                 </thead>
-            
                 <tbody class="table-border-bottom-0">
                     @foreach (var item in Model)
                     {
                         count++;
                         <tr>
                             <td>@count</td>
-                            <td><a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.ImageUrl" style="height:50px;width:auto;border-radius:10%;" /></a></td>
-                            <td>@item.Country</td>
-                            <td>@item.City</td>
-                            <td>@item.DayNight</td>
-                            <td>@item.Capacity</td>
+                            <td><a href="/Destination/DestinationDetail/@item.DestinationId">@item.Destination.Country - @item.Destination.City</a></td>
+                            <td>@item.Text</td>
+                            <td>@item.CommentDate.ToString("dd.MM.yyy HH:MM")</td>
                             <td>
-                                @await Component.InvokeAsync("_AdminDestinationListGuideComponentPartial", new { id = item.DestinationId })
-                            </td>
-                            <td>
-                                <a href="/Admin/Destination/IsApproved/@item.DestinationId">
+                                <a href="/Admin/Comment/IsApproved/@item.CommentId">
                                     @{
-                                        if (item.Status == true)
+                                        if (item.IsApproved == true)
                                         {
-                                                <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
+                                            <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
                                         }
                                         else
                                         {
-                                                <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
+                                            <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
                                         }
                                     }
                                 </a>
@@ -59,24 +51,22 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/Admin/Destination/UpdateDestination/@item.DestinationId"><i class="bx bx-edit-alt me-1"></i> Güncelleme</a>
-                                        <button class="dropdown-item btn-deleteDestination" data-id=@item.DestinationId><i class="bx bx-trash me-1"></i> Sil</button>
+                                        <button class="dropdown-item btn-deleteComment2" data-id=@item.CommentId><i class="bx bx-trash me-1"></i> Sil</button>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                     }
                 </tbody>
-
             </table>
         </div>
     </div>
 </div>
 <script>
-    $("#destinationList").on('click', '.btn-deleteDestination', function () {
-        let destinationId = $(this).data('id');
+    $("#commentListByMember").on('click', '.btn-deleteComment2', function () {
+        let CommentId = $(this).data('id');
         Swal.fire({
-            title: "Turu Silmek İstediğinizden Emin Misiniz?",
+            title: "Yorumu Silmek İstediğinizden Emin Misiniz?",
             text: "Bu işlemin geri dönüşü olmayacaktır.",
             icon: "warning",
             showCancelButton: true,
@@ -88,13 +78,13 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "post",
-                    url: "/Admin/Destination/DeleteDestination/" + destinationId,
+                    url: "/Admin/Comment/DeleteComment/" + CommentId,
                     contentType: "application/json",
                     dataType: "json",
                     success: function (response) {
                         Swal.fire({
                             title: "İşlem Başarılı!",
-                            text: "Seçtiğiniz tur başarılı bir şekilde silindi.",
+                            text: "Seçtiğiniz yorum başarılı bir şekilde silindi.",
                             icon: "success"
                         }).then(() => {
                             // Sayfayı yenile

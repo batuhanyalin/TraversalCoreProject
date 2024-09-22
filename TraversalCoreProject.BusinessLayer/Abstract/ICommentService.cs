@@ -11,5 +11,7 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
     {
         public List<Comment> TGetListAllWithAllInfoByDestinationId(int id);
         public List<Comment> TGetListCommentWithAllInfo();
+        public List<Comment> TGetListCommentWithAllInfoByMemberId(int id);
+        public Comment TIsApprovedByCommentId(int id);
     }
 }

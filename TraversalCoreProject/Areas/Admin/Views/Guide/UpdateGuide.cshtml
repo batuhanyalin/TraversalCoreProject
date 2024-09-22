@@ -1,0 +1,157 @@
+﻿@model MemberUpdateDto
+@{
+    ViewData["Title"] = "UpdateGuide";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Hesap Ayarları /</span> Hesap</h4>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages-account-settings-notifications.html"><i class="bx bx-bell me-1"></i> Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages-account-settings-connections.html"><i class="bx bx-link-alt me-1"></i> Connections</a>
+                    </li>
+                </ul>
+
+                <div class="card mb-4">
+                    <h5 class="card-header">Profil Detayları</h5>
+                    <!-- Account -->
+                    <div class="card-body">
+                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                            <img src="@Model.ImageUrl"
+                                 alt="user-avatar"
+                                 class="d-block rounded"
+                                 height="100"
+                                 width="100"
+                                 id="uploadedAvatar" />
+                            <div class="button-wrapper">
+                                <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                    <span class="d-none d-sm-block">Fotoğraf Yükle</span>
+                                    <i class="bx bx-upload d-block d-sm-none"></i>
+                                    <input type="file" name="Image"
+                                           id="upload"
+                                           class="account-file-input"
+                                           hidden
+                                           accept="image/png, image/jpeg" />
+                                </label>
+                                <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                    <i class="bx bx-reset d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Reset</span>
+                                </button>
+
+                                <p class="text-muted mb-0">JPG, GIF ya da PNG. Max boyut 800K</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-0" />
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Kullanıcı Adı</label>
+                                        <input class="form-control" type="text" asp-for="UserName" readonly />
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Parola</label>
+                                        <input class="form-control" type="text" asp-for="Password" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Password"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Adı</label>
+                                        <input class="form-control" type="text" asp-for="Name" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Name"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Soyadı</label>
+                                        <input class="form-control" type="text" asp-for="Surname" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Surname"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">E-posta</label>
+                                        <input class="form-control" type="text" asp-for="Email" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Email"></span>
+                                    </div>    <div class="col">
+                                        <label class="form-label">Telefon</label>
+                                        <input class="form-control" type="text" asp-for="Phone" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Phone"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Ana Dil</label>
+                                        <input class="form-control" type="text" asp-for="MainLanguage" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="MainLanguage"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Diğer Diller</label>
+                                        <input class="form-control" type="text" asp-for="OtherLanguage" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="OtherLanguage"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Doğum Yeri</label>
+                                        <input class="form-control" type="text" asp-for="HomeTown" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="HomeTown"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Doğum Tarihi</label>
+                                        <input class="form-control" type="date" asp-for="Birtday" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Birtday"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Twitter URL</label>
+                                        <input class="form-control" type="text" asp-for="TwitterUrl" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="TwitterUrl"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Instagram URL</label>
+                                        <input class="form-control" type="text" asp-for="InstagramUrl" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="InstagramUrl"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Meslek</label>
+                                        <input class="form-control" type="text" asp-for="Profession" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Profession"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Hakkında</label>
+                                        <textarea class="form-control" type="text" asp-for="About"></textarea>
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="About"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <button class="btn btn-primary me-2">Bilgileri Güncelle</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /Account -->
+            </div>
+        </div>
+    </div>
+
+</form>
+

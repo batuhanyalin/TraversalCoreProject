@@ -43,9 +43,19 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _commentDAL.GetListCommentWithAllInfo();
         }
 
+        public List<Comment> TGetListCommentWithAllInfoByMemberId(int id)
+        {
+            return _commentDAL.GetListCommentWithAllInfoByMemberId(id);
+        }
+
         public void TInsert(Comment entity)
         {
            _commentDAL.Insert(entity);
+        }
+
+        public Comment TIsApprovedByCommentId(int id)
+        {
+            return _commentDAL.IsApprovedByCommentId(id);
         }
 
         public void TUpdate(Comment entity)

@@ -8,7 +8,7 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Rehberler</h4>
     <div class="card">
         <h5 class="card-header">Rehber Listesi</h5>
-        <div class="table-responsive text-nowrap">
+        <div class="table-responsive text-nowrap" id="guideList">
             <table class="table">
                 <thead>
                     <tr>
@@ -45,7 +45,7 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="/Admin/Guide/UpdateGuide/@item.Id"><i class="bx bx-edit-alt me-1"></i> Güncelleme</a>
-                                        <a class="dropdown-item" href="/Admin/Guide/DeleteGuide/@item.Id"><i class="bx bx-trash me-1"></i> Sil</a>
+                                        <button class="dropdown-item btn-deleteGuide" data-id=@item.Id><i class="bx bx-trash me-1"></i> Sil</button>
                                     </div>
                                 </div>
                             </td>
@@ -56,3 +56,37 @@
         </div>
     </div>
 </div>
+<script>
+    $("#guideList").on('click', '.btn-deleteGuide', function () {
+        let guideId = $(this).data('id');
+        Swal.fire({
+            title: "Rehberi Silmek İstediğinizden Emin Misiniz?",
+            text: "Bu işlemin geri dönüşü olmayacaktır.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, sil.",
+            cancelButtonText: "İptal Et."
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "/Admin/Guide/DeleteGuide/" + guideId,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (response) {
+                        Swal.fire({
+                            title: "İşlem Başarılı!",
+                            text: "Seçtiğiniz rehber başarılı bir şekilde silindi.",
+                            icon: "success"
+                        }).then(() => {
+                            // Sayfayı yenile
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>

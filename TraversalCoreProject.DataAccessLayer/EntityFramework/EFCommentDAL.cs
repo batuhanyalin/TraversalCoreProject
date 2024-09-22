@@ -26,5 +26,24 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
             var values= context.Comments.Include(x=>x.Member).Include(x=>x.Destination).ToList();  
             return values;
         }
+        public List<Comment> GetListCommentWithAllInfoByMemberId(int id)
+        {
+            var values = context.Comments.Where(x=>x.MemberId==id).Include(x => x.Member).Include(x => x.Destination).ToList();
+            return values;
+        }
+        public Comment IsApprovedByCommentId(int id)
+        {
+            var value = context.Comments.Where(x => x.CommentId == id).FirstOrDefault();
+            if (value.IsApproved == false)
+            {
+                value.IsApproved = true;
+            }
+            else
+            {
+                value.IsApproved = false;
+            }
+            context.SaveChanges();
+            return value;
+        }
     }
 }

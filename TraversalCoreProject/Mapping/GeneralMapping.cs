@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos;
+using TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.ProfileDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.CommentDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.ContactDtos;
@@ -37,6 +38,9 @@ namespace TraversalCoreProject.Mapping
             CreateMap<AppUser,GuideDetailDto>().ReverseMap();
             CreateMap<AppUser,MyProfileUpdateDto>().ReverseMap();
             CreateMap<AppUser,AdminMyProfileUpdateDto>().ReverseMap();
+            CreateMap<AppUser, MemberUpdateDto>().ReverseMap();
+            CreateMap<AppUser, MemberListDto>().ReverseMap();
+            CreateMap<AppUser, MemberCreateDto>().ReverseMap();
 
             CreateMap<Newsletter,NewsletterSubscribeDto>().ReverseMap();
             CreateMap<SocialMedia,SocialMediaDtos>().ReverseMap();

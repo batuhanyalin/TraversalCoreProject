@@ -7,6 +7,7 @@ using TraversalCoreProject.BusinessLayer.ValidationRules;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
 using TraversalCoreProject.EntityLayer.Concrete;
+using Newtonsoft.Json;
 
 namespace TraversalCoreProject.Areas.Admin.Controllers
 {
@@ -100,10 +101,11 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
         [Route("DeleteDestination/{id:int}")]
+        [HttpPost]
         public IActionResult DeleteDestination(int id)
         {
             _destinationService.TDelete(id);
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
         [Route("UpdateDestination/{id:int}")]
         [HttpGet]

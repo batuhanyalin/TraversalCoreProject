@@ -1,23 +1,24 @@
-﻿@model List<CommentListDto>
+﻿@model List<MemberListDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
     int count = 0;
 }
-
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Yorumlar</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Misafirler</h4>
     <div class="card">
-        <h5 class="card-header">Yorumlar Listesi</h5>
-        <div class="table-responsive text-nowrap" id="commentList">
+        <h5 class="card-header">Misafir Listesi</h5>
+        <div class="table-responsive text-nowrap" id="MemberList">
             <table class="table">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Yorum Yapan</th>
-                        <th>Tur</th>
-                        <th>Yorum</th>
-                        <th>Tarih</th>
+                        <th>Profil</th>
+                        <th>Adı Soyadı</th>
+                        <th>Meslek</th>
+                        <th>Telefon</th>
+                        <th>E-posta</th>
+                        <th>Katıldığı Turlar</th>
                         <th>Durum</th>
                         <th>Aksiyon</th>
                     </tr>
@@ -28,32 +29,23 @@
                         count++;
                         <tr>
                             <td>@count</td>
-                            <td><a href="/Admin/Comment/GetCommentListByMember/@item.MemberId"><img src="@item.Member.ImageUrl" style="height:50px;width:auto;border-radius:10%;" />  @item.Member.Name @item.Member.Surname </a></td>
-                            <td><a href="/Destination/DestinationDetail/@item.DestinationId">@item.Destination.Country - @item.Destination.City</a></td>
-                            <td>@item.Text</td>
-                            <td>@item.CommentDate.ToString("dd.MM.yyy HH:MM")</td>
+                            <td><a href="/Member/MemberDetail/@item.Id"><img src="@item.ImageUrl" style="height:50px;width:auto;border-radius:10%;" /></a></td>
+                            <td>@item.Name @item.Surname</td>
+                            <td>@item.Profession</td>
+                            <td><a href="tel:@item.Phone">@item.Phone</a></td>
+                            <td><a href="mailto:@item.Email">@item.Email</a></td>
                             <td>
-                                <a href="/Admin/Comment/IsApproved/@item.CommentId">
-                                    @{
-                                        if (item.IsApproved == true)
-                                        {
-                                            <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
-                                        }
-                                        else
-                                        {
-                                            <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
-                                        }
-                                    }
-                                </a>
-
+                                @await Component.InvokeAsync("_AdminGuideListDestinationComponentPartial", new { id = item.Id })
                             </td>
+                            <td><span class="badge bg-label-primary me-1">@item.IsActive</span></td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <button class="dropdown-item btn-deleteComment" data-id=@item.CommentId><i class="bx bx-trash me-1"></i> Sil</button>
+                                        <a class="dropdown-item" href="/Admin/Member/UpdateMember/@item.Id"><i class="bx bx-edit-alt me-1"></i> Güncelleme</a>
+                                        <button class="dropdown-item btn-deleteMember" data-id=@item.Id><i class="bx bx-trash me-1"></i> Sil</button>
                                     </div>
                                 </div>
                             </td>
@@ -65,10 +57,10 @@
     </div>
 </div>
 <script>
-    $("#commentList").on('click', '.btn-deleteComment', function () {
-        let CommentId = $(this).data('id');
+    $("#MemberList").on('click', '.btn-deleteMember', function () {
+        let MemberId = $(this).data('id');
         Swal.fire({
-            title: "Yorumu Silmek İstediğinizden Emin Misiniz?",
+            title: "Misafiri Silmek İstediğinizden Emin Misiniz?",
             text: "Bu işlemin geri dönüşü olmayacaktır.",
             icon: "warning",
             showCancelButton: true,
@@ -80,13 +72,13 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "post",
-                    url: "/Admin/Comment/DeleteComment/" + CommentId,
+                    url: "/Admin/Member/DeleteMember/" + MemberId,
                     contentType: "application/json",
                     dataType: "json",
                     success: function (response) {
                         Swal.fire({
                             title: "İşlem Başarılı!",
-                            text: "Seçtiğiniz yorum başarılı bir şekilde silindi.",
+                            text: "Seçtiğiniz misafir başarılı bir şekilde silindi.",
                             icon: "success"
                         }).then(() => {
                             // Sayfayı yenile
