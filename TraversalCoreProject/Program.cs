@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Serilog;
 using System.Reflection;
 using TraversalCoreProject.BusinessLayer;
 using TraversalCoreProject.BusinessLayer.Abstract;
@@ -49,6 +50,7 @@ builder.Services.AddScoped<ITagService, TagManager>();
 builder.Services.AddScoped<IDestinationTagService, DestinationTagManager>();
 builder.Services.AddScoped<ICommentService, CommentManager>();
 builder.Services.AddScoped<IReservationService, ReservationManager>();
+
 //Logging iþlemi
 builder.Services.AddLogging(x =>
 {
@@ -57,7 +59,8 @@ builder.Services.AddLogging(x =>
     x.SetMinimumLevel(LogLevel.Debug);
     //Bu loglarýn nereye loglanacaðýný gösteriyor
     x.AddDebug();
-
+    //Burada hata loglarýnýn nereye yazýlacaðýný belirtiyoruz. Anadizine Logs adýnda bir klasör içine yazacak. Log seviyesini deðiþtirebiliriz, projemiz için error seviyesinde logluyoruz.
+    x.AddFile($"{Directory.GetCurrentDirectory()}\\Logs\\log.txt", LogLevel.Error);
 });
 
 

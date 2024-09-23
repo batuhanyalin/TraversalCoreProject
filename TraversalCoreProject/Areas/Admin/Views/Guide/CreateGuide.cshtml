@@ -1,0 +1,86 @@
+﻿@model RegisterDto
+@{
+    ViewData["Title"] = "CreateGuide";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Yeni Rehber Kaydı</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-12">
+                    <h5 class="card-header">Profil Bilgileri</h5>
+                    <!-- Account -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Kullanıcı Adı</label>
+                                        <input class="form-control" type="text" asp-for="UserName" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="UserName"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Parola</label>
+                                        <input class="form-control" type="text" asp-for="Password" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Password"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Parolayı Tekrar Girin</label>
+                                        <input class="form-control" type="text" asp-for="ConfirmPassword" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="ConfirmPassword"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Adı</label>
+                                        <input class="form-control" type="text" asp-for="Name" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Name"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Soyadı</label>
+                                        <input class="form-control" type="text" asp-for="Surname" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Surname"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">E-posta</label>
+                                        <input class="form-control" type="email" asp-for="Email" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Email"></span>
+                                    </div>    
+                                    <div class="col">
+                                        <label class="form-label">Telefon</label>
+                                        <input class="form-control" type="text" asp-for="Phone" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Doğum Tarihi</label>
+                                        <input class="form-control" type="date" asp-for="Birtday" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Birtday"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Meslek</label>
+                                        <input class="form-control" type="text" asp-for="Profession" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Profession"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <button class="btn btn-primary me-2">Rehberi Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Account -->
+            </div>
+        </div>
+    </div>
+</form>

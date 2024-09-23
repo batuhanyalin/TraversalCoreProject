@@ -2,10 +2,12 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.BusinessLayer.ValidationRules;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.GuideDtos;
+using TraversalCoreProject.DtoLayer.RegisterDtos;
 using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.Areas.Admin.Controllers
@@ -15,14 +17,16 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
     public class GuideController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
         private readonly IGuideService _guideService;
         private IMapper _mapper;
 
-        public GuideController(UserManager<AppUser> userManager, IMapper mapper, IGuideService guideService)
+        public GuideController(UserManager<AppUser> userManager, IMapper mapper, IGuideService guideService, RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
             _mapper = mapper;
             _guideService = guideService;
+            _roleManager = roleManager;
         }
 
         [Route("Index")]
@@ -32,6 +36,56 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             var map = _mapper.Map<List<GuideListDto>>(values);
             return View(map);
         }
+        [HttpGet]
+        [Route("CreateGuide")]
+        public IActionResult CreateGuide()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Route("CreateGuide")]
+        public async Task<IActionResult> CreateGuide(RegisterDto registerDto)
+        {
+            var validation = new RegisterValidator().Validate(registerDto);
+            if (!validation.IsValid)
+            {
+                foreach (var error in validation.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+                return View(registerDto);
+            }
+
+            registerDto.ApplicationDate = DateTime.Now;
+            registerDto.IsActive = true;
+            if (ModelState.IsValid)
+            {
+                var value = _mapper.Map<AppUser>(registerDto);
+                if (value.ImageUrl == null)
+                {
+                    value.ImageUrl = $"/images/users/no-image-users.png";
+                }
+
+                var register = await _userManager.CreateAsync(value, registerDto.Password);
+                if (register.Succeeded)
+                {
+                    var user = await _userManager.FindByNameAsync(registerDto.UserName);
+                    var currentRoles = await _userManager.GetRolesAsync(user);
+                    await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                    await _userManager.AddToRoleAsync(user, "Guide");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (var item in register.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
         [Route("IsApproved/{id:int}")]
         public IActionResult IsApproved(int id)
         {
