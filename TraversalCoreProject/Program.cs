@@ -19,7 +19,7 @@ builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Traver
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddFluentValidation(x=>x.RegisterValidatorsFromAssemblyContaining<validatorFinder>()); //Burada fluentvalidationý sisteme tanýmlýyoruz. Burada validator olarak oluþturduðum sýnýflarý bulabilmesi için validationFinder sýnýfýný Business katmaný içinde oluþturup burada tanýmlýyorum.
+builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<validatorFinder>()); //Burada fluentvalidationý sisteme tanýmlýyoruz. Burada validator olarak oluþturduðum sýnýflarý bulabilmesi için validationFinder sýnýfýný Business katmaný içinde oluþturup burada tanýmlýyorum.
 builder.Services.AddScoped<IAboutDAL, EFAboutDAL>();
 builder.Services.AddScoped<IIndexBannerDAL, EFIndexBannerDAL>();
 builder.Services.AddScoped<IContactDAL, EFContactDAL>();
@@ -49,21 +49,30 @@ builder.Services.AddScoped<ITagService, TagManager>();
 builder.Services.AddScoped<IDestinationTagService, DestinationTagManager>();
 builder.Services.AddScoped<ICommentService, CommentManager>();
 builder.Services.AddScoped<IReservationService, ReservationManager>();
+//Logging iþlemi
+builder.Services.AddLogging(x =>
+{
+    x.ClearProviders();
+    //Burada loglevel seviyesi belirleniyor. Log iþlemi nereden itibaren baþlayacak onu seçiyoruz.
+    x.SetMinimumLevel(LogLevel.Debug);
+    //Bu loglarýn nereye loglanacaðýný gösteriyor
+    x.AddDebug();
 
+});
 
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-	options.AccessDeniedPath = new PathString("/error/error403");
-	options.LoginPath = new PathString("/Login/Index");
-	options.LogoutPath = new PathString("/Login/LogOut");
+    options.AccessDeniedPath = new PathString("/error/error403");
+    options.LoginPath = new PathString("/Login/Index");
+    options.LogoutPath = new PathString("/Login/LogOut");
 });
 
 //Proje seviyesinde authentication iþlemi
 builder.Services.AddMvc(config =>
 {
-	var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-	config.Filters.Add(new AuthorizeFilter(policy));
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
 });
 builder.Services.AddMvc();
 
@@ -73,9 +82,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-	app.UseExceptionHandler("/Home/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-	app.UseHsts();
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -88,15 +97,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
 
 app.UseEndpoints(endpoints =>
 {
-	endpoints.MapControllerRoute(
-	  name: "areas",
-	  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-	);
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
 });
