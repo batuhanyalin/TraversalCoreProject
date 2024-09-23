@@ -19,6 +19,7 @@ namespace TraversalCoreProject.Controllers
         public IActionResult Index()
         {
             _logger.LogInformation("Index sayfası çağrıldı.");
+            _logger.LogError("Error log çağrıldı.");
             return View();
         }
 
