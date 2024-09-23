@@ -33,5 +33,20 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
             return values;
 
         }
+        public List<Reservation> GetListReservationWithAllInfo()
+        {
+            var values = context.Reservations.Include(x => x.Destination).Include(x => x.Member).ToList();
+            return values;
+        }
+        public List<Reservation> GetListReservationWithAllInfoByMemberId(int id)
+        {
+            var values = context.Reservations.Where(x=>x.MemberId==id).Include(x => x.Destination).Include(x => x.Member).ToList();
+            return values;
+        }
+        public Reservation GetReservationWithAllInfoById(int id)
+        {
+            var values = context.Reservations.Where(x => x.ReservationId == id).Include(x => x.Destination).Include(x => x.Member).FirstOrDefault();
+            return values;
+        }
     }
 }

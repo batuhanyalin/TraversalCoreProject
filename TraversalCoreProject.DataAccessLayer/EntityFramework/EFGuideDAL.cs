@@ -19,5 +19,20 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
             var value= context.Users.Where(x=>x.Id==id).Include(x=>x.DestinationMatchGuides).FirstOrDefault();
             return value;
         }
+        public AppUser IsApprovedByUserId(int id)
+        {
+            var value = context.Users.Where(x => x.Id == id).FirstOrDefault();
+            if (value.IsActive == false)
+            {
+                value.IsActive = true;
+            }
+            else
+            {
+                value.IsActive = false;
+            }
+            context.SaveChanges();
+            return value;
+        }
+
     }
 }

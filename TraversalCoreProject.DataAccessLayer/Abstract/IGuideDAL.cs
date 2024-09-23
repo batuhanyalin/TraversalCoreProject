@@ -11,6 +11,7 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
     public interface IGuideDAL : IGenericDAL<AppUser>
     {
         public AppUser GetGuideDetailById(int id);
+        public AppUser IsApprovedByUserId(int id);
     }
 }
 

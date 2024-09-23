@@ -7,8 +7,9 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.ReservationDtos
 {
-    public class AdminNewReservationDto
+    public class AdminReservationUpdateDto
     {
+        public int ReservationId { get; set; }
         public AppUser Member { get; set; }
         public int MemberId { get; set; }
         public int PersonCount { get; set; }
@@ -17,7 +18,6 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.ReservationDtos
         public DateTime ReservationDate { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
-        public string? validationCode { get; set; }
-
+        public string? ReservationError { get; set; }
     }
 }

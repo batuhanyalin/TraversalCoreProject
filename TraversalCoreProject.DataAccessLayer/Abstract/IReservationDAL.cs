@@ -12,5 +12,8 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
         public List<Reservation> GetMyOldReservationListByUserId(int id);
         public List<Reservation> GetMyApprovalReservationListByUserId(int id);
         public List<Reservation> GetMyCurrentReservationListByUserId(int id);
+        public List<Reservation> GetListReservationWithAllInfo();
+        public List<Reservation> GetListReservationWithAllInfoByMemberId(int id);
+        public Reservation GetReservationWithAllInfoById(int id);
     }
 }

@@ -12,5 +12,8 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
         public List<Reservation> TGetMyOldReservationListByUserId(int id);
         public List<Reservation> TGetMyApprovalReservationListByUserId(int id);
         public List<Reservation> TGetMyCurrentReservationListByUserId(int id);
+        public List<Reservation> TGetListReservationWithAllInfo();
+        public List<Reservation> TGetListReservationWithAllInfoByMemberId(int id);
+        public Reservation TGetReservationWithAllInfoById(int id);
     }
 }

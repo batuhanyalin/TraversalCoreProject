@@ -14,12 +14,14 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
     public class MemberController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly IGuideService _guideService;
         private IMapper _mapper;
 
-        public MemberController(UserManager<AppUser> userManager, IMapper mapper)
+        public MemberController(UserManager<AppUser> userManager, IMapper mapper, IGuideService guideService)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _guideService = guideService;
         }
 
         [Route("Index")]
@@ -28,6 +30,12 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             var values = await _userManager.GetUsersInRoleAsync("Member");
             var map = _mapper.Map<List<MemberListDto>>(values);
             return View(map);
+        }
+        [Route("IsApproved/{id:int}")]
+        public IActionResult IsApproved(int id)
+        {
+            _guideService.TIsApprovedByUserId(id);
+            return RedirectToAction("Index");
         }
 
         [Route("DeleteMember/{id:int}")]

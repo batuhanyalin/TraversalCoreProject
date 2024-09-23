@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.BusinessLayer.ValidationRules;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.GuideDtos;
@@ -14,12 +15,14 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
     public class GuideController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly IGuideService _guideService;
         private IMapper _mapper;
 
-        public GuideController(UserManager<AppUser> userManager, IMapper mapper)
+        public GuideController(UserManager<AppUser> userManager, IMapper mapper, IGuideService guideService)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _guideService = guideService;
         }
 
         [Route("Index")]
@@ -28,6 +31,12 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             var values = await _userManager.GetUsersInRoleAsync("Guide");
             var map = _mapper.Map<List<GuideListDto>>(values);
             return View(map);
+        }
+        [Route("IsApproved/{id:int}")]
+        public IActionResult IsApproved(int id)
+        {
+            _guideService.TIsApprovedByUserId(id);
+            return RedirectToAction("Index");
         }
         [Route("DeleteGuide/{id:int}")]
         public async Task<IActionResult> DeleteGuide(int id)

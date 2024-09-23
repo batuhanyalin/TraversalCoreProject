@@ -2,6 +2,7 @@
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.ProfileDtos;
+using TraversalCoreProject.DtoLayer.AdminAreaDtos.ReservationDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.CommentDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.ContactDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
@@ -50,7 +51,9 @@ namespace TraversalCoreProject.Mapping
             CreateMap<Contact, ContactCreateDto>().ReverseMap();
 
             CreateMap<Reservation, AdminNewReservationDto>().ReverseMap();
+            CreateMap<Reservation, AdminListReservationDto>().ReverseMap();
             CreateMap<Reservation, MemberListMyReservationDto>().ReverseMap();
+            CreateMap<Reservation, AdminReservationUpdateDto>().ReverseMap();
         }
     }
 }

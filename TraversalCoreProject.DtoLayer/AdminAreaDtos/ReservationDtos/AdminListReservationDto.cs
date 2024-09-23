@@ -7,7 +7,7 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.ReservationDtos
 {
-    public class AdminListMyReservationDto
+    public class AdminListReservationDto
     {
         public int ReservationId { get; set; }
         public AppUser Member { get; set; }

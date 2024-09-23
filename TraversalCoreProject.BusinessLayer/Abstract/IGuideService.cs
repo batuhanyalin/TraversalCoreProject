@@ -10,5 +10,6 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
     public interface IGuideService : IGenericService<AppUser>
     {
         public AppUser TGetGuideDetailById(int id);
+        public AppUser TIsApprovedByUserId(int id);
     }
 }

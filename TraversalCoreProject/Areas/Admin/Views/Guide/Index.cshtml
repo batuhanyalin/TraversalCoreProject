@@ -37,13 +37,28 @@
                             <td>
                                 @await Component.InvokeAsync("_AdminGuideListDestinationComponentPartial", new { id = item.Id })
                             </td>
-                            <td><span class="badge bg-label-primary me-1">@item.IsActive</span></td>
+                            <td>
+                                <a href="/Admin/Guide/IsApproved/@item.Id">
+                                    @{
+                                        if (item.IsActive == true)
+                                        {
+                                            <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
+                                        }
+                                        else
+                                        {
+                                            <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
+                                        }
+                                    }
+                                </a>
+
+                            </td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/Admin/Comment/GetCommentListByMember/@item.Id"><i class="bx bx-edit-alt me-1"></i> Yorumlar</a>
                                         <a class="dropdown-item" href="/Admin/Guide/UpdateGuide/@item.Id"><i class="bx bx-edit-alt me-1"></i> Güncelleme</a>
                                         <button class="dropdown-item btn-deleteGuide" data-id=@item.Id><i class="bx bx-trash me-1"></i> Sil</button>
                                     </div>

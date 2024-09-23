@@ -1,0 +1,71 @@
+﻿@model AdminReservationUpdateDto
+@{
+    ViewData["Title"] = "UpdateReservation";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Rezervasyonlar /</span> Rezervasyon Güncelleme</h4>
+        <div class="row">
+            <h5 class="card-header">Rezervasyon Detayları </h5>
+            <!-- Form controls -->
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <input type="hidden" asp-for="ReservationId" />
+                            <label class="form-label">Tur Seçimi</label>
+                            @Html.DropDownListFor(x => x.DestinationId, (List<SelectListItem>)ViewBag.destinationList, new { @class = "form-control" })
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Misafir Seçimi</label>
+                            @Html.DropDownListFor(x => x.MemberId, (List<SelectListItem>)ViewBag.memberList, new { @class = "form-control" })
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Açıklama</label>
+                            <textarea class="form-control" asp-for="Description"></textarea>
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="Description"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Tur Tarihi</label>
+                            <input type="date" readonly class="form-control" asp-for="Destination.StartDate" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="Destination.StartDate"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Rezervasyon Tarihi</label>
+                            <input type="date" class="form-control" asp-for="ReservationDate" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="ReservationDate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Durum </label>
+                            <input type="text" class="form-control" asp-for="Status" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="Status"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Kişi Sayısı </label>
+                            <input type="number" class="form-control" asp-for="PersonCount" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="ReservationError"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-success">Güncelle</button>
+        </div>
+    </div>
+    </div>
+</form>

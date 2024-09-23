@@ -43,6 +43,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _guideDAL.Insert(entity);
         }
 
+        public AppUser TIsApprovedByUserId(int id)
+        {
+            return _guideDAL.IsApprovedByUserId(id);
+        }
+
         public void TUpdate(AppUser entity)
         {
           _guideDAL.Update(entity);

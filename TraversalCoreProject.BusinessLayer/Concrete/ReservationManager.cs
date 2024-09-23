@@ -33,6 +33,16 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _reservationDAL.GetListAll();
         }
 
+        public List<Reservation> TGetListReservationWithAllInfo()
+        {
+           return _reservationDAL.GetListReservationWithAllInfo();
+        }
+
+        public List<Reservation> TGetListReservationWithAllInfoByMemberId(int id)
+        {
+            return _reservationDAL.GetListReservationWithAllInfoByMemberId(id);
+        }
+
         public List<Reservation> TGetMyApprovalReservationListByUserId(int id)
         {
             return _reservationDAL.GetMyApprovalReservationListByUserId(id);
@@ -46,6 +56,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
         public List<Reservation> TGetMyOldReservationListByUserId(int id)
         {
            return _reservationDAL.GetMyOldReservationListByUserId(id);
+        }
+
+        public Reservation TGetReservationWithAllInfoById(int id)
+        {
+            return _reservationDAL.GetReservationWithAllInfoById(id);
         }
 
         public void TInsert(Reservation entity)
