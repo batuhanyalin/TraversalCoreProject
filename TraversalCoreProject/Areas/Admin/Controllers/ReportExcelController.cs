@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.DataAccessLayer.Context;
+using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
 using TraversalCoreProject.Models;
 
 namespace TraversalCoreProject.Areas.Controllers
@@ -13,6 +15,13 @@ namespace TraversalCoreProject.Areas.Controllers
     public class ReportExcelController : Controller
     {
         TraversalContext context = new TraversalContext();
+        private readonly IExcelService _excelService;
+
+        public ReportExcelController(IExcelService excelService)
+        {
+            _excelService = excelService;
+        }
+
         [Route("Index")]
         public IActionResult Index()
         {
@@ -35,27 +44,7 @@ namespace TraversalCoreProject.Areas.Controllers
         [Route("StaticExcelReport")]
         public IActionResult StaticExcelReport()
         {
-            ExcelPackage excel = new ExcelPackage();
-            var workSheet = excel.Workbook.Worksheets.Add("Sayfa1");
-            workSheet.Cells[1, 1].Value = "Rota";
-            workSheet.Cells[1, 2].Value = "Rehber";
-            workSheet.Cells[1, 3].Value = "Kontenjan";
-
-            workSheet.Cells[2, 1].Value = "Slovenya Jülyen Dağları";
-            workSheet.Cells[2, 2].Value = "Emrah Safa Gürkan";
-            workSheet.Cells[2, 3].Value = "18";
-
-            workSheet.Cells[3, 1].Value = "Tayland Bangkok Turu";
-            workSheet.Cells[3, 2].Value = "İlber ORTAYLI";
-            workSheet.Cells[3, 3].Value = "50";
-
-            workSheet.Cells[4, 1].Value = "Yunanistan Yunan Adaları";
-            workSheet.Cells[4, 2].Value = "Fatih ALTAYLI";
-            workSheet.Cells[4, 3].Value = "38";
-
-            var bytes = excel.GetAsByteArray();
-
-            return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "dosya1.xlsx");
+            return File(_excelService.ExcelList(DestinationList()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "YeniExcel.xlsx");         
         }
         [Route("DestinationExcelReport")]
         public IActionResult DestinationExcelReport()
