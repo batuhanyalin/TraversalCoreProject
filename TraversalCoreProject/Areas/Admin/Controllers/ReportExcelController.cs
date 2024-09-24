@@ -5,18 +5,20 @@ using OfficeOpenXml;
 using TraversalCoreProject.DataAccessLayer.Context;
 using TraversalCoreProject.Models;
 
-namespace TraversalCoreProject.Controllers
+namespace TraversalCoreProject.Areas.Controllers
 {
     [AllowAnonymous]
-    public class ExcelController : Controller
+    [Area("Admin")]
+    [Route("Admin/[controller]")]
+    public class ReportExcelController : Controller
     {
         TraversalContext context = new TraversalContext();
-
+        [Route("Index")]
         public IActionResult Index()
         {
             return View();
         }
-
+        [Route("DestinationList")]
         public List<DestinationReportModel> DestinationList()
         {
             List<DestinationReportModel> destinationReportModels = new List<DestinationReportModel>();
@@ -30,7 +32,7 @@ namespace TraversalCoreProject.Controllers
             }).ToList();
             return destinationReportModels;
         }
-
+        [Route("StaticExcelReport")]
         public IActionResult StaticExcelReport()
         {
             ExcelPackage excel = new ExcelPackage();
@@ -55,7 +57,7 @@ namespace TraversalCoreProject.Controllers
 
             return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "dosya1.xlsx");
         }
-
+        [Route("DestinationExcelReport")]
         public IActionResult DestinationExcelReport()
         {
             using (var workbook = new XLWorkbook())
