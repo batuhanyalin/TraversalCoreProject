@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using TraversalCoreProject.DataAccessLayer.Context;
+using TraversalCoreProject.Models;
 
 namespace TraversalCoreProject.Controllers
 {
     public class ExcelController : Controller
     {
+        TraversalContext context = new TraversalContext();
         public IActionResult Index()
         {
             ExcelPackage excel=new ExcelPackage();
@@ -28,6 +32,23 @@ namespace TraversalCoreProject.Controllers
             var bytes= excel.GetAsByteArray();
 
             return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","dosya1.xlsx");
+        }
+        public List<DestinationReportModel> DestinationList()
+        {
+            List<DestinationReportModel> destinationReportModels = new List<DestinationReportModel>();
+          destinationReportModels=context.Destinations.Select(x=>new DestinationReportModel
+          {
+              City = x.City,
+              DayNight = x.DayNight,
+              Price = x.Price,
+              Country = x.Country,
+              Capacity = x.Capacity,
+          }).ToList();
+            return destinationReportModels;
+        }
+        public IActionResult DestinationExcelReport()
+        {
+            using(var workbook= new XLWorkbook)
         }
     }
 }
