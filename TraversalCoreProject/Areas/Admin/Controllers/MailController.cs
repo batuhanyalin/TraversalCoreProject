@@ -29,6 +29,12 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             //Alıcıyı burada tekrar aynı sınıfla oluşturuyoruz.
             MailboxAddress mailboxAddressReceiver = new MailboxAddress(mailRequest.ReceiverName, mailRequest.ReceiverMail);
             mimeMessage.To.Add(mailboxAddressReceiver);//To ile alıcıyı seçiyoruz.
+
+            var bodyBuilder= new BodyBuilder(); //Burada mail içeriği için entity bazında bir ekleme işlemi yapılıyor.
+            bodyBuilder.TextBody = mailRequest.Text;
+            mimeMessage.Body=bodyBuilder.ToMessageBody();
+
+
             mimeMessage.Subject=mailRequest.Subject;
             mimeMessage.Date = mailRequest.SendingTime;
             //MailKit.Net.Smtp ile SmtpClient sınıfından nesne türetiyoruz.
@@ -37,7 +43,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             smtpClient.Authenticate("traversalcoreproject@batuhanyalin.com", "Vfv;apmH~$uU");
             smtpClient.Send(mimeMessage);
             smtpClient.Disconnect(true);
-            return View();
+            return Json(new {success=true});
         }
     }
 }

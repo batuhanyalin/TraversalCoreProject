@@ -4,41 +4,98 @@
     Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
 }
 
-<form method="post" enctype="multipart/form-data">
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Mail /</span> Mail Gönderme</h4>
-        <div class="row">
-            <h5 class="card-header">Yeni Mail Oluştur </h5>
-            <!-- Form controls -->
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label class="form-label">Alıcı Adı Soyadı</label>
-                            <input type="text" class="form-control" asp-for="ReceiverName" />
-@*                             <span style="color:darkred;font-size:smaller" asp-validation-for="ReceiverName"></span>
- *@                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Alıcı Mail Adresi</label>
-                            <input type="text" class="form-control" asp-for="ReceiverMail" />
-@*                             <span style="color:darkred;font-size:smaller" asp-validation-for="ReceiverMail"></span>
- *@                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Konu</label>
-                            <input type="text" class="form-control" asp-for="Subject" />
-@*                             <span style="color:darkred;font-size:smaller" asp-validation-for="Subject"></span>
- *@                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Metin</label>
-                          @*   <input type="text" class="form-control" asp-for="Subject" /> *@
-@*                             <span style="color:darkred;font-size:smaller" asp-validation-for="Subject"></span>
- *@                        </div>
-                        <div class="mb-3">
-                            <button class="btn btn-success">Mail Gönder</button>
-                        </div>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Mail /</span> Mail Gönderme</h4>
+    <div class="row">
+        <h5 class="card-header">Yeni Mail Oluştur </h5>
+        <!-- Form controls -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Alıcı Adı Soyadı</label>
+                        <input type="text" id="ReceiverName" class="form-control" asp-for="ReceiverName" />
+                        @*                             <span style="color:darkred;font-size:smaller" asp-validation-for="ReceiverName"></span>
+                        *@
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Alıcı Mail Adresi</label>
+                        <input type="text" id="ReceiverMail" class="form-control" asp-for="ReceiverMail" />
+                        @*                             <span style="color:darkred;font-size:smaller" asp-validation-for="ReceiverMail"></span>
+                        *@
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Konu</label>
+                        <input type="text" id="Subject" class="form-control" asp-for="Subject" />
+                        @*                             <span style="color:darkred;font-size:smaller" asp-validation-for="Subject"></span>
+                        *@
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Metin</label>
+                        <input type="text" id="Text" class="form-control" asp-for="Text" />
+                        @*                             <span style="color:darkred;font-size:smaller" asp-validation-for="Subject"></span>
+                        *@
+                    </div>
+                    <div class="mb-3">
+                        <button id="btnSendMail" class="btn btn-success">Mail Gönder</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</form>
+</div>
+<script>
+    $("#btnSendMail").click(function () {
+        var formData = new FormData();
+        formData.append("ReceiverName", $("#ReceiverName").val());
+        formData.append("ReceiverMail", $("#ReceiverMail").val());
+        formData.append("Subject", $("#Subject").val());
+        formData.append("Text", $("#Text").val());
+        Swal.fire({
+            title: "Maili Göndermek İstediğinizden Emin Misiniz?",
+            text: "Mail Gönderimi",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, gönder.",
+            cancelButtonText: "İptal Et."
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "/Admin/Mail/SendMail/",
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: "İşlem Başarılı!",
+                                text: "Mail başarılı bir şekilde gönderildi.",
+                                icon: "success"
+                            }).then(() => {
+                                // Sayfayı yenile
+                                location.reload();
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                title: "Hata!",
+                                text: response.message,
+                                icon: "error"
+                            });
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({
+                            title: "Beklenmeyen Hata!",
+                            text: "Bir hata oluştu, lütfen tekrar deneyin.",
+                            icon: "error"
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>
