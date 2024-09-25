@@ -33,7 +33,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             mimeMessage.Date = mailRequest.SendingTime;
             //MailKit.Net.Smtp ile SmtpClient sınıfından nesne türetiyoruz.
             SmtpClient smtpClient = new SmtpClient();
-            smtpClient.Connect("mail.batuhanyalin.com",587,false);
+            smtpClient.Connect("mail.batuhanyalin.com",465,true);
             smtpClient.Authenticate("traversalcoreproject@batuhanyalin.com", "Vfv;apmH~$uU");
             smtpClient.Send(mimeMessage);
             smtpClient.Disconnect(true);
