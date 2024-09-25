@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> AJAX</h4>
+    <div class="card">
+        <h5 class="card-header">AJAX İşlemleri</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Şehir Listesi</th>
+                        <th>Tur EXCEL</th>
+                        <th>Rezervasyon PDF</th>
+                        <th>Statik Misafir PDF</th>
+                    </tr>
+                </thead>
+
+                <tbody class="table-border-bottom-0">
+                    <tr>
+                        <td><button id="btnGetList" class="btn btn-outline-info" type="button">Listeyi Getir</button></td>
+                        <td><a href="/Admin/ReportExcel/DestinationExcelReport" class="btn btn-outline-warning">Raporu İndir</a></td>
+                        <td><a href="/Admin/ReportPDF/StaticPDFReport" class="btn btn-outline-success">Raporu İndir</a></td>
+                        <td><a href="/Admin/ReportPDF/StaticCustomerReport" class="btn btn-outline-primary">Raporu İndir</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="cityList">
+        </div>
+    </div>
+</div>
+<script>
+    $("#btnGetList").click(function () {
+        $.ajax({
+            contentType: "application/json",
+            dataType: "JSON",
+            type: "GET",
+            url: "/Admin/City/CityList",
+            success: function (func) {
+                let w = jQuery.parseJSON(func);
+                console.log(w);
+                let tablehtml = "<table class=table table-bordered> <tr><th> Şehir ID</th> <th> Şehir Adı </th> <th> Ülke Adı</th> </tr>";
+                $.each(w, (index, value) => {
+                    tablehtml += `<tr><td>${value.CityId}</td><td>${value.CityName}</td><td>${value.CityCountry}</td></tr>`
+                });
+                tablehtml += "</table>";
+                $("#cityList").html(tablehtml);
+            }
+        });
+    });
+</script>
