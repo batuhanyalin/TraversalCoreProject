@@ -51,6 +51,8 @@ builder.Services.AddScoped<IDestinationTagService, DestinationTagManager>();
 builder.Services.AddScoped<ICommentService, CommentManager>();
 builder.Services.AddScoped<IReservationService, ReservationManager>();
 builder.Services.AddScoped<IExcelService, ExcelManager>();
+builder.Services.AddScoped<IPDFService, PDFManager>();
+
 
 //Logging iþlemi
 builder.Services.AddLogging(x =>
