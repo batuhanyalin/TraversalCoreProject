@@ -8,24 +8,44 @@
     <div class="card">
         <h5 class="card-header">AJAX İşlemleri</h5>
         <div class="table-responsive text-nowrap">
-            <table class="table">
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Şehir Listesi</th>
-                        <th>Şehir Getir</th>
-                        <th>Şehir Ekle</th>
-                        <th>Şehir Sil</th>
-                        <th>Şehir Güncelle</th>
+                        <th>Tur Listesi</th>
+                        <th>Tur Getir</th>
+                        <th>Tur Ekle</th>
+                        <th>Tur Sil</th>
+                        <th>Tur Güncelle</th>
                     </tr>
                 </thead>
 
                 <tbody class="div margin ayarlamatable-border-bottom-0">
                     <tr>
                         <td><button id="btnGetList" class="btn btn-outline-info" type="button">İŞLEM</button></td>
-                        <td><button id="btnGetCity" class="btn btn-outline-primary" type="button">İŞLEM</button></td>
+                        <td>
+                            <button id="btnGetCity" class="btn btn-outline-primary" type="button">İŞLEM</button>
+                            <br />
+                            <br />
+                            <input type="number" placeholder="İstenen Turun Idsini Girin" class="form-control" id="txtDestinationId" />
+                        </td>
                         <td><button id="btnAddCity" class="btn btn-outline-success" type="button">İŞLEM</button></td>
-                        <td><button id="btnDeleteCity" class="btn btn-outline-danger" type="button">İŞLEM</button></td>
-                        <td><button id="btnUpdateCity" class="btn btn-outline-warning" type="button">İŞLEM</button></td>
+
+                        <td>
+                            <button id="btnDeleteCity" class="btn btn-outline-danger" type="button">İŞLEM Sil</button>
+                            <br />
+                            <br />
+                            <input type="number" placeholder="Silinecek Turun Idsini Girin" class="form-control" id="txtDestinationDeleteId" />
+                        </td>
+                        <td>
+                            <button id="btnUpdateCity" class="btn btn-outline-warning" type="button">İŞLEM</button>
+                            <br />
+                            <br />
+                            <input type="text" placeholder="Güncellenecek Id Değeri" class="form-control" id="txtUpdateId" />
+                            <br />
+                            <input type="text" placeholder="Ülke Bilgisi" class="form-control" id="txtUpdateCountry" />
+                            <br />
+                            <input type="text" placeholder="Şehir Bilgisi" class="form-control" id="txtUpdateCity" />
+                        </td>
 
                     </tr>
                 </tbody>
@@ -48,6 +68,12 @@
                 <br />
             </div>
             <div id="cityList" class="col md-6">
+            </div>
+        </div>
+        <div class="px-3 row">
+            <div id="destinationListById" class="col md-6">
+            </div>
+            <div class="col md-6">
             </div>
         </div>
     </div>
@@ -91,4 +117,52 @@
             }
         });
     });
+
+    $("#btnGetCity").click(function () {
+        let id = $("#txtDestinationId").val();
+        $.ajax({
+            type: "get",
+            contentType: "application/json",
+            url: "/Admin/City/GetDestination/",
+            dataType: "JSON",
+            data: { id: id }, //burada atama yapıyoruz.
+            success: function (funcGet) {
+                let result = jQuery.parseJSON(funcGet);
+                console.log(result);
+                let htmlTable = `<table class=table table-bordered table-hover> <tr><th>Ülke</th><th>Şehir</th><th>Gün</th><th>Fiyat</th></tr><tr><td>${result.Country}</td><td>${result.City}</td><td>${result.DayNight}</td><td>${result.Price}</td></tr></table>`;
+                $("#destinationListById").html(htmlTable);
+            }
+        });
+    });
+
+    $("#btnDeleteCity").click(function () {
+        let id = $("#txtDestinationDeleteId").val();
+        $.ajax({
+            url: "/Admin/City/DeleteDestination/" + id,
+            type: "post",
+            contentType: "application/json",
+            dataType: "JSON",
+
+            success: function (funcDelete) {
+                alert("Silindi");
+            }
+        });
+    });
+
+    $("#btnUpdateCity").click(function () {
+        let values = {
+            DestinationId: $("#txtUpdateId").val(),
+            Country: $("#txtUpdateCountry").val(),
+            City: $("#txtUpdateCity").val()
+        };
+        $.ajax({
+            type: "post",
+            url: "/Admin/City/UpdateDestination/",
+            data: values,
+            success: function (func2) {
+                alert("Tur başarılı şekilde güncellendi.");
+            }
+        });
+    });
+
 </script>

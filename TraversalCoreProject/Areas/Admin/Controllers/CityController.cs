@@ -28,8 +28,8 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         [Route("CityList")]
         public IActionResult CityList()
         {
-            var values= _destinationService.TGetListAll();
-            var jsonCity= JsonConvert.SerializeObject(values);
+            var values = _destinationService.TGetListAll();
+            var jsonCity = JsonConvert.SerializeObject(values);
             return Json(jsonCity);
         }
         [HttpPost]
@@ -44,12 +44,47 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             destination.Detail = "detail";
             destination.Description = "description";
             destination.IsFeaturePost = false;
-           _destinationService.TInsert(destination);
+            _destinationService.TInsert(destination);
             var values = JsonConvert.SerializeObject(destination);
             return Json(values);
         }
-       
+        [HttpGet]
+        [Route("GetDestination")]
+        public IActionResult GetDestination(int id)
+        {
+            var value = _destinationService.TGetById(id);
+            var jsonConvert = JsonConvert.SerializeObject(value);
+            return Json(jsonConvert);
+        }
+        [HttpPost]
+        [Route("DeleteDestination")]
+        public async Task<IActionResult> DeleteDestination(int id)
+        {
+            var value = _destinationService.TGetById(id);
+            _destinationService.TDelete(value.DestinationId);
+            return NoContent();
 
+        }
+        [HttpPost]
+        [Route("UpdateDestination")]
+        public async Task<IActionResult> UpdateDestination(Destination destination)
+        {
+            var values = _destinationService.TGetById(destination.DestinationId);
+            destination.Text1 = values.Text1;
+            destination.Detail = values.Detail;
+            destination.Description = values.Description;
+            destination.IsFeaturePost = values.IsFeaturePost;
+            destination.Status = values.Status;
+            destination.StartDate = values.StartDate;
+            destination.Capacity = values.Capacity;
+            destination.Price = values.Price;
+            destination.CoverImage = values.CoverImage;
+            destination.ImageUrl = values.ImageUrl;
+            destination.DayNight = values.DayNight;
+            _destinationService.TUpdate(destination);
+            var jsonValue = JsonConvert.SerializeObject(destination);
+            return Json(jsonValue);
+        }
 
         //public static List<CityClass> cities = new List<CityClass>
         //{

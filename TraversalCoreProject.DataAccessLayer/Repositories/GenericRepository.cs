@@ -36,7 +36,7 @@ namespace TraversalCoreProject.DataAccessLayer.Repositories
 
         public void Update(T entity)
         {
-            context.Update(entity);
+            context.Set<T>().Update(entity);
             context.SaveChanges();
         }
     }
