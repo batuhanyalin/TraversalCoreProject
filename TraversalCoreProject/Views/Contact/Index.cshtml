@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ContactCreateDto
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
@@ -42,31 +43,35 @@
                     </div>
                 </div>
                 <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
-                    <form method="post" class="signin-form">
-                        <div class="input-grids">
-                            <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Adınız" class="contact-input" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Soyadınız" class="contact-input" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Telefon Numaranız" class="contact-input" />
-                            </div>
-                            <div class="form-group">
-                                <input type="email" name="w3lSender" id="w3lSender" placeholder="E-posta Adresiniz" class="contact-input" required="" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="w3lSubect" id="w3lSubect" placeholder="Konu" class="contact-input" />
-                            </div>
+                    <div class="input-grids">
+                        <div class="form-group">
+                            <input type="text" id="xName" placeholder="Adınız" class="contact-input" />
+                            <span asp-validation-for="Name" style="color:darkred;font-size:smaller"></span>
                         </div>
                         <div class="form-group">
-                            <textarea name="w3lMessage" id="w3lMessage" placeholder="Mesajınız" required=""></textarea>
+                            <input type="text"  id="xSurname" placeholder="Soyadınız" class="contact-input" />
+                            <span asp-validation-for="Surname" style="color:darkred;font-size:smaller"></span>
                         </div>
-                        <div class="text-right">
-                            <button class="btn btn-style btn-primary">Mesaj Gönder</button>
+                        <div class="form-group">
+                            <input type="text" id="xPhone" placeholder="Telefon Numaranız" class="contact-input" />
+                            <span asp-validation-for="Phone" style="color:darkred;font-size:smaller"></span>
                         </div>
-                    </form>
+                        <div class="form-group">
+                            <input type="email" id="xEmail" placeholder="E-posta Adresiniz" class="contact-input" required="" />
+                            <span asp-validation-for="Email" style="color:darkred;font-size:smaller"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="text"  id="xSubject" placeholder="Konu" class="contact-input" />
+                            <span asp-validation-for="Subject" style="color:darkred;font-size:smaller"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea  id="xText" placeholder="Mesajınız" required=""></textarea>
+                        <span asp-validation-for="Text" style="color:darkred;font-size:smaller"></span>
+                    </div>
+                    <div class="text-right">
+                        <button type="button" id="btnContact" class="btn btn-style btn-primary">Mesaj Gönder</button>
+                    </div>
                 </div>
 
             </div>
@@ -78,3 +83,59 @@
         </div>
     </div>
 </section>
+<script>
+    $("#btnContact").click(function () {
+        let values = {
+            Name: $("#xName").val(),
+            Surname: $("#xSurname").val(),
+            Phone: $("#xPhone").val(),
+            Email: $("#xEmail").val(),
+            Subject: $("#xSubject").val(),
+            Text: $("#xText").val()
+        };
+        Swal.fire({
+            title: "Mesajı Göndermek İstediğinizden Emin Misiniz?",
+            text: "Mesaj Gönderimi",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, gönder.",
+            cancelButtonText: "İptal Et."
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "/Contact/Index/",
+                    data: values,
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: "İşlem Başarılı!",
+                                text: "Mesaj başarılı bir şekilde gönderildi.",
+                                icon: "success"
+                            }).then(() => {
+                                // Sayfayı yenile
+                                location.reload();
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                title: "Hata!",
+                                text: response.message,
+                                icon: "error"
+                            });
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({
+                            title: "Beklenmeyen Hata!",
+                            text: "Bir hata oluştu, lütfen tekrar deneyin.",
+                            icon: "error"
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>
