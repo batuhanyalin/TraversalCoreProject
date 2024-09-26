@@ -12,23 +12,43 @@
                 <thead>
                     <tr>
                         <th>Şehir Listesi</th>
-                        <th>Tur EXCEL</th>
-                        <th>Rezervasyon PDF</th>
-                        <th>Statik Misafir PDF</th>
+                        <th>Şehir Getir</th>
+                        <th>Şehir Ekle</th>
+                        <th>Şehir Sil</th>
+                        <th>Şehir Güncelle</th>
                     </tr>
                 </thead>
 
-                <tbody class="table-border-bottom-0">
+                <tbody class="div margin ayarlamatable-border-bottom-0">
                     <tr>
-                        <td><button id="btnGetList" class="btn btn-outline-info" type="button">Listeyi Getir</button></td>
-                        <td><a href="/Admin/ReportExcel/DestinationExcelReport" class="btn btn-outline-warning">Raporu İndir</a></td>
-                        <td><a href="/Admin/ReportPDF/StaticPDFReport" class="btn btn-outline-success">Raporu İndir</a></td>
-                        <td><a href="/Admin/ReportPDF/StaticCustomerReport" class="btn btn-outline-primary">Raporu İndir</a></td>
+                        <td><button id="btnGetList" class="btn btn-outline-info" type="button">İŞLEM</button></td>
+                        <td><button id="btnGetCity" class="btn btn-outline-primary" type="button">İŞLEM</button></td>
+                        <td><button id="btnAddCity" class="btn btn-outline-success" type="button">İŞLEM</button></td>
+                        <td><button id="btnDeleteCity" class="btn btn-outline-danger" type="button">İŞLEM</button></td>
+                        <td><button id="btnUpdateCity" class="btn btn-outline-warning" type="button">İŞLEM</button></td>
+
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div id="cityList">
+        <br />
+        <div class="px-3 row">
+            <div class="col md-6">
+                <h4>Yeni Tur Bilgileri</h4>
+                <br />
+                <input type="text" placeholder="Ülke" class="form-control" id="txtCountry" />
+                <br />
+                <input type="text" placeholder="Şehir" class="form-control" id="txtCity" />
+                <br />
+                <input type="text" placeholder="Gün bilgisi" class="form-control" id="txtDayNight" />
+                <br />
+                <input type="number" placeholder="Konaklayacak kişi sayısı" class="form-control" id="txtCapacity" />
+                <br />
+                <input type="text" placeholder="Fiyat" class="form-control" id="txtPrice" />
+                <br />
+            </div>
+            <div id="cityList" class="col md-6">
+            </div>
         </div>
     </div>
 </div>
@@ -42,12 +62,32 @@
             success: function (func) {
                 let w = jQuery.parseJSON(func);
                 console.log(w);
-                let tablehtml = "<table class=table table-bordered> <tr><th> Şehir ID</th> <th> Şehir Adı </th> <th> Ülke Adı</th> </tr>";
+                let tablehtml = "<table class=table table-bordered> <tr><th>Ülke</th> <th>Şehir</th> <th>Gün</th> <th>Fiyat</th> </tr>";
                 $.each(w, (index, value) => {
-                    tablehtml += `<tr><td>${value.CityId}</td><td>${value.CityName}</td><td>${value.CityCountry}</td></tr>`
+                    tablehtml += `<tr><td>${value.Country}</td><td>${value.City}</td><td>${value.DayNight}</td><td>${value.Price} $</td></tr>`
                 });
                 tablehtml += "</table>";
                 $("#cityList").html(tablehtml);
+            }
+        });
+    });
+
+    $("#btnAddCity").click(function () {
+        let destination = {
+            Country: $("#txtCountry").val(),
+            City: $("#txtCity").val(),
+            Price: $("#txtPrice").val(),
+            DayNight: $("#txtDayNight").val(),
+            Capacity: $("#txtCapacity").val()
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/Admin/City/AddDestination/",
+            data: destination,
+            success: function (func2) {
+                let result = jQuery.parseJSON(func2);
+                alert("Tur başarılı şekilde eklendi.");
             }
         });
     });
