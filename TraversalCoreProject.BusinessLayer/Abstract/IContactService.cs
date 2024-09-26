@@ -9,5 +9,6 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
 {
     public interface IContactService : IGenericService<Contact>
     {
+        public Contact TIsApprovedByContactId(int id);
     }
 }

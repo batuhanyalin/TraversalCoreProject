@@ -38,6 +38,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _contactDAL.Insert(entity);
         }
 
+        public Contact TIsApprovedByContactId(int id)
+        {
+            return _contactDAL.IsApprovedByContactId(id);
+        }
+
         public void TUpdate(Contact entity)
         {
             _contactDAL.Update(entity);

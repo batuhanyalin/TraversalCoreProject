@@ -18,7 +18,6 @@ namespace TraversalCoreProject.Controllers
             _contactService = contactService;
             _mapper = mapper;
         }
-
         [HttpGet]
         public IActionResult Index()
         {

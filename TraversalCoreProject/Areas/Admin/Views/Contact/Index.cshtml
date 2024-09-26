@@ -1,0 +1,109 @@
+﻿@model List<ContactListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+    int count = 0;
+}
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Mesajlar</h4>
+    <div class="card">
+        <h5 class="card-header">Mesajlar Listesi</h5>
+        <div class="table-responsive text-nowrap" id="contactList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Kişi</th>
+                        <th>E-posta</th>
+                        <th>Telefon</th>
+                        <th>Tarih</th>
+                        <th>Konu</th>
+                        <th>Mesaj</th>
+                        <th>Durum</th>
+                        <th>Aksiyon</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@item.Name @item.Surname</td>
+                            <td>@item.Email</td>
+                            <td>@item.Phone</td>
+                            <td>@item.SendingDate</td>
+                            <td>@item.Subject</td>
+                            <td>
+                                @{
+                                    if (item.Text?.Length > 50)
+                                    {
+                                        @item.Text.Substring(0, 50);
+                                    }
+                                    else
+                                    {
+                                        @item.Text?.ToString();
+                                    }
+                                }...                             
+                            </td>
+                            <td>
+                                <a href="/Admin/Contact/IsApproved/@item.ContactId">
+                                    @{
+                                        if (item.IsApproved == true)
+                                        {
+                                            <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
+                                        }
+                                        else
+                                        {
+                                            <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
+                                        }
+                                    }
+                                </a>
+                            </td>
+                            <td>
+                                <a class="dropdown-item" href="/Admin/Contact/ReadContactMessage/@item.ContactId"><i style="font-size:larger" class="fab fa-readme"></i> Oku</a>
+                                <button class="dropdown-item btn-deleteContact" data-id=@item.ContactId><i class="bx bx-trash me-1"></i> Sil</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $("#contactList").on('click', '.btn-deleteContact', function () {
+        let ContactId = $(this).data('id');
+        Swal.fire({
+            title: "Mesajı Silmek İstediğinizden Emin Misiniz?",
+            text: "Bu işlemin geri dönüşü olmayacaktır.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, sil.",
+            cancelButtonText: "İptal Et."
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "/Admin/Contact/DeleteContact/" + ContactId,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (response) {
+                        Swal.fire({
+                            title: "İşlem Başarılı!",
+                            text: "Seçtiğiniz mesaj başarılı bir şekilde silindi.",
+                            icon: "success"
+                        }).then(() => {
+                            // Sayfayı yenile
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>

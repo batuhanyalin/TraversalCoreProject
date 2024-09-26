@@ -9,5 +9,6 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
 {
     public interface IContactDAL:IGenericDAL<Contact>
     {
+        public Contact IsApprovedByContactId(int id);
     }
 }
