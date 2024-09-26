@@ -28,5 +28,6 @@ namespace TraversalCoreProject.DataAccessLayer.Context
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<DestinationMatchGuide> DestinationMatchGuides { get; set; }
+        public DbSet<Announcement> Announcements { get; set; }
     }
 }
