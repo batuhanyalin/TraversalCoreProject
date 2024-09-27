@@ -14,7 +14,7 @@ using TraversalCoreProject.DataAccessLayer.EntityFramework;
 using TraversalCoreProject.EntityLayer.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHttpClient(); //CORS için ekleniyor.
 builder.Services.AddDbContext<TraversalContext>();
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<TraversalContext>().AddErrorDescriber<CustomIdentityValidator>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

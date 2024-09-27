@@ -1,0 +1,56 @@
+﻿@model VisitorViewModel
+@{
+    ViewData["Title"] = "UpdateVisitor";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Ziyaretçiler /</span> Ziyaretçi Güncelle API</h4>
+    <div class="row">
+        <h5 class="card-header">Ziyaretçiyi Güncelle API </h5>
+        <!-- Form controls -->
+        <form method="post">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <input type="hidden" asp-for="VisitorId" />
+                            <label class="form-label">Adı</label>
+                            <input type="text" class="form-control" asp-for="Name" />
+                            @*                             <span style="color:darkred;font-size:smaller" asp-validation-for="ReceiverName"></span>
+                            *@
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Soyadı</label>
+                            <input type="text" class="form-control" asp-for="Surname" />
+                            @*                             <span style="color:darkred;font-size:smaller" asp-validation-for="ReceiverName"></span>
+                            *@
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mail Adresi</label>
+                            <input type="text" class="form-control" asp-for="Mail" />
+                            @*                             <span style="color:darkred;font-size:smaller" asp-validation-for="ReceiverMail"></span>
+                            *@
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ülke</label>
+                            <input type="text" class="form-control" asp-for="Country" />
+                            @*                             <span style="color:darkred;font-size:smaller" asp-validation-for="Subject"></span>
+                            *@
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Şehir</label>
+                            <input type="text" class="form-control" asp-for="City" />
+                            @*                             <span style="color:darkred;font-size:smaller" asp-validation-for="Subject"></span>
+                            *@
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-success">Ziyaretçiyi Güncelle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
