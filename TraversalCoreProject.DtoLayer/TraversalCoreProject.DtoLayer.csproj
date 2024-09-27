@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="AdminAreaDtos\DashboardDtos\" />
     <Folder Include="AdminAreaDtos\MailDtos\" />
-    <Folder Include="AdminAreaDtos\AnnouncementDtos\" />
   </ItemGroup>
 
   <ItemGroup>

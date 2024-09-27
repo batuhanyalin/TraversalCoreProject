@@ -1,0 +1,247 @@
+﻿@model List<AnnouncementListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+    int count = 0;
+}
+<div class="modal fade" id="createAnnouncement" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="staticBackdropLabel">Yeni Duyuru Ekle</h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col col-md-6">
+                        <label for="announcementTitle" class="mt-1">Başlık</label>
+                        <input tabindex="0" type="text" id="announcementTitle" class="form-control mb-2" />
+                        <label for="announcementContent">İçerik</label>
+                        <input tabindex="1" type="text" id="announcementContent" class="form-control mb-2" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnAnnouncementClose" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                <button type="button" id="btnAnnouncementCreate" class="btn btn-primary">Oluştur</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateAnnouncement" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="staticBackdropLabel">Duyuru Güncelle</h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col col-md-6">
+                        <input type="hidden" id="UpdateAnnouncementId" />
+                        <label for="announcementTitle" class="mt-1">Başlık</label>
+                        <input tabindex="0" type="text" id="UpdateAnnouncementTitle" class="form-control mb-2" />
+                        <label for="announcementContent">İçerik</label>
+                        <input tabindex="1" type="text" id="UpdateAnnouncementContent" class="form-control mb-2" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnUpdateAnnouncementClose" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                <button type="button" id="btnUpdateAnnouncement" class="btn btn-success">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Duyurular <button class="btn btn-success" data-toggle="modal" data-target="#createAnnouncement"><i class="fas fa-plus-circle"></i></button> </h4>
+    <div class="card">
+        <h5 class="card-header">Duyurular Listesi</h5>
+        <div class="table-responsive text-nowrap" id="announcementList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Başlık</th>
+                        <th>İçerik</th>
+                        <th>Tarih</th>
+                        <th>Aksiyon</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@item.Title</td>
+                            <td>
+                                @{
+                                    if (item.Content?.Length > 50)
+                                    {
+                                        @item.Content.Substring(0, 50)
+                                        ;
+                                    }
+                                    else
+                                    {
+                                        @item.Content?.ToString()
+                                        ;
+                                    }
+                                }...
+                            </td>
+                            <td>@item.Date.ToString("dd.MM.yyy")</td>
+                            <td>
+                                <button class="dropdown-item btn-updateAnnouncement" data-toggle="modal" data-target="#updateAnnouncement" data-id=@item.AnnouncementId><i class="fas fa-sync"></i> Güncelle</button>
+                                <button class="dropdown-item btn-deleteAnnouncement" data-id=@item.AnnouncementId><i class="bx bx-trash me-1"></i> Sil</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+
+    $("#announcementList").on('click', '.btn-updateAnnouncement', function () {
+        let Id = $(this).data("id");
+        console.log(Id);
+        $.ajax({
+            url: "/Admin/Announcement/GetAnnouncement/" + Id,
+            type: "GET",
+            dataType: "json",
+            success: function (funkGetAnnouncement) {
+                let response = JSON.parse(funkGetAnnouncement);
+                console.log(response);
+                // Blgileri popup içinde doldur
+                $("#UpdateAnnouncementTitle").val(response.Title);
+                $("#UpdateAnnouncementContent").val(response.Content);
+                $("#UpdateAnnouncementId").val(response.AnnouncementId);
+                // Popup'ı göster
+
+            },
+            error: function () {
+                Swal.fire({
+                    title: "HATA",
+                    text: "Duyuru bilgileri yüklenemedi.",
+                    icon: "warning"
+                });
+            }
+        });
+    });
+    $("#btnUpdateAnnouncement").click(function () {
+        var formData = new FormData();
+        formData.append("AnnouncementId", $("#UpdateAnnouncementId").val());
+        formData.append("Title", $("#UpdateAnnouncementTitle").val());
+        formData.append("Content", $("#UpdateAnnouncementContent").val());
+
+        $.ajax({
+            url: "/Admin/Announcement/UpdateAnnouncement/",
+            data: formData,
+            contentType: false,
+            processData: false,
+            type: "POST",
+            success: function (funkUpdateAnnouncement) {
+                if (funkUpdateAnnouncement.success) {
+                    Swal.fire({
+                        title: "Duyuru Güncelleme İşlemi Başarılı!",
+                        text: "Yeni duyuru başarıyla oluşturuldu.",
+                        icon: "success",
+                    }).then(() => {
+                        location.reload();
+                    });
+                    $("#btnUpdateAnnouncementClose").click();
+                } else {
+                    Swal.fire({
+                        title: "Hata!",
+                        text: funkUpdateAnnouncement.message,
+                        icon: "error"
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    title: "Beklenmeyen Hata!",
+                    text: "Bir hata oluştu, lütfen tekrar deneyin.",
+                    icon: "error"
+                });
+            }
+        });
+    });
+
+    $("#btnAnnouncementCreate").click(function () {
+        var formData = new FormData();
+        formData.append("Title", $("#announcementTitle").val());
+        formData.append("Content", $("#announcementContent").val());
+
+        $.ajax({
+            url: "/Admin/Announcement/CreateAnnouncement/",
+            data: formData,
+            contentType: false,
+            processData: false,
+            type: "POST",
+            success: function (funkCreateAnnouncement) {
+                if (funkCreateAnnouncement.success) {
+                    Swal.fire({
+                        title: "Duyuru Oluşturma İşlemi Başarılı!",
+                        text: "Yeni duyuru başarıyla oluşturuldu.",
+                        icon: "success",
+                    }).then(() => {
+                        location.reload();
+                    });
+                    $("#btnAnnouncementClose").click();
+                } else {
+                    Swal.fire({
+                        title: "Hata!",
+                        text: funkCreateAnnouncement.message,
+                        icon: "error"
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    title: "Beklenmeyen Hata!",
+                    text: "Bir hata oluştu, lütfen tekrar deneyin.",
+                    icon: "error"
+                });
+            }
+        });
+    });
+
+
+
+
+    $("#announcementList").on('click', '.btn-deleteAnnouncement', function () {
+        let ContactId = $(this).data('id');
+        Swal.fire({
+            title: "Duyuruyu Silmek İstediğinizden Emin Misiniz?",
+            text: "Bu işlemin geri dönüşü olmayacaktır.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, sil.",
+            cancelButtonText: "İptal Et."
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "/Admin/Announcement/DeleteAnnouncement/" + ContactId,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (response) {
+                        Swal.fire({
+                            title: "İşlem Başarılı!",
+                            text: "Seçtiğiniz duyuru başarılı bir şekilde silindi.",
+                            icon: "success"
+                        }).then(() => {
+                            // Sayfayı yenile
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>

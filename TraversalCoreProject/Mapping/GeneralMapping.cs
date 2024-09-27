@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using TraversalCoreProject.DtoLayer.AdminAreaDtos.AnnouncementDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.ContactDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos;
@@ -56,6 +57,9 @@ namespace TraversalCoreProject.Mapping
             CreateMap<Reservation, AdminListReservationDto>().ReverseMap();
             CreateMap<Reservation, MemberListMyReservationDto>().ReverseMap();
             CreateMap<Reservation, AdminReservationUpdateDto>().ReverseMap();
+
+            CreateMap<Announcement, AnnouncementCreateDto>().ReverseMap();
+            CreateMap<Announcement, AnnouncementListDto>().ReverseMap();
         }
     }
 }

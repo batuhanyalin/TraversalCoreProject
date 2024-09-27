@@ -35,6 +35,7 @@ builder.Services.AddScoped<ITagDAL, EFTagDAL>();
 builder.Services.AddScoped<IDestinationTagDAL, EFDestinationTagDAL>();
 builder.Services.AddScoped<ICommentDAL, EFCommentDAL>();
 builder.Services.AddScoped<IReservationDAL, EFReservationDAL>();
+builder.Services.AddScoped<IAnnouncementDAL, EFAnnouncementDAL>();
 
 builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IContactService, ContactManager>();
@@ -52,6 +53,7 @@ builder.Services.AddScoped<ICommentService, CommentManager>();
 builder.Services.AddScoped<IReservationService, ReservationManager>();
 builder.Services.AddScoped<IExcelService, ExcelManager>();
 builder.Services.AddScoped<IPDFService, PDFManager>();
+builder.Services.AddScoped<IAnnouncementService, AnnouncementManager>();
 
 
 //Logging iþlemi
