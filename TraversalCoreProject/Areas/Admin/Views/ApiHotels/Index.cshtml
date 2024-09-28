@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ApiBookingHotelSearchViewModel.Result>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+    int count = 0;
+    string reviewScoreWordTurkish = "";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">API /</span> Booking Hotel Rezervasyon API  </h4>
+    <div class="card">
+        <h5 class="card-header">Fransa/Paris Hotel Arama Sonuçları - API</h5>
+        <div class="table-responsive text-nowrap" id="movieList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Otel Adı</th>
+                        <th>Puan</th>
+                        <th>Değerlendirme</th>
+                        <th>Detaylar</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@item.name</td>
+                            <td>@item.reviewScore</td>
+                            <td>
+                                @{
+                                    if (item.reviewScoreWord == "Very good")
+                                    {
+                                        item.reviewScoreWord = "Çok iyi";
+                                    }
+                                    if (item.reviewScoreWord == "Good")
+                                    {
+                                        item.reviewScoreWord = "İyi";
+                                    }
+                                    if (item.reviewScoreWord == "Fabulous")
+                                    {
+                                        item.reviewScoreWord = "Harika";
+                                    }
+                                    if (item.reviewScoreWord == "Exceptional")
+                                    {
+                                        item.reviewScoreWord = "Olağanüstü";
+                                    }
+                                    if (item.reviewScoreWord == "Disappointing")
+                                    {
+                                        item.reviewScoreWord = "Hayal kırıklığı";
+                                    }
+                                    if (item.reviewScoreWord == "Superb")
+                                    {
+                                        item.reviewScoreWord = "Muhteşem";
+                                    }   
+                                    if (item.reviewScoreWord == "")
+                                    {
+                                        item.reviewScoreWord = "Yorum bulunmuyor";
+                                    }
+
+                                    if (item.reviewScoreWord?.Length > 50)
+                                    {
+
+                                        @item.reviewScoreWord.Substring(0, 50)
+                                        ;
+                                    }
+                                    else
+                                    {
+                                        @item.reviewScoreWord?.ToString()
+                                        ;
+                                    }
+                                }
+
+                            </td>
+                            <td><a class="btn btn-warning" href="#">Detay</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

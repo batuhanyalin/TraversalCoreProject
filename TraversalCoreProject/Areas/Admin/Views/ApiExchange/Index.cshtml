@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ApiExchangeViewModelJSON.Exchange_Rates> //Burada veriler arrayden geldiği için list değil IEnumerable oluyor.
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">API /</span> Exchange Rate API  </h4>
+    <div class="card">
+        <h5 class="card-header">Kur Bilgileri Listesi - API</h5>
+        <div class="table-responsive text-nowrap" id="exchangeRateList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Kur Adı</th>
+                        <th>Kur Oranı</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@item.currency</td>
+                            <td>@item.exchange_rate_buy</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
