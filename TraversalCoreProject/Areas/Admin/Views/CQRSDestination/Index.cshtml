@@ -1,0 +1,43 @@
+﻿@model List<GetAllDestinationQueryResult>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> CQRS <a class="btn btn-success" href="/Admin/CQRSDestination/CreateDestination/">Yeni Tur Ekle</a> </h4>
+    <div class="card">
+        <h5 class="card-header">Tur Listesi - CQRS</h5>
+        <div class="table-responsive text-nowrap" id="movieList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Şehir</th>
+                        <th>Gün</th>
+                        <th>Kapasite</th>
+                        <th>Fiyat</th>
+                        <th>Sil</th>
+                        <th>Güncelle</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@item.City</td>
+                            <td>@item.DayNight</td>
+                            <td>@item.Capacity</td>
+                            <td>@item.Price</td>
+                            <td><a class="btn btn-danger" href="/Admin/CQRSDestination/DeleteDestination/@item.Id">Sil</a></td>
+                            <td><a class="btn btn-primary" href="/Admin/CQRSDestination/GetDestination/@item.Id">Güncelle</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

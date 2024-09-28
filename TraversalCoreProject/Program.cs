@@ -8,6 +8,7 @@ using TraversalCoreProject.BusinessLayer;
 using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.BusinessLayer.Concrete;
 using TraversalCoreProject.BusinessLayer.ValidationRules;
+using TraversalCoreProject.CQRS.Handlers.DestinationHandlers;
 using TraversalCoreProject.DataAccessLayer.Abstract;
 using TraversalCoreProject.DataAccessLayer.Context;
 using TraversalCoreProject.DataAccessLayer.EntityFramework;
@@ -55,6 +56,13 @@ builder.Services.AddScoped<IExcelService, ExcelManager>();
 builder.Services.AddScoped<IPDFService, PDFManager>();
 builder.Services.AddScoped<IAnnouncementService, AnnouncementManager>();
 
+
+//CQRS Dependency Injection
+builder.Services.AddScoped<GetAllDestinationQueryHandler>();
+builder.Services.AddScoped<GetDestinationByIdQueryHandler>();
+builder.Services.AddScoped<CreateDestinationCommandHandler>();
+builder.Services.AddScoped<DeleteDestinationCommandHandler>();
+builder.Services.AddScoped<UpdateDestinationCommandHandler>();
 
 //Logging iþlemi
 builder.Services.AddLogging(x =>
