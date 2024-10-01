@@ -1,0 +1,51 @@
+﻿@model GetContactByIdQueryResult
+@{
+    ViewData["Title"] = "GetContact";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">CQRS /</span> Tur Güncelleme</h4>
+    <div class="row">
+        <h5 class="card-header">Tur Bilgileri Güncelle </h5>
+        <form method="post" asp-action="UpdateContact" asp-controller="MediatRContact">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <input type="hidden" asp-for="ContactId" />
+                            <label class="form-label">Ad</label>
+                            <input type="text" id="ReceiverName" class="form-control" asp-for="Name" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Soyad</label>
+                            <input type="text" id="ReceiverMail" class="form-control" asp-for="Surname" />
+
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Konu</label>
+                            <input type="text" id="ReceiverMail" class="form-control" asp-for="Subject" />
+
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Telefon</label>
+                            <input type="text" id="Subject" class="form-control" asp-for="Phone" />
+
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">E-posta</label>
+                            <input type="text" id="Text" class="form-control" asp-for="Email" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mesaj</label>
+                            <textarea class="form-control" asp-for="Text"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-success">Güncelle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -63,6 +64,11 @@ builder.Services.AddScoped<GetDestinationByIdQueryHandler>();
 builder.Services.AddScoped<CreateDestinationCommandHandler>();
 builder.Services.AddScoped<DeleteDestinationCommandHandler>();
 builder.Services.AddScoped<UpdateDestinationCommandHandler>();
+
+//MediatR kullanýldýðý için 
+builder.Services.AddMediatR(typeof(Program)); //typeof kullanýlarak dependency injectioný bu þekilde otomatik tanýmlýyoruz.
+
+
 
 //Logging iþlemi
 builder.Services.AddLogging(x =>
