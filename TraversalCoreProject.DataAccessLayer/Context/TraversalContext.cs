@@ -29,5 +29,6 @@ namespace TraversalCoreProject.DataAccessLayer.Context
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<DestinationMatchGuide> DestinationMatchGuides { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<Account> Accounts { get; set; }
     }
 }
