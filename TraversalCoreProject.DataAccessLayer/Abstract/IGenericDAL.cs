@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TraversalCoreProject.DataAccessLayer.Abstract
 {
     public interface IGenericDAL<T> where T : class
-    {
+    {  
         void Insert(T entity);
         void Update(T entity);
         void Delete(int id);

@@ -7,12 +7,15 @@ using Serilog;
 using System.Reflection;
 using TraversalCoreProject.BusinessLayer;
 using TraversalCoreProject.BusinessLayer.Abstract;
+using TraversalCoreProject.BusinessLayer.Abstract.AbstractUow;
 using TraversalCoreProject.BusinessLayer.Concrete;
+using TraversalCoreProject.BusinessLayer.Concrete.ConcreteUow;
 using TraversalCoreProject.BusinessLayer.ValidationRules;
 using TraversalCoreProject.CQRS.Handlers.DestinationHandlers;
 using TraversalCoreProject.DataAccessLayer.Abstract;
 using TraversalCoreProject.DataAccessLayer.Context;
 using TraversalCoreProject.DataAccessLayer.EntityFramework;
+using TraversalCoreProject.DataAccessLayer.UnitOfWork;
 using TraversalCoreProject.EntityLayer.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -68,7 +71,10 @@ builder.Services.AddScoped<UpdateDestinationCommandHandler>();
 //MediatR kullanýldýðý için 
 builder.Services.AddMediatR(typeof(Program)); //typeof kullanýlarak dependency injectioný bu þekilde otomatik tanýmlýyoruz.
 
-
+//UnitOfWork Service
+builder.Services.AddScoped<IAccountService, AccountManager>();
+builder.Services.AddScoped<IAccountDAL, EFAccountDAL>();
+builder.Services.AddScoped<IUowDAL, UowDAL>();
 
 //Logging iþlemi
 builder.Services.AddLogging(x =>
