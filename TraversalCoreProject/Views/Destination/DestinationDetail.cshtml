@@ -21,18 +21,18 @@
             @Model.Country - @Model.City <br />
             Turumuz Tüm Detaylarıyla Karşınızda!
         </h3>
-            <div class="blog-post-info">
-                <ul class="blog-meta">
-                    <li class="meta-item blog-lesson">
+        <div class="blog-post-info">
+            <ul class="blog-meta">
+                <li class="meta-item blog-lesson">
                     <span class="meta-value"> <b>Tur Tarihi:</b> </span>
-                        <span class="meta-value"> @Model.StartDate.ToString("MMMM dd, yyy") </span>
-                    </li>
-                    <li class="meta-item blog-students">
+                    <span class="meta-value"> @Model.StartDate.ToString("MMMM dd, yyy") </span>
+                </li>
+                <li class="meta-item blog-students">
                     <span class="meta-value"> <b>Güncel Kontenjan:</b></span>
-                        <span class="meta-value"> @Model.Capacity</span>
-                    </li>
-                </ul>
-           </div>   
+                    <span class="meta-value"> @Model.Capacity</span>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 <section class="blog-post-main w3l-homeblock1">
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="single-post-content">
-                <p id="summernoteRead" class="alphabet mb-4">@Html.Raw(Model.Text1)</p>
+                <p id="summernote" class="mb-4">@Html.Raw(Model.Text1)</p>
                 <blockquote class="blockquote my-5">
                     <div class="icon-quote"><span class="fa fa-quote-left" aria-hidden="true"></span></div>
                     "Dünyayı dolaşın. Görebileceğiniz bütün rüyaların en muhteşemi!"
@@ -55,7 +55,7 @@
                 </blockquote>
 
                 <div class="d-grid left-right mt-5 pb-md-5">
-                    @await Component.InvokeAsync("_DestinationDetailTagsComponentPartial",new{id=ViewBag.id})
+                    @await Component.InvokeAsync("_DestinationDetailTagsComponentPartial", new { id = ViewBag.id })
                     <div class="buttons-singles">
                         <h4>Share :</h4>
                         <a href="#blog-share"><span class="fa fa-facebook" aria-hidden="true"></span></a>
@@ -79,6 +79,11 @@
                     if (ViewBag.user != null)
                     {
                         @await Component.InvokeAsync("_DestinationDetailMakeCommentComponentPartial", new { id = ViewBag.id })
+                    }
+                    else
+                    {
+                        <hr />
+                        <span>Yorum yapabilmek için önce giriş yapmanız gerekmektedir.</span>
                     }
                 }
             </div>

@@ -36,6 +36,7 @@ namespace TraversalCoreProject.Mapping
             CreateMap<IndexBanner,IndexBannerShowDto>().ReverseMap();
 
             CreateMap<AppUser,RegisterDto>().ReverseMap();
+            CreateMap<AppUser,ApplicationDto>().ReverseMap();
             CreateMap<AppUser,LoginDto>().ReverseMap();
             CreateMap<AppUser,GuideListDto>().ReverseMap();
             CreateMap<AppUser,GuideDetailDto>().ReverseMap();

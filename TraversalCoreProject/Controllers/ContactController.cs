@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TraversalCoreProject.BusinessLayer.Abstract;
@@ -8,6 +9,7 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.Controllers
 {
+    [AllowAnonymous]
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;

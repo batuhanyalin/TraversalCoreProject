@@ -4,12 +4,23 @@
     <div class="author-card col-md-3 m-3" style="text-align:center">
         <div>
             <a href="/Guide/GuideDetail/@item.Guide.Id">
-                <img src="@item.Guide.ImageUrl" alt="" class="rounded-circle img-fluid">
+                <img style="height:165px;width:150px" src="@item.Guide.ImageUrl" alt="" class="rounded-circle img-fluid">
             </a>
         </div>
         <h3 class="mb-3 title">@item.Guide.Name @item.Guide.Surname</h3>
         <p>
-            @item.Guide.About
+            @{
+                if (item.Guide.About?.Length > 50)
+                {
+                    @item.Guide.About.Substring(0, 50)
+                    ;
+                }
+                else
+                {
+                    @item.Guide.About?.ToString()
+                    ;
+                }
+            }...
         </p>
         <ul class="author-icons mt-4">
             <li>

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TraversalCoreProject.BusinessLayer.Abstract;
@@ -7,6 +8,7 @@ using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.Controllers
 {
+    [AllowAnonymous]
     public class GuideController : Controller
     {
         private readonly UserManager<AppUser> _userManager;

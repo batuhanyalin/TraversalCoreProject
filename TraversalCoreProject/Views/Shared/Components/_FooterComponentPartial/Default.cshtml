@@ -1,4 +1,5 @@
-﻿<footer>
+﻿@model FooterAuthenticationControllerModel
+<footer>
     <!-- footer -->
     <section class="w3l-footer">
         <div class="w3l-footer-16-main py-5">
@@ -7,13 +8,13 @@
                     <div class="col-lg-6 column">
                         <div class="row">
                             <div class="col-md-4 column">
-                                <h3>Şirketimiz</h3>
+                                <h3>Acentamız</h3>
                                 <ul class="footer-gd-16">
                                     <li><a href="/Default/Index">Anasayfa</a></li>
                                     <li><a href="/About/Index">Hakkımızda</a></li>
                                     <li><a href="/Destination/Index">Rotalar</a></li>
                                     <li><a href="/Guide/Index">Rehberler</a></li>
-                                    <li><a href="/Contact/Index">Contact Us</a></li>
+                                    <li><a href="/Contact/Index">Bize Yazın</a></li>
                                     <li><a href="/Application/Index">Rehber Ol</a></li>
                                 </ul>
                             </div>
@@ -24,7 +25,6 @@
                                     <li><a href="#url">Hastaneler</a></li>
                                     <li><a href="#url">Döviz Ofisleri</a></li>
                                     <li><a href="about.html">Turizm Bürosu</a></li>
-                                    <li><a href="#url">Bize Yazın</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4 column mt-md-0 mt-4">
@@ -32,9 +32,26 @@
                                 <ul class="footer-gd-16">
                                     <li><a href="#url">Servisler</a></li>
                                     <li><a href="#url">Ring Seferler</a></li>
-                                    <li><a href="services.html">Services</a></li>
-                                    <li><a href="landing-single.html">Türkiye Ofisi</a></li>
-                                    <li><a href="#url">Ukrayna Ofisi</a></li>
+                                    <li><a href="services.html">Hizmet Şartları</a></li>
+                                    @{
+                                        if (Model.IdentityName != null)
+                                        {
+                                            if (Model.Role=="Admin")
+                                            {
+                                                <li><a href="/Admin/Profile/Index">Profilim</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="/Member/Profile/Index">Profilim</a></li>
+                                            }                                          
+                                            <li><a href="/Login/LogOut">Çıkış Yap</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="/Register/Index">Kayıt Ol</a></li>
+                                            <li><a href="/Login/Index">Giriş Yap</a></li>
+                                        }
+                                    }
                                 </ul>
                             </div>
                         </div>

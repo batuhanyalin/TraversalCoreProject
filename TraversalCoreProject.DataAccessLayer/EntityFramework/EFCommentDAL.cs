@@ -18,7 +18,7 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
         TraversalContext context= new TraversalContext();
         public List<Comment> GetListAllWithAllInfoByDestinationId(int id)
         {
-            var values = context.Comments.Where(x => x.DestinationId == id).Include(x => x.Member).Include(x => x.Destination).ToList();
+            var values = context.Comments.Where(x => x.DestinationId == id&&x.IsApproved==true).Include(x => x.Member).Include(x => x.Destination).ToList();
             return values;
         }
         public List<Comment> GetListCommentWithAllInfo()

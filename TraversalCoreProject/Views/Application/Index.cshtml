@@ -1,4 +1,4 @@
-﻿@model RegisterDto
+﻿@model ApplicationDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UILayout.cshtml";
@@ -24,32 +24,42 @@
                     <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
                         <div class="input-grids">
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Adınız" class="contact-input" required="" />
+                                <input type="text" asp-for=Name placeholder="Adınız" class="contact-input" required="" />
+                                <span style="color:darkred;font-size:smaller" asp-validation-for="Name"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Soyadınız" class="contact-input" required="" />
+                                <input type="text" asp-for=Surname placeholder="Soyadınız" class="contact-input" required="" />
+                                <span style="color:darkred;font-size:smaller" asp-validation-for="Surname">
+
+                                </span>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Telefon Numaranız" class="contact-input" required="" />
+                                <input type="text" asp-for=Phone placeholder="Telefon Numaranız" class="contact-input" required="" />
+                                <span style="color:darkred;font-size:smaller" asp-validation-for="Phone"></span>
                             </div>
                             <div class="form-group">
-                                <input type="email" name="w3lSender" id="w3lSender" placeholder="E-posta Adresiniz" class="contact-input" required="" />
+                                <input type="email" asp-for=Email placeholder="E-posta Adresiniz" class="contact-input" required="" />
+                                <span style="color:darkred;font-size:smaller" asp-validation-for="Email"></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
                         <div class="input-grids">
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Doğum Yeri" class="contact-input" required="" />
+                                <input type="text" asp-for=HomeTown placeholder="Doğum Yeri" class="contact-input" required="" />
+                                <span style="color:darkred;font-size:smaller" asp-validation-for="HomeTown"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Meslek" class="contact-input" required="" />
+                                <input type="text" asp-for=Profession placeholder="Meslek" class="contact-input" required="" />
+                                <span style="color:darkred;font-size:smaller" asp-validation-for="Profession"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="Ana Dil" class="contact-input" required="" />
+                                <input type="text" asp-for=MainLanguage placeholder="Ana Dil" class="contact-input" required="" />
+                                <span style="color:darkred;font-size:smaller" asp-validation-for="MainLanguage"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="w3lName" id="w3lName" placeholder="2. Dil" class="contact-input" />
+                                <input type="text" asp-for=OtherLanguage placeholder="2. Dil" class="contact-input" />
+                                <span style="color:darkred;font-size:smaller" asp-validation-for="OtherLanguage"></span>
                             </div>
 
                         </div>
@@ -58,14 +68,22 @@
                 <div class="contact-grids row">
                     <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
                         <div class="form-group">
-                            <label clas="form-label">Doğum Tarihi</label> <input type="date" name="w3lSender" id="w3lSender" placeholder="Doğum Tarihi" class="contact-input" required="" />
+                            <label clas="form-label">Doğum Tarihi</label> <input type="date" asp-for=Birtday placeholder="Doğum Tarihi" class="contact-input" required="" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="Birtday"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" asp-for=UserName placeholder="Kullanıcı Adı" class="contact-input" required="" />
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="UserName"></span>
                         </div>
                     </div>
                     <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
                         <div class="form-group">
-                            <label clas="form-label">Hakkında</label> <textarea name="w3lMessage" id="w3lMessage" required=""></textarea>
+                            <label clas="form-label">Hakkında</label> <textarea asp-for=About required=""></textarea>
+                            <span style="color:darkred;font-size:smaller" asp-validation-for="About"></span>
                         </div>
                     </div>
+                </div>
+                <div class="text-danger" asp-validation-summary="ModelOnly">
                 </div>
                 <div class="contact-grids row">
                     <div class="text-right">

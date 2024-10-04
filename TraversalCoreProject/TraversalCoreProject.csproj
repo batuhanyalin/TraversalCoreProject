@@ -30,7 +30,6 @@
     <Folder Include="Areas\Admin\Views\ReportPDF\" />
     <Folder Include="Areas\Member\Data\" />
     <Folder Include="Areas\Member\Models\" />
-    <Folder Include="wwwroot\images\destinations\" />
     <Folder Include="wwwroot\PDFReports\" />
   </ItemGroup>
 
