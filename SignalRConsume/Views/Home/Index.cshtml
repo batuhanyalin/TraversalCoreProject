@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     ViewData["Title"] = "Home Page";
 }
 @section Scripts
@@ -8,7 +8,7 @@
 
     <script type="text/javascript">
         $(document).ready(() => {
-            var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:5045/VisitorHub/").build();
+            var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:5182/VisitorHub/").build();
 
             $("#connectionStatus").text(connection.state);
 

@@ -24,7 +24,7 @@ namespace SignalRApiForMSSQL.Model
         {
             await _context.Visitors.AddAsync(visitor);
             await _context.SaveChangesAsync();
-            await _hubContext.Clients.All.SendAsync("CallVisitorList",GetVisitorChartList());//SignalR da çağırılacak metotlar SendAsync metoduyla çağırılır.
+            await _hubContext.Clients.All.SendAsync("ReceiveVisitorList", GetVisitorChartList());//SignalR da çağırılacak metotlar SendAsync metoduyla çağırılır.
         }
         public List<VisitorChart> GetVisitorChartList()
         {
@@ -42,7 +42,11 @@ namespace SignalRApiForMSSQL.Model
                         visitorChart.VisitDate = reader.GetDateTime(0).ToShortDateString();
                         Enumerable.Range(1, 5).ToList().ForEach(x =>
                         {
-                            visitorChart.Counts.Add(reader.GetInt32(x));
+                            if (DBNull.Value.Equals(reader[x]))
+                            {
+                                visitorChart.Counts.Add(0);
+                            }
+                            else { visitorChart.Counts.Add(reader.GetInt32(x)); }
                         });
                         visitorCharts.Add(visitorChart);
                     }
