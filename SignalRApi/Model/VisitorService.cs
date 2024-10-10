@@ -24,7 +24,7 @@ namespace SignalRApi.Model
         {
             await _context.Visitors.AddAsync(visitor);
             await _context.SaveChangesAsync();
-            await _hubContext.Clients.All.SendAsync("CallVisitorList","y");//SignalR da çağırılacak metotlar SendAsync metoduyla çağırılır.
+            await _hubContext.Clients.All.SendAsync("CallVisitorList",GetVisitorChartList());//SignalR da çağırılacak metotlar SendAsync metoduyla çağırılır.
         }
         public List<VisitorChart> GetVisitorChartList()
         {

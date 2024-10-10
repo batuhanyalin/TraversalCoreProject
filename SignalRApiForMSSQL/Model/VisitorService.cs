@@ -24,14 +24,14 @@ namespace SignalRApiForMSSQL.Model
         {
             await _context.Visitors.AddAsync(visitor);
             await _context.SaveChangesAsync();
-            await _hubContext.Clients.All.SendAsync("CallVisitorList","y");//SignalR da çağırılacak metotlar SendAsync metoduyla çağırılır.
+            await _hubContext.Clients.All.SendAsync("CallVisitorList",GetVisitorChartList());//SignalR da çağırılacak metotlar SendAsync metoduyla çağırılır.
         }
         public List<VisitorChart> GetVisitorChartList()
         {
             List<VisitorChart> visitorCharts = new List<VisitorChart>();
             using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
-                command.CommandText = "select * from crosstab\r\n(\r\n'Select \"VisitDate\",\"City\",\"CityVisitCount\"\r\n\tFrom \"Visitors\"\r\n\tOrder By 1,2'\r\n) As ct(\"VisitDate\" date,City1 int,City2 int,City3 int,City4 int,City5 int)"; //POSTGRESQL SORGUSU
+                command.CommandText = "execute SignalRPivot"; //Oluşturduğum MSSQL procedürü çağırıyorum
                 command.CommandType = System.Data.CommandType.Text;
                 _context.Database.OpenConnection();
                 using (var reader = command.ExecuteReader())

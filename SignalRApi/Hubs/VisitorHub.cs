@@ -13,7 +13,7 @@ namespace SignalRApi.Hubs
         }
        public async Task GetVisitorList()
         {
-            await Clients.All.SendAsync("CallVisitList","deeneme");
+            await Clients.All.SendAsync("CallVisitList",_visitorService.GetVisitorChartList());
         }
     }
 }
