@@ -35,10 +35,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("CorsPolicy"); //Burada oluþturulan Corse çaðrýlýyor.
 app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<VisitorHub>("/VisitorHub"); //Burada API consume iþleminde nerenin consume edileceðini gösteriyoruz.
+
 app.Run();
 
