@@ -44,7 +44,6 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             var value = _announcementService.TGetById(id);
             var jsonValue = JsonConvert.SerializeObject(value);
             return Json(jsonValue);
-
         }
         [HttpPost]
         [Route("UpdateAnnouncement")]

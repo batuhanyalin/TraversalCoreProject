@@ -1,0 +1,235 @@
+﻿@model List<RoleListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+    int count = 0;
+}
+<div class="modal fade" id="createRole" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="staticBackdropLabel">Yeni Rol Ekle</h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col col-md-6">
+                        <label for="RoleName" class="mt-1">Rol Adı</label>
+                        <input tabindex="0" type="text" id="RoleName" class="form-control mb-2" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnRoleClose" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                <button type="button" id="btnRoleCreate" class="btn btn-primary">Oluştur</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateRole" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="staticBackdropLabel">Rol Güncelle</h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col col-md-6">
+                        <input type="hidden" id="UpdateRoleId" />
+                        <label for="UpdateRoleName" class="mt-1">Rol Adı</label>
+                        <input tabindex="0" type="text" id="UpdateRoleName" class="form-control mb-2" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnUpdateRoleClose" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                <button type="button" id="btnUpdateRole" class="btn btn-success">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Rol İşlemleri <button class="btn btn-success" data-toggle="modal" data-target="#createRole"><i class="fas fa-plus-circle"></i></button> </h4>
+    <div class="card">
+        <h5 class="card-header">Rol Listesi</h5>
+        <div class="table-responsive text-nowrap" id="RoleList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Rol Adı</th>
+                        <th>Kişi Sayısı</th>
+                        <th>Aksiyon</th>
+                    </tr>
+                </thead>
+
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@item.Name</td>
+                            <td><a href="/Admin/Role/UserListByRole/@item.Id">@item.UserCount</a></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item btn-updateRole" data-toggle="modal" data-target="#updateRole" data-id=@item.Id><i class="fas fa-sync"></i> Güncelle</button>
+                                        <button class="dropdown-item btn-deleteRole" data-id=@item.Id><i class="bx bx-trash me-1"></i> Sil</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $("#RoleList").on('click', '.btn-deleteRole', function () {
+        let Id = $(this).data('id');
+        Swal.fire({
+            title: "Rolü Silmek İstediğinizden Emin Misiniz?",
+            text: "Bu işlemin geri dönüşü olmayacaktır.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, sil.",
+            cancelButtonText: "İptal Et."
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "/Admin/Role/DeleteRole/" + Id,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (response) {
+                        Swal.fire({
+                            title: "İşlem Başarılı!",
+                            text: "Seçtiğiniz rol başarılı bir şekilde silindi.",
+                            icon: "success"
+                        }).then(() => {
+                            // Sayfayı yenile
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    $("#RoleList").on('click', '.btn-updateRole', function () {
+        let Id = $(this).data("id");
+        console.log(Id);
+        $.ajax({
+            url: "/Admin/Role/GetRole/" + Id,
+            type: "GET",
+            dataType: "json",
+            success: function (funkGetRole) {
+                let response = JSON.parse(funkGetRole);
+                console.log(response);
+                // Blgileri popup içinde doldur
+                $("#UpdateRoleName").val(response.Name);
+                $("#UpdateRoleId").val(response.Id);
+                // Popup'ı göster
+
+            },
+            error: function () {
+                Swal.fire({
+                    title: "HATA",
+                    text: "Duyuru bilgileri yüklenemedi.",
+                    icon: "warning"
+                });
+            }
+        });
+    });
+    $("#btnUpdateRole").click(function () {
+        var formData = new FormData();
+        formData.append("Id", $("#UpdateRoleId").val());
+        formData.append("Name", $("#UpdateRoleName").val());
+
+        $.ajax({
+            url: "/Admin/Role/UpdateRole/",
+            data: formData,
+            contentType: false,
+            processData: false,
+            type: "POST",
+            success: function (funkUpdateRole) {
+                if (funkUpdateRole.success) {
+                    Swal.fire({
+                        title: "Rol Güncelleme İşlemi Başarılı!",
+                        text: "Yeni rol başarıyla oluşturuldu.",
+                        icon: "success",
+                    }).then(() => {
+                        location.reload();
+                    });
+                    $("#btnUpdateRoleClose").click();
+                } else {
+                    Swal.fire({
+                        title: "Hata!",
+                        text: funkUpdateRole.message,
+                        icon: "error"
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    title: "Beklenmeyen Hata!",
+                    text: "Bir hata oluştu, lütfen tekrar deneyin.",
+                    icon: "error"
+                });
+            }
+        });
+    });
+
+    $("#btnRoleCreate").click(function () {
+        var formData = new FormData();
+        formData.append("Name", $("#RoleName").val());
+
+        $.ajax({
+            url: "/Admin/Role/CreateRole/",
+            data: formData,
+            contentType: false,
+            processData: false,
+            type: "POST",
+            success: function (funkCreateRole) {
+                if (funkCreateRole.success) {
+                    Swal.fire({
+                        title: "Rol Oluşturma İşlemi Başarılı!",
+                        text: "Yeni duyuru başarıyla oluşturuldu.",
+                        icon: "success",
+                    }).then(() => {
+                        location.reload();
+                    });
+                    $("#btnRoleClose").click();
+                } else {
+                    Swal.fire({
+                        title: "Hata!",
+                        text: funkCreateRole.message,
+                        icon: "error"
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    title: "Beklenmeyen Hata!",
+                    text: "Bir hata oluştu, lütfen tekrar deneyin.",
+                    icon: "error"
+                });
+            }
+        });
+    });
+
+
+
+
+</script>

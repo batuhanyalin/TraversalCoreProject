@@ -5,6 +5,7 @@ using TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.ProfileDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.ReservationDtos;
+using TraversalCoreProject.DtoLayer.AdminAreaDtos.RoleDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.CommentDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.ContactDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
@@ -61,6 +62,10 @@ namespace TraversalCoreProject.Mapping
 
             CreateMap<Announcement, AnnouncementCreateDto>().ReverseMap();
             CreateMap<Announcement, AnnouncementListDto>().ReverseMap();
+
+            CreateMap<AppRole, RoleListDto>().ReverseMap();
+            CreateMap<AppRole, RoleCreateDto>().ReverseMap();
+            CreateMap<AppRole, RoleUpdateDto>().ReverseMap();
         }
     }
 }

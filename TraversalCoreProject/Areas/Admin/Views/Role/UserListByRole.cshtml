@@ -1,0 +1,128 @@
+﻿@model List<MemberListDto>
+@{
+    ViewData["Title"] = "UserListByRole";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="/Admin/Role/Index">Roller</a> /</span> @ViewBag.role</h4>
+    <div class="card">
+        <h5 class="card-header">
+            @{
+                if (ViewBag.role == "Admin")
+                {
+                    <span>Yönetici</span>
+                }
+                if (ViewBag.role=="Guide")
+                {
+                    <span>Rehber</span>
+                }
+                if (ViewBag.role=="GuideApplication")
+                {
+                    <span>Rehber Başvuru</span>
+                }
+                if (ViewBag.role=="Member")
+                {
+                    <span>Kullanıcı</span>
+                }
+            }
+            Listesi
+        </h5>
+        <div class="table-responsive text-nowrap" id="guideList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Profil</th>
+                        <th>Adı Soyadı</th>
+                        <th>Meslek</th>
+                        <th>Telefon</th>
+                        <th>E-posta</th>
+                        <th>Katıldığı Turlar</th>
+                        <th>Durum</th>
+                        <th>Aksiyon</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td><a href="/Guide/GuideDetail/@item.Id"><img src="@item.ImageUrl" style="height:50px;width:auto;border-radius:50%;" /></a></td>
+                            <td>@item.Name @item.Surname</td>
+                            <td>@item.Profession</td>
+                            <td><a href="tel:@item.Phone">@item.Phone</a></td>
+                            <td><a href="mailto:@item.Email">@item.Email</a></td>
+                            <td>
+                                @await Component.InvokeAsync("_AdminGuideListDestinationComponentPartial", new { id = item.Id })
+                            </td>
+                            <td>
+                                <a href="/Admin/Guide/IsApproved/@item.Id">
+                                    @{
+                                        if (item.IsActive == true)
+                                        {
+                                            <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
+                                        }
+                                        else
+                                        {
+                                            <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
+                                        }
+                                    }
+                                </a>
+
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/Admin/Comment/GetCommentListByMember/@item.Id"><i class="bx bx-edit-alt me-1"></i> Yorumlar</a>
+                                        <a class="dropdown-item" href="/Admin/Guide/UpdateGuide/@item.Id"><i class="bx bx-edit-alt me-1"></i> Güncelleme</a>
+                                        <button class="dropdown-item btn-deleteGuide" data-id=@item.Id><i class="bx bx-trash me-1"></i> Sil</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $("#guideList").on('click', '.btn-deleteGuide', function () {
+        let guideId = $(this).data('id');
+        Swal.fire({
+            title: "Rehberi Silmek İstediğinizden Emin Misiniz?",
+            text: "Bu işlemin geri dönüşü olmayacaktır.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, sil.",
+            cancelButtonText: "İptal Et."
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "/Admin/Guide/DeleteGuide/" + guideId,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (response) {
+                        Swal.fire({
+                            title: "İşlem Başarılı!",
+                            text: "Seçtiğiniz rehber başarılı bir şekilde silindi.",
+                            icon: "success"
+                        }).then(() => {
+                            // Sayfayı yenile
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>
