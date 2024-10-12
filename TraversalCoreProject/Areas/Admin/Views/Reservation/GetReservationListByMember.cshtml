@@ -37,23 +37,23 @@
                             <td>@item.PersonCount</td>
                             <td>
                                 @{
-                                    if (item.Status == "Onaylandı")
+                                    if (item.ReservationStatusId == 1)
                                     {
                                         <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
                                     }
-                                    else if (item.Status == "Onay Bekliyor")
+                                    else if (item.ReservationStatusId == 3)
                                     {
                                         <span style="font-size:medium" class="badge bg-label-warning me-1"><i class="fas fa-hourglass-half"></i></span>
                                     }
-                                    else if (item.Status == "Onaylanmadı")
+                                    else if (item.ReservationStatusId == 2)
                                     {
                                         <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
                                     }
-                                    else if (item.Status == "İptal Edildi")
+                                    else if (item.ReservationStatusId == 4)
                                     {
                                         <span style="font-size:medium" class="badge bg-label-dark me-1"><i class="fas fa-user-times"></i></span>
                                     }
-                                    else if (item.Status == "Geçmiş Rezervasyon")
+                                    else if (item.ReservationStatusId == 5)
                                     {
                                         <span style="font-size:medium" class="badge bg-label-info me-1"><i class="fas fa-calendar-check"></i></span>
                                     }

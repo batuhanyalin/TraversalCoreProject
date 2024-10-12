@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.BusinessLayer.ValidationRules;
+using TraversalCoreProject.DataAccessLayer.Context;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.ReservationDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.CommentDtos;
 using TraversalCoreProject.DtoLayer.MemberAreaDtos.ReservationDtos;
@@ -16,17 +17,20 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
     [Route("Admin/[controller]")]
     public class ReservationController : Controller
     {
+     
         private readonly IReservationService _reservationService;
+        private readonly IReservationStatusService _reservationStatusService;
         private readonly IDestinationService _destinationService;
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
 
-        public ReservationController(IReservationService reservationService, IMapper mapper, UserManager<AppUser> userManager, IDestinationService destinationService)
+        public ReservationController(IReservationService reservationService, IMapper mapper, UserManager<AppUser> userManager, IDestinationService destinationService, IReservationStatusService reservationStatusService)
         {
             _reservationService = reservationService;
             _mapper = mapper;
             _userManager = userManager;
             _destinationService = destinationService;
+            _reservationStatusService = reservationStatusService;
         }
 
         [Route("Index")]
@@ -52,6 +56,16 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         [Route("UpdateReservation/{id:int}")]
         public async Task<IActionResult> UpdateReservation(int id)
         {
+
+            var reservationStatus = _reservationStatusService.TGetListAll();
+            List<SelectListItem> rezStat= (from x in reservationStatus.ToList()
+                                           select new SelectListItem
+                                           {
+                                               Text=x.ReservationStatusName,
+                                               Value=x.ReservationStatusId.ToString()
+                                           }).ToList();
+
+            ViewBag.reservationStatus = rezStat;
             var member = _userManager.Users.ToList();
             var value = _reservationService.TGetReservationWithAllInfoById(id);
             var destin = _destinationService.TGetAllDestinationWithAllInfo();
@@ -76,6 +90,16 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         [Route("UpdateReservation/{id:int}")]
         public async Task<IActionResult> UpdateReservation(AdminReservationUpdateDto memberNewReservationDto)
         {
+            var reservationStatus = _reservationStatusService.TGetListAll();
+            List<SelectListItem> rezStat = (from x in reservationStatus.ToList()
+                                            select new SelectListItem
+                                            {
+                                                Text = x.ReservationStatusName,
+                                                Value = x.ReservationStatusId.ToString()
+                                            }).ToList();
+
+            ViewBag.reservationStatus = rezStat;
+
             var member = _userManager.Users.ToList();
             var destin = _destinationService.TGetAllDestinationWithAllInfo();
             List<SelectListItem> destinationListItem = (from x in destin.ToList()
@@ -109,7 +133,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                 ModelState.AddModelError("ReservationError", "Kişi sayısı kapasitenin üzerinde olamaz.");
                 return View();
             }
-            if (memberNewReservationDto.Status == "Onaylandı")
+            if (memberNewReservationDto.ReservationStatusId == 3)
             {
                 int capacity1 = findDestination.Capacity;
                 int personCount = memberNewReservationDto.PersonCount;
@@ -118,7 +142,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                 _destinationService.TUpdate(findDestination);
             }
             Reservation reservation = new Reservation();
-            reservation.Status = memberNewReservationDto.Status;
+            reservation.ReservationStatusId = memberNewReservationDto.ReservationStatusId;
             reservation.PersonCount = memberNewReservationDto.PersonCount;
             reservation.ReservationDate = memberNewReservationDto.ReservationDate;
             reservation.DestinationId = memberNewReservationDto.DestinationId;

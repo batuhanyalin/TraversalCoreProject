@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.BusinessLayer.ValidationRules;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos;
@@ -102,14 +103,24 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         [Route("UpdateGuide/{id:int}")]
         [HttpGet]
         public async Task<IActionResult> UpdateGuide(int id)
-        {
-            var value = await _userManager.FindByIdAsync(id.ToString());
-            var map = _mapper.Map<MemberUpdateDto>(value);
+        {     var value = await _userManager.FindByIdAsync(id.ToString());
+
+            var currentRole = await _userManager.GetRolesAsync(value);
+            var roles = await _roleManager.Roles.ToListAsync();
+            List<SelectListItem> rol = (from x in roles.ToList()
+                                        select new SelectListItem
+                                        {
+                                            Text = x.Name,
+                                            Value = x.Id.ToString(),
+                                            Selected=currentRole.Contains(x.Name)
+                                        }).ToList();
+            ViewBag.userRole = rol;    
+            var map = _mapper.Map<MemberUpdateDto>(value); 
             return View(map);
         }
         [Route("UpdateGuide/{id:int}")]
         [HttpPost]
-        public async Task<IActionResult> UpdateGuide(MemberUpdateDto memberUpdateDto,IFormFile Image)
+        public async Task<IActionResult> UpdateGuide(MemberUpdateDto memberUpdateDto, IFormFile Image)
         {
             var user = await _userManager.FindByIdAsync(memberUpdateDto.Id.ToString());
             var validator = new MemberUpdateValidatorForAdmin().Validate(memberUpdateDto);
@@ -141,6 +152,14 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                 {
                     user.ImageUrl = $"/images/users/no-image-users.png";
                 }
+
+                //Rol değiştirme işlemi--
+                var currentRole = await _userManager.GetRolesAsync(user);
+                var newRole = _roleManager.Roles.FirstOrDefault(x => x.Id == memberUpdateDto.UserRole.Id);
+                await _userManager.RemoveFromRolesAsync(user, currentRole);
+                await _userManager.AddToRoleAsync(user, newRole.Name);
+                //Rol değiştirme işlemi--
+
                 user.Name = memberUpdateDto.Name;
                 user.Surname = memberUpdateDto.Surname;
                 user.PhoneNumber = memberUpdateDto.Phone;

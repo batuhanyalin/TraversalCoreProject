@@ -17,7 +17,8 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.ReservationDtos
         public int DestinationId { get; set; }
         public DateTime ReservationDate { get; set; }
         public string Description { get; set; }
-        public string Status { get; set; }
+        public ReservationStatus ReservationStatus { get; set; }
+        public int ReservationStatusId { get; set; }
         public string? ReservationError { get; set; }
     }
 }

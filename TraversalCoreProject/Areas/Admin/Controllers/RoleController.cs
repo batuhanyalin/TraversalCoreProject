@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using TraversalCoreProject.Areas.Admin.Models;
 using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.RoleDtos;
@@ -23,6 +25,33 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             _mapper = mapper;
             _userManager = userManager;
         }
+        [Route("AssignRole/{id:int}")]
+        public async Task<IActionResult> AssignRole(int id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            var roles = _roleManager.Roles.ToList();
+            List<SelectListItem> userRole= (from x in roles.ToList()
+                                            select new SelectListItem
+                                            {
+                                                Text = x.Name,
+                                                Value=x.Id.ToString()
+                                            }).ToList();
+            ViewBag.userRole= userRole;
+
+            //List<RoleAssignViewModel> roleAssignViewModels = new List<RoleAssignViewModel>();
+            //foreach (var item in roles)
+            //{
+            //    RoleAssignViewModel model = new RoleAssignViewModel();
+            //    model.RoleId = item.Id;
+            //    model.RoleName = item.Name;
+            //    model.RoleExist = userRoles.Contains(item.Name);
+            //    roleAssignViewModels.Add(model);
+            //}
+            return View();
+        }
+
         [Route("Index")]
         [HttpGet]
         public async Task<IActionResult> Index()

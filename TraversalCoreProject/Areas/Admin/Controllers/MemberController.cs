@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.BusinessLayer.ValidationRules;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos;
@@ -14,14 +16,16 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
     public class MemberController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
         private readonly IGuideService _guideService;
         private IMapper _mapper;
 
-        public MemberController(UserManager<AppUser> userManager, IMapper mapper, IGuideService guideService)
+        public MemberController(UserManager<AppUser> userManager, IMapper mapper, IGuideService guideService, RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
             _mapper = mapper;
             _guideService = guideService;
+            _roleManager = roleManager;
         }
 
         [Route("Index")]
@@ -51,6 +55,16 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         {
             var value = await _userManager.FindByIdAsync(id.ToString());
             var map = _mapper.Map<MemberUpdateDto>(value);
+            var currentRole = await _userManager.GetRolesAsync(value);
+            var roles = await _roleManager.Roles.ToListAsync();
+            List<SelectListItem> rol = (from x in roles.ToList()
+                                        select new SelectListItem
+                                        {
+                                            Text = x.Name,
+                                            Value = x.Id.ToString(),
+                                            Selected = currentRole.Contains(x.Name)
+                                        }).ToList();
+            ViewBag.userRole = rol;
             return View(map);
         }
         [Route("UpdateMember/{id:int}")]

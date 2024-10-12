@@ -12,7 +12,7 @@ using TraversalCoreProject.DataAccessLayer.Context;
 namespace TraversalCoreProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(TraversalContext))]
-    [Migration("20241001135021_mig26")]
+    [Migration("20241012155955_mig26")]
     partial class mig26
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -639,9 +639,8 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ReservationStatusId")
+                        .HasColumnType("int");
 
                     b.HasKey("ReservationId");
 
@@ -649,7 +648,26 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
 
                     b.HasIndex("MemberId");
 
+                    b.HasIndex("ReservationStatusId");
+
                     b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("TraversalCoreProject.EntityLayer.Concrete.ReservationStatus", b =>
+                {
+                    b.Property<int>("ReservationStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationStatusId"), 1L, 1);
+
+                    b.Property<string>("ReservationStatusName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReservationStatusId");
+
+                    b.ToTable("ReservationStatuses");
                 });
 
             modelBuilder.Entity("TraversalCoreProject.EntityLayer.Concrete.SocialMedia", b =>
@@ -854,9 +872,17 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TraversalCoreProject.EntityLayer.Concrete.ReservationStatus", "ReservationStatus")
+                        .WithMany("Reservations")
+                        .HasForeignKey("ReservationStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Destination");
 
                     b.Navigation("Member");
+
+                    b.Navigation("ReservationStatus");
                 });
 
             modelBuilder.Entity("TraversalCoreProject.EntityLayer.Concrete.AppUser", b =>
@@ -876,6 +902,11 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
 
                     b.Navigation("DestinationTags");
 
+                    b.Navigation("Reservations");
+                });
+
+            modelBuilder.Entity("TraversalCoreProject.EntityLayer.Concrete.ReservationStatus", b =>
+                {
                     b.Navigation("Reservations");
                 });
 

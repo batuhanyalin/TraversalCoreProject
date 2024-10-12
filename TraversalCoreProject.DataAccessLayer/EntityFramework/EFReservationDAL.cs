@@ -17,35 +17,35 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
         TraversalContext context = new TraversalContext();
         public List<Reservation> GetMyOldReservationListByUserId(int id)
         {
-            var values= context.Reservations.Where(x=>x.MemberId==id).Where(x=>x.Status=="Geçmiş Rezervasyon" || x.Destination.StartDate < DateTime.Now).Include(x=>x.Destination).Include(x=>x.Member).ToList();
+            var values= context.Reservations.Where(x=>x.MemberId==id).Where(x=>x.ReservationStatus.ReservationStatusName=="Geçmiş Rezervasyon" || x.Destination.StartDate < DateTime.Now).Include(x=>x.Destination).Include(x=>x.Member).Include(x=>x.ReservationStatus).ToList();
             return values;  
            
         }
         public List<Reservation> GetMyApprovalReservationListByUserId(int id)
         {
-            var values = context.Reservations.Where(x => x.MemberId == id).Where(x => x.Status == "Onay Bekliyor" ).Include(x => x.Destination).Include(x => x.Member).ToList();
+            var values = context.Reservations.Where(x => x.MemberId == id).Where(x => x.ReservationStatus.ReservationStatusName == "Onay Bekliyor" ).Include(x => x.Destination).Include(x => x.Member).Include(x => x.ReservationStatus).ToList();
             return values;
 
         }
         public List<Reservation> GetMyCurrentReservationListByUserId(int id)
         {
-            var values = context.Reservations.Where(x => x.MemberId == id).Where(x => x.Status == "Onaylandı").Include(x => x.Destination).Include(x => x.Member).ToList();
+            var values = context.Reservations.Where(x => x.MemberId == id).Where(x => x.ReservationStatus.ReservationStatusName == "Onaylandı").Include(x => x.Destination).Include(x => x.Member).Include(x => x.ReservationStatus).ToList();
             return values;
 
         }
         public List<Reservation> GetListReservationWithAllInfo()
         {
-            var values = context.Reservations.Include(x => x.Destination).Include(x => x.Member).ToList();
+            var values = context.Reservations.Include(x => x.Destination).Include(x => x.Member).Include(x => x.ReservationStatus).ToList();
             return values;
         }
         public List<Reservation> GetListReservationWithAllInfoByMemberId(int id)
         {
-            var values = context.Reservations.Where(x=>x.MemberId==id).Include(x => x.Destination).Include(x => x.Member).ToList();
+            var values = context.Reservations.Where(x=>x.MemberId==id).Include(x => x.Destination).Include(x => x.Member).Include(x => x.ReservationStatus).ToList();
             return values;
         }
         public Reservation GetReservationWithAllInfoById(int id)
         {
-            var values = context.Reservations.Where(x => x.ReservationId == id).Include(x => x.Destination).Include(x => x.Member).FirstOrDefault();
+            var values = context.Reservations.Where(x => x.ReservationId == id).Include(x => x.Destination).Include(x => x.Member).Include(x => x.ReservationStatus).FirstOrDefault();
             return values;
         }
     }

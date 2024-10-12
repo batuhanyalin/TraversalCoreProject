@@ -10,6 +10,7 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos
     public class MemberUpdateDto
     {
         public int Id { get; set; }
+        public Role UserRole { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
@@ -26,5 +27,10 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos
         public string? TwitterUrl { get; set; }
         public DateTime Birtday { get; set; }
         public IFormFile Image { get; set; }
+    }
+    public class Role
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

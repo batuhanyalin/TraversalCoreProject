@@ -51,8 +51,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label">Durum </label>
-                            <input type="text" class="form-control" asp-for="Status" />
-                            <span style="color:darkred;font-size:smaller" asp-validation-for="Status"></span>
+                            @Html.DropDownListFor(x => x.ReservationStatusId, (List<SelectListItem>)ViewBag.reservationStatus,new {@class="form-control"})
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Kişi Sayısı </label>

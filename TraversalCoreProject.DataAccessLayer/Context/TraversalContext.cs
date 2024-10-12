@@ -30,5 +30,6 @@ namespace TraversalCoreProject.DataAccessLayer.Context
         public DbSet<DestinationMatchGuide> DestinationMatchGuides { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<ReservationStatus> ReservationStatuses { get; set; }
     }
 }

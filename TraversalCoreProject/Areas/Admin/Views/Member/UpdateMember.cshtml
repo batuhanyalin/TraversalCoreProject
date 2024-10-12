@@ -103,29 +103,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-3">
                                 <div class="row">
                                     <div class="col">
                                         <label class="form-label">Doğum Yeri</label>
                                         <input class="form-control" type="text" asp-for="HomeTown" />
                                         <span style="color:darkred;font-size:smaller" asp-validation-for="HomeTown"></span>
                                     </div>
-                                    <div class="col">
-                                        <label class="form-label">Doğum Tarihi</label>
-                                        <input class="form-control" type="date" asp-for="Birtday" />
-                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Birtday"></span>
-                                    </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <label class="form-label">Twitter URL</label>
                                         <input class="form-control" type="text" asp-for="TwitterUrl" />
                                         <span style="color:darkred;font-size:smaller" asp-validation-for="TwitterUrl"></span>
-                                    </div>
-                                    <div class="col">
-                                        <label class="form-label">Instagram URL</label>
-                                        <input class="form-control" type="text" asp-for="InstagramUrl" />
-                                        <span style="color:darkred;font-size:smaller" asp-validation-for="InstagramUrl"></span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -134,9 +125,33 @@
                                         <input class="form-control" type="text" asp-for="Profession" />
                                         <span style="color:darkred;font-size:smaller" asp-validation-for="Profession"></span>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Kullanının Rolü</label>
+                                        @Html.DropDownListFor(x => x.UserRole.Id, (List<SelectListItem>)ViewBag.userRole, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Doğum Tarihi</label>
+                                        <input class="form-control" type="date" asp-for="Birtday" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="Birtday"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Instagram URL</label>
+                                        <input class="form-control" type="text" asp-for="InstagramUrl" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="InstagramUrl"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col">
                                         <label class="form-label">Hakkında</label>
-                                        <textarea class="form-control" type="text" asp-for="About"></textarea>
+                                        <textarea style="height:110px" class="form-control" type="text" asp-for="About"></textarea>
                                         <span style="color:darkred;font-size:smaller" asp-validation-for="About"></span>
                                     </div>
                                 </div>
