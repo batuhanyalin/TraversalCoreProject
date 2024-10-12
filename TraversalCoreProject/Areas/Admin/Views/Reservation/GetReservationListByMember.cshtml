@@ -6,7 +6,7 @@
 }
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> @ViewBag.name Kullanıcısının Yaptığı Rezervasyonlar</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="/Admin/Reservation/Index">Rezervasyonlar </a> /</span> @ViewBag.name Kullanıcısının Yaptığı Rezervasyonlar</h4>
     <div class="card">
         <h5 class="card-header">Rezervason Listesi</h5>
         <div class="table-responsive text-nowrap" id="reservationList">
@@ -17,8 +17,8 @@
                         <th>Görsel</th>
                         <th>Ülke</th>
                         <th>Şehir</th>
-                        <th>Misafir</th>
                         <th>Kişi Sayısı</th>
+                        <th>Tarih</th>
                         <th>Durum</th>
                         <th>Aksiyon</th>
                     </tr>
@@ -33,29 +33,29 @@
                             <td><a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.Destination.ImageUrl" style="height:50px;width:auto;border-radius:10%;" /></a></td>
                             <td>@item.Destination.Country</td>
                             <td>@item.Destination.City</td>
-                            <td><a href="/Admin/Reservation/GetReservationListByMember/@item.Member.Id">@item.Member.Name @item.Member.Surname</a></td>
                             <td>@item.PersonCount</td>
+                            <td>@item.ReservationDate.ToString("dd.MM.yyy HH:ss")</td>
                             <td>
                                 @{
-                                    if (item.ReservationStatusId == 1)
+                                    if (item.ReservationStatus.ReservationStatusName == "Onaylandı")
                                     {
-                                        <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
+                                        <span title="Onaylandı" style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
                                     }
-                                    else if (item.ReservationStatusId == 3)
+                                    else if (item.ReservationStatus.ReservationStatusName == "Onay Bekliyor")
                                     {
-                                        <span style="font-size:medium" class="badge bg-label-warning me-1"><i class="fas fa-hourglass-half"></i></span>
+                                        <span title="Onay Bekliyor" style="font-size:medium" class="badge bg-label-warning me-1"><i class="fas fa-hourglass-half"></i></span>
                                     }
-                                    else if (item.ReservationStatusId == 2)
+                                    else if (item.ReservationStatus.ReservationStatusName == "Onaylanmadı")
                                     {
-                                        <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
+                                        <span title ="Onaylanmadı" style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
                                     }
-                                    else if (item.ReservationStatusId == 4)
+                                    else if (item.ReservationStatus.ReservationStatusName == "İptal Edildi")
                                     {
-                                        <span style="font-size:medium" class="badge bg-label-dark me-1"><i class="fas fa-user-times"></i></span>
+                                        <span title ="İptal Edildi" style="font-size:medium" class="badge bg-label-dark me-1"><i class="fas fa-user-times"></i></span>
                                     }
-                                    else if (item.ReservationStatusId == 5)
+                                    else if (item.ReservationStatus.ReservationStatusName == "Geçmiş Rezervasyon")
                                     {
-                                        <span style="font-size:medium" class="badge bg-label-info me-1"><i class="fas fa-calendar-check"></i></span>
+                                        <span title="Geçmiş Rezervasyon" style="font-size:medium" class="badge bg-label-info me-1"><i class="fas fa-calendar-check"></i></span>
                                     }
                                     else
                                     {

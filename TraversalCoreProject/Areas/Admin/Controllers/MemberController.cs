@@ -101,6 +101,15 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                 {
                     user.ImageUrl = $"/images/users/no-image-users.png";
                 }
+
+
+                //Rol değiştirme işlemi--
+                var currentRole = await _userManager.GetRolesAsync(user);
+                var newRole = _roleManager.Roles.FirstOrDefault(x => x.Id == memberUpdateDto.UserRole.Id);
+                await _userManager.RemoveFromRolesAsync(user, currentRole);
+                await _userManager.AddToRoleAsync(user, newRole.Name);
+                //Rol değiştirme işlemi--
+
                 user.Name = memberUpdateDto.Name;
                 user.Surname = memberUpdateDto.Surname;
                 user.PhoneNumber = memberUpdateDto.Phone;

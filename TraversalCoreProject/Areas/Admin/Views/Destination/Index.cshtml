@@ -19,11 +19,12 @@
                         <th>Gün</th>
                         <th>Kapasite</th>
                         <th>Tur Rehberleri</th>
+                        <th>Öne Çıkarıldı</th>
                         <th>Durum</th>
                         <th>Aksiyon</th>
                     </tr>
                 </thead>
-            
+
                 <tbody class="table-border-bottom-0">
                     @foreach (var item in Model)
                     {
@@ -39,15 +40,27 @@
                                 @await Component.InvokeAsync("_AdminDestinationListGuideComponentPartial", new { id = item.DestinationId })
                             </td>
                             <td>
+                                @{
+                                    if (item.IsFeaturePost == true)
+                                    {
+                                        <i style="color:coral;font-size:x-large;text-align:center" class="text-warning fa-solid fa-face-smile"></i>
+                                    }
+                                    else
+                                    {
+                                        <i style="color:slategray;font-size:x-large;text-align:center" class="fa-solid fa-face-sad-tear"></i>
+                                    }
+                                }
+                            </td>
+                            <td>
                                 <a href="/Admin/Destination/IsApproved/@item.DestinationId">
                                     @{
                                         if (item.Status == true)
                                         {
-                                                <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
+                                            <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
                                         }
                                         else
                                         {
-                                                <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
+                                            <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
                                         }
                                     }
                                 </a>

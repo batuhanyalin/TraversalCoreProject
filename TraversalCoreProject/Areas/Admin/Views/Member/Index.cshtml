@@ -18,7 +18,6 @@
                         <th>Meslek</th>
                         <th>Telefon</th>
                         <th>E-posta</th>
-                        <th>Katıldığı Turlar</th>
                         <th>Durum</th>
                         <th>Aksiyon</th>
                     </tr>
@@ -34,9 +33,6 @@
                             <td>@item.Profession</td>
                             <td><a href="tel:@item.Phone">@item.Phone</a></td>
                             <td><a href="mailto:@item.Email">@item.Email</a></td>
-                            <td>
-                                @await Component.InvokeAsync("_AdminGuideListDestinationComponentPartial", new { id = item.Id })
-                            </td>
                             <td>
                                 <a href="/Admin/Member/IsApproved/@item.Id">
                                     @{
@@ -59,7 +55,7 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="/Admin/Comment/GetCommentListByMember/@item.Id"><i class="bx bx-edit-alt me-1"></i> Yorumlar</a>
-                                        <a class="dropdown-item" href="/Admin/Member/xxx/@item.Id"><i class="bx bx-edit-alt me-1"></i> Tur Geçmişi</a>
+                                        <a class="dropdown-item" href="/Admin/Reservation/GetReservationListByMember/@item.Id"><i class="bx bx-edit-alt me-1"></i> Tur Geçmişi</a>
                                         <a class="dropdown-item" href="/Admin/Member/UpdateMember/@item.Id"><i class="bx bx-edit-alt me-1"></i> Güncelleme</a>
                                         <button class="dropdown-item btn-deleteMember" data-id=@item.Id><i class="bx bx-trash me-1"></i> Sil</button>
                                     </div>
