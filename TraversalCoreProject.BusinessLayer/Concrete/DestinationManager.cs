@@ -48,6 +48,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _destinationDAL.GetFeaturePosts();
         }
 
+        public List<Destination> TGetLastDestinationForMemberDashboard()
+        {
+           return _destinationDAL.GetLastDestinationForMemberDashboard();
+        }
+
         public List<Destination> TGetListAll()
         {
             return _destinationDAL.GetListAll();

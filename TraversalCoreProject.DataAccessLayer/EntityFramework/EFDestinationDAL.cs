@@ -49,5 +49,11 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
             context.SaveChanges();
             return value;
         }
+
+        public List<Destination> GetLastDestinationForMemberDashboard()
+        {
+            var values= context.Destinations.OrderByDescending(x=>x.DestinationId).Take(4).ToList();
+            return values;
+        }
     }
 }

@@ -1,0 +1,12 @@
+﻿@model List<DestinationMatchGuide>
+<div class="d-flex align-items-center justify-content-between">
+    <a href="/Destination/DestinationDetail/@ViewBag.destinationId" class="btn btn-outline-primary btn-sm mb-0">Tur Detayları</a>
+    <div class="avatar-group mt-2">
+        @foreach (var item in Model)
+        {
+            <a href="/Guide/GuideDetail/@item.Guide.Id" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Guide.Name @item.Guide.Surname">
+                <img alt="Image placeholder" src="@item.Guide.ImageUrl">
+            </a>
+        }    
+    </div>
+</div>
