@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Serilog;
 using System.Reflection;
 using TraversalCoreProject.BusinessLayer;
@@ -62,6 +63,13 @@ builder.Services.AddScoped<IPDFService, PDFManager>();
 builder.Services.AddScoped<IAnnouncementService, AnnouncementManager>();
 builder.Services.AddScoped<IReservationStatusService, ReservationStatusManager>();
 
+builder.Services.AddLocalization(opt =>
+{
+    opt.ResourcesPath = "Resources";
+}); //Dil desteðinin bakýlacaðý klasörün adý veriliyor.
+
+
+
 
 //CQRS Dependency Injection
 builder.Services.AddScoped<GetAllDestinationQueryHandler>();
@@ -104,7 +112,7 @@ builder.Services.AddMvc(config =>
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     config.Filters.Add(new AuthorizeFilter(policy));
 });
-builder.Services.AddMvc();
+builder.Services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization(); //Dil desteði için ekleniyor.
 
 
 var app = builder.Build();
@@ -116,6 +124,16 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+var supportedCultures = new[] { "tr", "en", "fr", "es", "gr", "de" };//Desteklenecek dillerin ön eklerini (suffixlerini giriyoruz)
+
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(supportedCultures[0]) // Default to Turkish if that's your main language
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions); //Dil konfigürasyonlarý 
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

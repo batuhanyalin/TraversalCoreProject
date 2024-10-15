@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace TraversalCoreProject.Areas.Member.Controllers
 {
     [Area("Member")]
     [Route("Member/[controller]")]
-    public class CommentController : Controller
+    public class InformationController : Controller
     {
         [Route("Index")]
         public IActionResult Index()

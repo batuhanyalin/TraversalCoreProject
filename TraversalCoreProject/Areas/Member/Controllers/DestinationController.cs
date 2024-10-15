@@ -10,7 +10,6 @@ using TraversalCoreProject.EntityLayer.Concrete;
 namespace TraversalCoreProject.Areas.Member.Controllers
 {
     [Area("Member")]
-    [AllowAnonymous]
     [Route("Member/[controller]")]
     public class DestinationController : Controller
     {

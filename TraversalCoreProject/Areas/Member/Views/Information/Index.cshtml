@@ -1,0 +1,36 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Member/Views/Shared/_UIMemberLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-6 mt-4">
+        <div class="card">
+            <div class="card-header pb-0 px-3">
+                <h6 class="mb-0">Profilim</h6>
+            </div>
+            <div class="card-body pt-4 p-3">
+                <div class="form-group row">
+                    <div class="col">
+                        <label class="form-text">Kullanıcı Adı</label>
+                        <input class="form-control" type="text" readonly />
+                    </div>
+                    <div class="col">
+                        <p>@localizer["Merhaba"]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 mt-4">
+        <div class="card h-100 mb-4">
+            <div class="card-header pb-0 px-3">
+                <div class="row">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
