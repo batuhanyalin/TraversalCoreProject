@@ -24,14 +24,16 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IDestinationMatchGuideService _destinationMatchGuideService;
         private readonly IMapper _mapper;
+        private readonly IDestinationTagService _destinationTagService;
 
-        public DestinationController(IDestinationService destinationService, IMapper mapper, UserManager<AppUser> userManager, ITagService tagService, IDestinationMatchGuideService destinationMatchGuideService)
+        public DestinationController(IDestinationService destinationService, IMapper mapper, UserManager<AppUser> userManager, ITagService tagService, IDestinationMatchGuideService destinationMatchGuideService, IDestinationTagService destinationTagService)
         {
             _destinationService = destinationService;
             _mapper = mapper;
             _userManager = userManager;
             _tagService = tagService;
             _destinationMatchGuideService = destinationMatchGuideService;
+            _destinationTagService = destinationTagService;
         }
         [Route("IsApproved/{id:int}")]
         public IActionResult IsApproved(int id)
@@ -70,6 +72,20 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                 };
                 destinationCreateDto.GuideMatchList.Add(model);
             }
+
+            destinationCreateDto.TagMatchList = new List<DestinationCreateDto.DestinationTag>();
+            var tagList = _tagService.TGetListAll();
+            foreach (var item in tagList)
+            {
+                var model2 = new DestinationCreateDto.DestinationTag
+                {
+                    TagId = item.TagId,
+                    TagName = item.TagName,
+                    TagExist = false,
+                };
+                destinationCreateDto.TagMatchList.Add(model2);
+            }
+
             // 4. DestinationCreateDto Nesnesi View'a Gönderiliyor
             return View(destinationCreateDto);
         }
@@ -163,6 +179,35 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                 }
             }
 
+            foreach (var tag in destinationCreateDto.TagMatchList)
+            {
+                if (tag.TagExist)
+                {
+                    var existingRecord = _destinationTagService.TGetTagsAllByDestinationId(newDestination.DestinationId)
+                        .FirstOrDefault(x => x.TagId == tag.TagId);
+
+                    if (existingRecord == null)
+                    {
+                        // Eğer böyle bir kayıt yoksa ekleme yap
+                        var dmtList = new DestinationTag
+                        {
+                            TagId = tag.TagId,
+                            DestinationId = newDestination.DestinationId // Yeni Destinasyon Id kullanılıyor
+                        };
+                        _destinationTagService.TInsert(dmtList);
+                    }
+                }
+                else
+                {
+                    // tag seçimi kaldırılmışsa, eşleşmeyi sil
+                    var destinationTag = _destinationTagService.TGetTagsAllByDestinationId(newDestination.DestinationId)
+                        .FirstOrDefault(x => x.TagId == tag.TagId);
+                    if (destinationTag != null)
+                    {
+                        _destinationTagService.TDelete(destinationTag.DestinationTagId);
+                    }
+                }
+            }
             // 7. Geri dönüş
             return RedirectToAction("Index");
         }
@@ -180,7 +225,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         public async Task<IActionResult> UpdateDestination(int id)
         {
             var value = _destinationService.TGetById(id);
-        
+
             var guideList = await _userManager.GetUsersInRoleAsync("Guide");
             var matchGuideList = _destinationMatchGuideService.TGetGuideAllByDestinationId(id);
             List<DestinationUpdateDto.DestinationGuide> destinationMatchGuideViewModels = new List<DestinationUpdateDto.DestinationGuide>();
@@ -193,9 +238,25 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                 model.GuideImageUrl = item.ImageUrl;
                 model.GuideExist = matchGuideList.Select(x => x.GuideId).Contains(item.Id);
                 destinationMatchGuideViewModels.Add(model);
-            }            
+            }
+
+            var tagList = _tagService.TGetListAll();
+            var matchTagList = _destinationTagService.TGetTagsAllByDestinationId(id);
+            List<DestinationUpdateDto.DestinationTag> destinationMatchTagViewModels = new List<DestinationUpdateDto.DestinationTag>();
+
+            foreach (var item in tagList)
+            {
+                DestinationUpdateDto.DestinationTag model2 = new DestinationUpdateDto.DestinationTag();
+                model2.TagId = item.TagId;
+                model2.DestinationId = id;
+                model2.TagName = item.TagName;
+                model2.TagExist = matchTagList.Select(x => x.TagId).Contains(item.TagId);
+                destinationMatchTagViewModels.Add(model2);
+            }
+
             var map = _mapper.Map<DestinationUpdateDto>(value);
             map.GuideMatchList = destinationMatchGuideViewModels;
+            map.TagMatchList = destinationMatchTagViewModels;
             return View(map);
         }
         [HttpPost]
@@ -288,6 +349,37 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                     if (destinationMatchGuide != null)
                     {
                         _destinationMatchGuideService.TDelete(destinationMatchGuide.DestinationMatchGuideId);
+                    }
+                }
+            }
+
+            var destinationMathTagFind = _destinationTagService.TGetTagsAllByDestinationId(destinationUpdateDto.DestinationId);
+
+            foreach (var tag in destinationUpdateDto.TagMatchList)
+            {
+                if (tag.TagExist)
+                {
+                    var existingRecord = _destinationTagService.TGetTagsAllByDestinationId(tag.DestinationId)
+                        .FirstOrDefault(x => x.TagId == tag.TagId);
+
+                    if (existingRecord == null)
+                    {
+                        // Eğer böyle bir kayıt yoksa ekleme yap
+                        var dmtList = new DestinationTag
+                        {
+                            TagId = tag.TagId,
+                            DestinationId = tag.DestinationId
+                        };
+                        _destinationTagService.TInsert(dmtList);
+                    }
+                }
+                else
+                {
+                    // Rehber seçimi kaldırılmışsa, eşleşmeyi sil
+                    var destinationTagGuide = destinationMathTagFind.FirstOrDefault(x => x.TagId == tag.TagId && x.DestinationId == tag.DestinationId);
+                    if (destinationTagGuide != null)
+                    {
+                        _destinationTagService.TDelete(destinationTagGuide.DestinationTagId);
                     }
                 }
             }

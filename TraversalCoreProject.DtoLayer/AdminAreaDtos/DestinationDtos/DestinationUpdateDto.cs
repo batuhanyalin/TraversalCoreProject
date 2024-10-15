@@ -31,6 +31,7 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
         public IFormFile ImageUpload { get; set; }
         public IFormFile CoverImageUpload { get; set; }
         public List<DestinationGuide> GuideMatchList { get; set; }
+        public List<DestinationTag> TagMatchList { get; set; }
 
         public class DestinationGuide
         {
@@ -40,7 +41,13 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
             public string GuideImageUrl { get; set; }
             public bool GuideExist { get; set; }
         }
+        public class DestinationTag
+        {
+            public int TagId { get; set; }
+            public string TagName { get; set; }
+            public int DestinationId { get; set; }
+            public bool TagExist { get; set; }
 
-
+        }
     }
 }

@@ -31,6 +31,11 @@ namespace TraversalCoreProject.Mapping
             CreateMap<Destination,PopularDestinationListDto>().ReverseMap();
             CreateMap<Destination,FeaturePostListDto>().ReverseMap();
             CreateMap<Destination,DestinationCreateDto>().ReverseMap();
+
+            CreateMap<Destination, DestinationUpdateDto>().ForMember(dest => dest.TagMatchList, opt => opt.MapFrom(src => src.DestinationTags.FirstOrDefault())).ReverseMap();
+
+            CreateMap<TraversalCoreProject.EntityLayer.Concrete.Tag, DestinationUpdateDto.DestinationTag>().ReverseMap();
+
             CreateMap<Destination,DestinationUpdateDto>().ForMember(dest => dest.GuideMatchList, opt => opt.MapFrom(src => src.DestinationMatchGuides.FirstOrDefault())).ReverseMap();
 
             CreateMap<AppUser, DestinationUpdateDto.DestinationGuide>().ReverseMap();

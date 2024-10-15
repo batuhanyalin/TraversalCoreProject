@@ -119,12 +119,12 @@
             <div class="col-md-12">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <label class="form-label">Tur Rehberleri</label>
+                        <h5>Tur Rehberleri</h5>
                         <div class="row">
 
                             @for (int i = 0; i < Model.GuideMatchList.Count; i++)
                             {
-                                <div class="col">
+                                <div class="col col-md-1">
                                     <div class="form-check">
                                         <input type="hidden" name="GuideMatchList[@i].DestinationId" value="@Model.GuideMatchList[i].DestinationId" />
                                         <input type="hidden" name="GuideMatchList[@i].GuideId" value="@Model.GuideMatchList[i].GuideId" />
@@ -133,6 +133,26 @@
                                         </a>
                                         <input type="checkbox" name="GuideMatchList[@i].GuideExist" class="form-check-input" value="true" @(Model.GuideMatchList[i].GuideExist ? "checked" : "") />
                                         <label class="form-check-label">@Model.GuideMatchList[i].GuideName</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5>Etiketler</h5>
+                        <div class="row">
+                            @for (int x = 0; x < Model.TagMatchList.Count; x++)
+                            {
+                                <div class="col col-md-1">
+                                    <div class="form-check">
+                                        <input type="hidden" name="TagMatchList[@x].DestinationId" value="@Model.TagMatchList[x].DestinationId" />
+                                        <input type="hidden" name="TagMatchList[@x].TagId" value="@Model.TagMatchList[x].TagId" />
+                                        <input type="checkbox" name="TagMatchList[@x].TagExist" class="form-check-input" value="true" @(Model.TagMatchList[x].TagExist ? "checked" : "") />
+                                        <label class="form-check-label">@Model.TagMatchList[x].TagName</label>
                                     </div>
                                 </div>
                             }
