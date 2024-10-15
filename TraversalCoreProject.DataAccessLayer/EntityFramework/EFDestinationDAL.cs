@@ -14,6 +14,12 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
     public class EFDestinationDAL : GenericRepository<Destination>, IDestinationDAL
     {
         TraversalContext context = new TraversalContext();
+
+        public List<Destination> GetAllDestinationByApproved()
+        {
+            var values = context.Destinations.Where(x=>x.Status==true).Include(x => x.DestinationMatchGuides).Include(x => x.Comments).Include(x => x.DestinationTags).ToList();
+            return values;
+        }
         public List<Destination> GetFeaturePosts()
         {
             var values = context.Destinations.Where(x => x.IsFeaturePost == true).ToList();

@@ -38,6 +38,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _newsletterDAL.Insert(entity);
         }
 
+        public void TMultiUpdate(List<Newsletter> t)
+        {
+            _newsletterDAL.MultiUpdate(t);  
+        }
+
         public void TUpdate(Newsletter entity)
         {
             _newsletterDAL.Update(entity);

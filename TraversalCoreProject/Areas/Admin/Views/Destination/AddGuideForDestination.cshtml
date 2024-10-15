@@ -1,0 +1,36 @@
+﻿@model List<DestinationMatchGuideViewModel>
+@{
+    ViewData["Title"] = "AddGuideForDestination";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="/Admin/Destination/Index">Turlar</a> /</span> Tur Güncelleme</h4>
+        <div class="row">
+            <h5 class="card-header">Tur Detayları </h5>
+            <!-- Form controls -->
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input type="hidden" asp-for="@Model[i].GuideId" />
+                                    <img height="70px" width="60px" src="@Model[i].GuideImageUrl" />
+                                    <input type="checkbox" asp-for="@Model[i].GuideExist" class="form-check-input" />
+                                    <label class="form-check-label" for="@Model[i].GuideExist">@Model[i].GuideName</label>
+                                </div>                                                
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr />
+                <button class="btn btn-success">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</form>

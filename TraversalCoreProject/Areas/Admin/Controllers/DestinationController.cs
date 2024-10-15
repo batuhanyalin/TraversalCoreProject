@@ -8,6 +8,10 @@ using TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
 using TraversalCoreProject.EntityLayer.Concrete;
 using Newtonsoft.Json;
+using TraversalCoreProject.Areas.Admin.Models;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using TraversalCoreProject.BusinessLayer.Abstract.AbstractUow;
+using DocumentFormat.OpenXml.Presentation;
 
 namespace TraversalCoreProject.Areas.Admin.Controllers
 {
@@ -36,6 +40,49 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("AddGuideForDestination")]
+        [HttpPost]
+        public async Task<IActionResult> AddGuideForDestination(List<DestinationMatchGuideViewModel> model)
+        {
+            var destinationId = TempData["destinationMatchId"];
+            var destinationMatchGuideFind = _destinationMatchGuideService.TGetGuideAllByDestinationId(Convert.ToInt32(destinationId));
+            var destination = _destinationService.TGetById(Convert.ToInt32(destinationId));
+            foreach (var item in model)
+            {
+                if (item.GuideExist)
+                {
+                    var existingRecord = _destinationMatchGuideService.TGetGuideAllByDestinationId(item.DestinationId)
+.FirstOrDefault(x => x.GuideId == item.GuideId);
+
+                    if (existingRecord == null)
+                    {
+                        // Eğer böyle bir kayıt yoksa ekleme yap
+
+                        var dmgList = new DestinationMatchGuide();
+                        {
+                            dmgList.GuideId = item.GuideId;
+                            dmgList.DestinationId = item.DestinationId;
+                        };
+                        _destinationMatchGuideService.TInsert(dmgList);
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else
+                {
+                    var destinationMatchGuide = destinationMatchGuideFind.FirstOrDefault(x => x.GuideId == item.GuideId && x.DestinationId == item.DestinationId);
+                    if (destinationMatchGuide != null)
+                    {
+                        _destinationMatchGuideService.TDelete(destinationMatchGuide.DestinationMatchGuideId);
+                    }
+                }
+
+            }
+            return RedirectToAction("Index");
+        }
+
         [Route("Index")]
         public async Task<IActionResult> Index()
         {
@@ -45,14 +92,35 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         }
         [HttpGet]
         [Route("CreateDestination")]
-        public IActionResult CreateDestination()
+        public async Task<IActionResult> CreateDestination()
         {
-            return View();
+            // 1. DestinationCreateDto Nesnesi Başlatılıyor
+            var destinationCreateDto = new DestinationCreateDto();
+            destinationCreateDto.GuideMatchList = new List<DestinationCreateDto.DestinationGuide>();
+
+            // 2. Rehber Listesi Getiriliyor
+            var guideList = await _userManager.GetUsersInRoleAsync("Guide");
+
+            // 3. Rehber Bilgileri GuideMatchList Listesine Ekleniyor
+            foreach (var item in guideList)
+            {
+                var model = new DestinationCreateDto.DestinationGuide
+                {
+                    GuideId = item.Id,
+                    GuideName = item.Name + " " + item.Surname,
+                    GuideImageUrl = item.ImageUrl,
+                    GuideExist = false,
+                };
+                destinationCreateDto.GuideMatchList.Add(model);
+            }
+            // 4. DestinationCreateDto Nesnesi View'a Gönderiliyor
+            return View(destinationCreateDto);
         }
         [HttpPost]
         [Route("CreateDestination")]
         public async Task<IActionResult> CreateDestination(DestinationCreateDto destinationCreateDto, IFormFile ImageUpload, IFormFile CoverImageUpload)
         {
+            // 1. Model Validasyonu
             var validator = new DestinationCreateValidator().Validate(destinationCreateDto);
             if (!validator.IsValid)
             {
@@ -62,6 +130,8 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                 }
                 return View(destinationCreateDto);
             }
+
+            // 2. Resimlerin Yüklenmesi
             if (ImageUpload != null && ImageUpload.Length > 0)
             {
                 var source = Directory.GetCurrentDirectory();
@@ -73,8 +143,8 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                     await ImageUpload.CopyToAsync(stream);
                 }
                 destinationCreateDto.ImageUrl = $"/images/destinations/{imageName}";
-
             }
+
             if (CoverImageUpload != null && CoverImageUpload.Length > 0)
             {
                 var source2 = Directory.GetCurrentDirectory();
@@ -88,18 +158,59 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                 destinationCreateDto.CoverImage = $"/images/destinations/{imageName2}";
             }
 
-            if (ImageUpload == null)
+            // 3. Resim yoksa varsayılan resim ayarları
+            if (destinationCreateDto.ImageUrl == null)
             {
                 destinationCreateDto.ImageUrl = $"/images/no-image.jpg";
             }
-            if (CoverImageUpload == null)
+            if (destinationCreateDto.CoverImage == null)
             {
                 destinationCreateDto.CoverImage = $"/images/no-image.jpg";
             }
+
+            // 4. Yeni Destinasyonun Eklenmesi
             var map = _mapper.Map<Destination>(destinationCreateDto);
             _destinationService.TInsert(map);
+
+            // 5. Yeni Eklenen Destinasyonun Alınması
+            var newDestination = _destinationService.TGetById(map.DestinationId);
+
+            // 6. Rehberlerin Eklenmesi veya Silinmesi
+            foreach (var guide in destinationCreateDto.GuideMatchList)
+            {
+                if (guide.GuideExist)
+                {
+                    var existingRecord = _destinationMatchGuideService.TGetGuideAllByDestinationId(newDestination.DestinationId)
+                        .FirstOrDefault(x => x.GuideId == guide.GuideId);
+
+                    if (existingRecord == null)
+                    {
+                        // Eğer böyle bir kayıt yoksa ekleme yap
+                        var dmgList = new DestinationMatchGuide
+                        {
+                            GuideId = guide.GuideId,
+                            DestinationId = newDestination.DestinationId // Yeni Destinasyon Id kullanılıyor
+                        };
+                        _destinationMatchGuideService.TInsert(dmgList);
+                    }
+                }
+                else
+                {
+                    // Rehber seçimi kaldırılmışsa, eşleşmeyi sil
+                    var destinationMatchGuide = _destinationMatchGuideService.TGetGuideAllByDestinationId(newDestination.DestinationId)
+                        .FirstOrDefault(x => x.GuideId == guide.GuideId);
+                    if (destinationMatchGuide != null)
+                    {
+                        _destinationMatchGuideService.TDelete(destinationMatchGuide.DestinationMatchGuideId);
+                    }
+                }
+            }
+
+            // 7. Geri dönüş
             return RedirectToAction("Index");
         }
+
+
         [Route("DeleteDestination/{id:int}")]
         [HttpPost]
         public IActionResult DeleteDestination(int id)
@@ -111,12 +222,23 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateDestination(int id)
         {
-            var guideList = await _userManager.GetUsersInRoleAsync("Guide");
-            var tagList = _tagService.TGetListAll();
-            var matchGuideList = _destinationMatchGuideService.TGetGuideAllByDestinationId(id);
-
             var value = _destinationService.TGetById(id);
+        
+            var guideList = await _userManager.GetUsersInRoleAsync("Guide");
+            var matchGuideList = _destinationMatchGuideService.TGetGuideAllByDestinationId(id);
+            List<DestinationUpdateDto.DestinationGuide> destinationMatchGuideViewModels = new List<DestinationUpdateDto.DestinationGuide>();
+            foreach (var item in guideList)
+            {
+                DestinationUpdateDto.DestinationGuide model = new DestinationUpdateDto.DestinationGuide();
+                model.GuideId = item.Id;
+                model.DestinationId = id;
+                model.GuideName = item.Name + " " + item.Surname;
+                model.GuideImageUrl = item.ImageUrl;
+                model.GuideExist = matchGuideList.Select(x => x.GuideId).Contains(item.Id);
+                destinationMatchGuideViewModels.Add(model);
+            }            
             var map = _mapper.Map<DestinationUpdateDto>(value);
+            map.GuideMatchList = destinationMatchGuideViewModels;
             return View(map);
         }
         [HttpPost]
@@ -181,6 +303,39 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             thisDestination.Detail = destinationUpdateDto.Detail;
             thisDestination.Price = destinationUpdateDto.Price;
             _destinationService.TUpdate(thisDestination);
+
+            var destinationMatchGuideFind = _destinationMatchGuideService.TGetGuideAllByDestinationId(destinationUpdateDto.DestinationId);
+
+            foreach (var guide in destinationUpdateDto.GuideMatchList)
+            {
+                if (guide.GuideExist)
+                {
+                    var existingRecord = _destinationMatchGuideService.TGetGuideAllByDestinationId(guide.DestinationId)
+                        .FirstOrDefault(x => x.GuideId == guide.GuideId);
+
+                    if (existingRecord == null)
+                    {
+                        // Eğer böyle bir kayıt yoksa ekleme yap
+                        var dmgList = new DestinationMatchGuide
+                        {
+                            GuideId = guide.GuideId,
+                            DestinationId = guide.DestinationId
+                        };
+                        _destinationMatchGuideService.TInsert(dmgList);
+                    }
+                }
+                else
+                {
+                    // Rehber seçimi kaldırılmışsa, eşleşmeyi sil
+                    var destinationMatchGuide = destinationMatchGuideFind.FirstOrDefault(x => x.GuideId == guide.GuideId && x.DestinationId == guide.DestinationId);
+                    if (destinationMatchGuide != null)
+                    {
+                        _destinationMatchGuideService.TDelete(destinationMatchGuide.DestinationMatchGuideId);
+                    }
+                }
+            }
+
+            // 4. Geri dönüş
             return RedirectToAction("Index");
         }
     }

@@ -23,6 +23,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _destinationDAL.Delete(id);
         }
 
+        public List<Destination> TGetAllDestinationByApproved()
+        {
+            return _destinationDAL.GetAllDestinationByApproved();
+        }
+
         public List<DestinationTag> TGetAllDestinationByTagId(int id)
         {
            return _destinationDAL.GetAllDestinationByTagId(id);
@@ -56,6 +61,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
         public Destination TIsApprovedByDestinationId(int id)
         {
             return _destinationDAL.IsApprovedByDestinationId(id);
+        }
+
+        public void TMultiUpdate(List<Destination> t)
+        {
+            _destinationDAL.MultiUpdate(t); 
         }
 
         public void TUpdate(Destination entity)

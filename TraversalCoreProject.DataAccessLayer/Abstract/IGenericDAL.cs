@@ -14,6 +14,7 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
         void Delete(int id);
         T GetById(int id);
         List<T> GetListAll();
+        void MultiUpdate(List<T> t);
         //List<T> GetListByFilter(Expression<Func<T, bool>> filter);
     }
 }

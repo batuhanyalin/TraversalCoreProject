@@ -5,7 +5,7 @@
     int count = 0;
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Turlar</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> Turlar <a class="btn btn-success" href="/Admin/Destination/CreateDestination"><i class="fas fa-circle-plus"></i> Yeni Tur</a></h4>
     <div class="card">
         <h5 class="card-header">Tur Listesi</h5>
         <div class="table-responsive text-nowrap" id="destinationList">
@@ -31,7 +31,7 @@
                         count++;
                         <tr>
                             <td>@count</td>
-                            <td><a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.ImageUrl" style="height:50px;width:auto;border-radius:10%;" /></a></td>
+                            <td><a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.ImageUrl" style="height:50px;width:40px;border-radius:10%;" /></a></td>
                             <td>@item.Country</td>
                             <td>@item.City</td>
                             <td>@item.DayNight</td>

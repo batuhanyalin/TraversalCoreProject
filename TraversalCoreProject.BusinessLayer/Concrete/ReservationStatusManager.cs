@@ -38,6 +38,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _reservationStatusDAL.Insert(entity);
         }
 
+        public void TMultiUpdate(List<ReservationStatus> t)
+        {
+            _reservationStatusDAL.MultiUpdate(t);
+        }
+
         public void TUpdate(ReservationStatus entity)
         {
             _reservationStatusDAL.Update(entity);

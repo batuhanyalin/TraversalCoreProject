@@ -48,6 +48,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _guideDAL.IsApprovedByUserId(id);
         }
 
+        public void TMultiUpdate(List<AppUser> t)
+        {
+            _guideDAL.MultiUpdate(t);
+        }
+
         public void TUpdate(AppUser entity)
         {
           _guideDAL.Update(entity);

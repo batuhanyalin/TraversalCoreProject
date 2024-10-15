@@ -25,7 +25,7 @@ namespace TraversalCoreProject.Controllers
 
         public IActionResult Index()
         {
-            var values = _destinationService.TGetListAll();
+            var values = _destinationService.TGetAllDestinationByApproved();
             var map = _mapper.Map<List<DestinationListDto>>(values);
             return View(map);
         }

@@ -15,6 +15,7 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
         void TDelete(int id);
         T TGetById(int id);
         List<T> TGetListAll();
+        void TMultiUpdate(List<T> t);
         //List<T> TGetListByFilter(Expression<Func<T, bool>> filter); //Filtreyle listeleme işlemi yapacak.
     }
 }

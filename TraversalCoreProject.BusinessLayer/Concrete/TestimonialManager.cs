@@ -38,6 +38,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _testimonialDAL.Insert(entity);
         }
 
+        public void TMultiUpdate(List<Testimonial> t)
+        {
+            _testimonialDAL.MultiUpdate(t);
+        }
+
         public void TUpdate(Testimonial entity)
         {
             _testimonialDAL.Update(entity);

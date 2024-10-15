@@ -29,5 +29,14 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
         public List<DestinationMatchGuide> DestinationMatchGuides { get; set; }
         public IFormFile ImageUpload { get; set; }
         public IFormFile CoverImageUpload { get; set; }
+        public List<DestinationGuide> GuideMatchList { get; set; }
+        public class DestinationGuide
+        {
+            public int GuideId { get; set; }
+            public int DestinationId { get; set; }
+            public string GuideName { get; set; }
+            public string GuideImageUrl { get; set; }
+            public bool GuideExist { get; set; }
+        }
     }
 }

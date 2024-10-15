@@ -58,6 +58,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _commentDAL.IsApprovedByCommentId(id);
         }
 
+        public void TMultiUpdate(List<Comment> t)
+        {
+           _commentDAL.MultiUpdate(t);
+        }
+
         public void TUpdate(Comment entity)
         {
             _commentDAL.Update(entity);

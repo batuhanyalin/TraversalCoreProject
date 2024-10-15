@@ -38,6 +38,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _contactPageDAL.Insert(entity);
         }
 
+        public void TMultiUpdate(List<ContactPage> t)
+        {
+            _contactPageDAL.MultiUpdate(t);
+        }
+
         public void TUpdate(ContactPage entity)
         {
             _contactPageDAL.Update(entity);

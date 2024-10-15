@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using DocumentFormat.OpenXml.Presentation;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.AnnouncementDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.ContactDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.MemberDtos;
+using TraversalCoreProject.DtoLayer.AdminAreaDtos.NewsletterDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.ProfileDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.ReservationDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.RoleDtos;
@@ -29,10 +31,12 @@ namespace TraversalCoreProject.Mapping
             CreateMap<Destination,PopularDestinationListDto>().ReverseMap();
             CreateMap<Destination,FeaturePostListDto>().ReverseMap();
             CreateMap<Destination,DestinationCreateDto>().ReverseMap();
-            CreateMap<Destination,DestinationUpdateDto>().ReverseMap();
+            CreateMap<Destination,DestinationUpdateDto>().ForMember(dest => dest.GuideMatchList, opt => opt.MapFrom(src => src.DestinationMatchGuides.FirstOrDefault())).ReverseMap();
 
-            CreateMap<Comment,CommentCreateDto>().ReverseMap();
-            CreateMap<Comment,CommentListDto>().ReverseMap();
+            CreateMap<AppUser, DestinationUpdateDto.DestinationGuide>().ReverseMap();
+
+            CreateMap<TraversalCoreProject.EntityLayer.Concrete.Comment,CommentCreateDto>().ReverseMap();
+            CreateMap<TraversalCoreProject.EntityLayer.Concrete.Comment,CommentListDto>().ReverseMap();
 
             CreateMap<IndexBanner,IndexBannerShowDto>().ReverseMap();
 
@@ -48,6 +52,7 @@ namespace TraversalCoreProject.Mapping
             CreateMap<AppUser, MemberCreateDto>().ReverseMap();
 
             CreateMap<Newsletter,NewsletterSubscribeDto>().ReverseMap();
+            CreateMap<Newsletter, NewsletterListDto>().ReverseMap();
             CreateMap<SocialMedia,SocialMediaDtos>().ReverseMap();
 
             CreateMap<Testimonial,TestimonialListDto>().ReverseMap();

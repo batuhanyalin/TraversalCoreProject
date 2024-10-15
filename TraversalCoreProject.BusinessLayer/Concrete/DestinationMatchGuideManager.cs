@@ -48,6 +48,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
            _destinationMatchGuideDAL.Insert(entity);
         }
 
+        public void TMultiUpdate(List<DestinationMatchGuide> t)
+        {
+           _destinationMatchGuideDAL.MultiUpdate(t);
+        }
+
         public void TUpdate(DestinationMatchGuide entity)
         {
             _destinationMatchGuideDAL.Update(entity);

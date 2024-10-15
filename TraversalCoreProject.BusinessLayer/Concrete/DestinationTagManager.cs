@@ -43,6 +43,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _destinationTagDAL.Insert(entity);
         }
 
+        public void TMultiUpdate(List<DestinationTag> t)
+        {
+            _destinationTagDAL.MultiUpdate(t);
+        }
+
         public void TUpdate(DestinationTag entity)
         {
             _destinationTagDAL.Update(entity);

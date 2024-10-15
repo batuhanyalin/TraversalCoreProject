@@ -34,6 +34,11 @@ namespace TraversalCoreProject.DataAccessLayer.Repositories
             context.SaveChanges();
         }
 
+        public void MultiUpdate(List<T> t)
+        {
+            context.UpdateRange(t);
+        }
+
         public void Update(T entity)
         {
             context.Set<T>().Update(entity);

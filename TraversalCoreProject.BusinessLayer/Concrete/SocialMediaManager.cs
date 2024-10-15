@@ -38,6 +38,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _socialMediaDAL.Insert(entity);
         }
 
+        public void TMultiUpdate(List<SocialMedia> t)
+        {
+            _socialMediaDAL.MultiUpdate(t);
+        }
+
         public void TUpdate(SocialMedia entity)
         {
             _socialMediaDAL.Update(entity);
