@@ -40,49 +40,6 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        [Route("AddGuideForDestination")]
-        [HttpPost]
-        public async Task<IActionResult> AddGuideForDestination(List<DestinationMatchGuideViewModel> model)
-        {
-            var destinationId = TempData["destinationMatchId"];
-            var destinationMatchGuideFind = _destinationMatchGuideService.TGetGuideAllByDestinationId(Convert.ToInt32(destinationId));
-            var destination = _destinationService.TGetById(Convert.ToInt32(destinationId));
-            foreach (var item in model)
-            {
-                if (item.GuideExist)
-                {
-                    var existingRecord = _destinationMatchGuideService.TGetGuideAllByDestinationId(item.DestinationId)
-.FirstOrDefault(x => x.GuideId == item.GuideId);
-
-                    if (existingRecord == null)
-                    {
-                        // Eğer böyle bir kayıt yoksa ekleme yap
-
-                        var dmgList = new DestinationMatchGuide();
-                        {
-                            dmgList.GuideId = item.GuideId;
-                            dmgList.DestinationId = item.DestinationId;
-                        };
-                        _destinationMatchGuideService.TInsert(dmgList);
-                    }
-                    else
-                    {
-
-                    }
-                }
-                else
-                {
-                    var destinationMatchGuide = destinationMatchGuideFind.FirstOrDefault(x => x.GuideId == item.GuideId && x.DestinationId == item.DestinationId);
-                    if (destinationMatchGuide != null)
-                    {
-                        _destinationMatchGuideService.TDelete(destinationMatchGuide.DestinationMatchGuideId);
-                    }
-                }
-
-            }
-            return RedirectToAction("Index");
-        }
-
         [Route("Index")]
         public async Task<IActionResult> Index()
         {
