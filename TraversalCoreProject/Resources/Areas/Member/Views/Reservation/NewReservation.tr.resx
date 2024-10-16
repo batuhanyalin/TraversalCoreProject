@@ -117,40 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Aktif Rezervasyonlar" xml:space="preserve">
-    <value>Current Reservations</value>
+  <data name="Açıklama" xml:space="preserve">
+    <value>Açıklama</value>
   </data>
-  <data name="Bekleyen Rezervasyonlar" xml:space="preserve">
-    <value>Pending reservations</value>
+  <data name="Bilgi" xml:space="preserve">
+    <value>Bilgi</value>
   </data>
-  <data name="Bildirimler" xml:space="preserve">
-    <value>Notifications</value>
+  <data name="Kişi Sayısı" xml:space="preserve">
+    <value>Kişi Sayısı</value>
   </data>
-  <data name="Geçmiş Rezervasyonlar" xml:space="preserve">
-    <value>Old Reservations</value>
-  </data>
-  <data name="Hesap" xml:space="preserve">
-    <value>Account</value>
-  </data>
-  <data name="Profilim" xml:space="preserve">
-    <value>My Profile</value>
+  <data name="Rezervasyon Oluştur" xml:space="preserve">
+    <value>Rezervasyon Oluştur</value>
   </data>
   <data name="Rezervasyon Yap" xml:space="preserve">
-    <value>Make A Reservation</value>
+    <value>Rezervasyon Yap</value>
   </data>
-  <data name="Rezervasyonlar" xml:space="preserve">
-    <value>Reservations</value>
+  <data name="Rezervasyonunuz başlangıçta onay bekliyor şeklinde alınacaktır. Rezervasyon onaylanma süreci için güncel rezervasyonlarım menüsünü takip etmeyi unutmayın." xml:space="preserve">
+    <value>Rezervasyonunuz başlangıçta onay bekliyor şeklinde alınacaktır. Rezervasyon onaylanma süreci için güncel rezervasyonlarım menüsünü takip etmeyi unutmayın.</value>
   </data>
-  <data name="Siteye Git" xml:space="preserve">
-    <value>Go to Site</value>
-  </data>
-  <data name="Turlar" xml:space="preserve">
-    <value>Tours</value>
-  </data>
-  <data name="Yorumlarım" xml:space="preserve">
-    <value>My Comments</value>
-  </data>
-  <data name="Çıkış Yap" xml:space="preserve">
-    <value>Log Out</value>
+  <data name="Tur Seçin" xml:space="preserve">
+    <value>Tur Seçin</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿@model List<MemberListMyReservationDto>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
     ViewData["Title"] = "MyOldReservation";
     Layout = "~/Areas/Member/Views/Shared/_UIMemberLayout.cshtml";
@@ -9,7 +10,7 @@
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
-                <h6>Geçmiş Rezervasyonlarım</h6>
+                <h6>@localizer["Geçmiş Rezervasyonlar"]</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -17,13 +18,13 @@
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Görsel</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Yer</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Süre/Tarih</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Güncel Kapasite/Kişi Sayısı</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rezervasyon Tarihi</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fiyat</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detaylar</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@localizer["Görsel"]</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">@localizer["Yer"]</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@localizer["Süre/Tarih"]</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@localizer["Güncel Kapasite/Kişi Sayısı"]</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@localizer["Rezervasyon Tarihi"]</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@localizer["Fiyat"]</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@localizer["Detaylar"]</th>
                             </tr>
                         </thead>
                         <tbody>

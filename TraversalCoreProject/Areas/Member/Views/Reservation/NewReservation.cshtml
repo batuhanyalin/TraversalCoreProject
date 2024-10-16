@@ -1,4 +1,5 @@
 ﻿@model AdminNewReservationDto
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
     ViewData["Title"] = "NewReservation";
     Layout = "~/Areas/Member/Views/Shared/_UIMemberLayout.cshtml";
@@ -8,12 +9,12 @@
     <div class="modal-dialog">
         <div style="background-color:gold;color:white" class="modal-content">
             <div class="modal-header">
-                <i style="font-size:xxx-large" class="far fa-question-circle"></i> <h1 class="modal-title">Bilgi</h1>
+                <i style="font-size:xxx-large" class="far fa-question-circle"></i> <h1 class="modal-title">@localizer["Bilgi"]</h1>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div>
-                        <span style="color:dimgray;font-weight:bold">Rezervasyonunuz başlangıçta onay bekliyor şeklinde alınacaktır. Rezervasyon onaylanma süreci için güncel rezervasyonlarım menüsünü takip etmeyi unutmayın</span>
+                        <span style="color:dimgray;font-weight:bold">@localizer["Rezervasyonunuz başlangıçta onay bekliyor şeklinde alınacaktır. Rezervasyon onaylanma süreci için güncel rezervasyonlarım menüsünü takip etmeyi unutmayın."]</span>
                     </div>
                 </div>
             </div>
@@ -26,30 +27,30 @@
         <div class="col-md-12 mt-4">
             <div class="card">
                 <div class="card-header pb-0 px-3">
-                    <h4 class="mb-0">Rezervasyon Oluştur</h4>
+                    <h4 class="mb-0">@localizer["Rezervasyon Oluştur"]</h4>
                 </div>
                 <div class="card-body pt-4 p-3">
                     <div class="form-group">
                         <div class="col">
-                            <label class="form-text">Tur Seçin</label>
+                            <label class="form-text">@localizer["Tur Seçin"]</label>
                             @Html.DropDownListFor(x => x.DestinationId, (List<SelectListItem>)ViewBag.destinationList, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col">
-                            <label class="form-text">Kişi Sayısı</label>
+                            <label class="form-text">@localizer["Kişi Sayısı"]</label>
                             <input class="form-control" type="number" asp-for="PersonCount" />
                             <span style="color:darkred;font-size:smaller" asp-validation-for="PersonCount"></span>
                             <span style="color:darkred;font-size:smaller" asp-validation-for="validationCode"></span>
                         </div>
                         <div class="col">
-                            <label class="form-text">Açıklama</label>
+                            <label class="form-text">@localizer["Açıklama"]</label>
                             <textarea class="form-control" type="text" asp-for="Description"></textarea>
                             <span style="color:darkred;font-size:smaller" asp-validation-for="Description"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-success">Rezervasyon Oluştur</button>
+                        <button class="btn btn-success">@localizer["Rezervasyon Yap"]</button>
                     </div>
                 </div>
             </div>

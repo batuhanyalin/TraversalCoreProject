@@ -1,57 +1,71 @@
-﻿<li class="nav-item dropdown pe-2 d-flex align-items-center">
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+<li class="nav-item dropdown pe-2 d-flex align-items-center">
     <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa fa-flag cursor-pointer"></i> Dil Seç
     </a>
     <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
         <li class="mb-2">
-            <a class="dropdown-item border-radius-md" href="javascript:;">
+            <a class="dropdown-item border-radius-md" href="?culture=tr">
                 <div class="d-flex py-1">
                     <div class="my-auto">
                         <img src="~/images/flags/turkey.png" class="avatar avatar-sm  me-3 ">
                     </div>
                     <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                            <span class="font-weight-bold">Türkçe</span>
-                        </h6>
+                        <h4 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">@localizer["Türkçe"]</span>
+                        </h4>
                     </div>
                 </div>
             </a>
             <hr />
-            <a class="dropdown-item border-radius-md" href="javascript:;">
-                <div class="d-flex py-1">
-                    <div class="my-auto">
-                        <img src="~/images/flags/germany.png" class="avatar avatar-sm  me-3 ">
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                            <span class="font-weight-bold">Almanca</span>
-                        </h6>
-                    </div>
-                </div>
-            </a>
-            <hr />
-            <a class="dropdown-item border-radius-md" href="javascript:;">
-                <div class="d-flex py-1">
-                    <div class="my-auto">
-                        <img src="~/images/flags/france.png" class="avatar avatar-sm  me-3 ">
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                            <span class="font-weight-bold">Fransızca</span>
-                        </h6>
-                    </div>
-                </div>
-            </a>
-            <hr />
-            <a class="dropdown-item border-radius-md" href="javascript:;">
+            <a class="dropdown-item border-radius-md" href="?culture=en">
                 <div class="d-flex py-1">
                     <div class="my-auto">
                         <img src="~/images/flags/united-kingdom.png" class="avatar avatar-sm  me-3 ">
                     </div>
                     <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                            <span class="font-weight-bold">İngilizce</span>
-                        </h6>
+                        <h4 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">@localizer["İngilizce"]</span>
+                        </h4>
+                    </div>
+                </div>
+            </a>
+            <hr />
+            <a class="dropdown-item border-radius-md" href="?culture=fr">
+                <div class="d-flex py-1">
+                    <div class="my-auto">
+                        <img src="~/images/flags/france.png" class="avatar avatar-sm  me-3 ">
+                    </div>
+                    <div class="d-flex flex-column justify-content-center">
+                        <h4 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">@localizer["Fransızca"]</span>
+                        </h4>
+                    </div>
+                </div>
+            </a>
+            <hr />
+            <a class="dropdown-item border-radius-md" href="?culture=de">
+                <div class="d-flex py-1">
+                    <div class="my-auto">
+                        <img src="~/images/flags/germany.png" class="avatar avatar-sm  me-3 ">
+                    </div>
+                    <div class="d-flex flex-column justify-content-center">
+                        <h4 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">@localizer["Almanca"]</span>
+                        </h4>
+                    </div>
+                </div>
+            </a>
+            <hr />
+            <a class="dropdown-item border-radius-md" href="?culture=es">
+                <div class="d-flex py-1">
+                    <div class="my-auto">
+                        <img src="~/images/flags/spain.png" class="avatar avatar-sm  me-3 ">
+                    </div>
+                    <div class="d-flex flex-column justify-content-center">
+                        <h4 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">@localizer["İspanyolca"]</span>
+                        </h4>
                     </div>
                 </div>
             </a>
