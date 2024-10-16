@@ -120,4 +120,7 @@
   <data name="Merhaba" xml:space="preserve">
     <value>Merhaba</value>
   </data>
+  <data name="İletişim" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
 </root>

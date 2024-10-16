@@ -1,4 +1,5 @@
-﻿<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html" target="_blank">
@@ -20,7 +21,7 @@
                 <a class="nav-link  " href="/Member/Destination/Index">
                     <div class="fas fa-map-marked-alt icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     </div>
-                    <span class="nav-link-text ms-1">Rotalar</span>
+                    <span class="nav-link-text ms-1">@localizer["Rotalar"]</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -34,7 +35,7 @@
                 <a class="nav-link  " href="~/soft-ui-dashboard/pages/virtual-reality.html">
                     <div class="fas fa-comments icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     </div>
-                    <span class="nav-link-text ms-1">Yorumlar</span>
+                    <span class="nav-link-text ms-1">@localizer["Yorumlarım"]</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -58,21 +59,21 @@
                 <a class="nav-link  " href="/Member/Reservation/MyCurrentReservation">
                     <div class="fas fa-plane icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     </div>
-                    <span class="nav-link-text ms-1">Aktif Rezervasyonlarım</span>
+                    <span class="nav-link-text ms-1">@localizer["Aktif Rezervasyon"]</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link  " href="/Member/Reservation/MyApprovalReservation">
                     <div class="far fa-hand-paper icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     </div>
-                    <span class="nav-link-text ms-1">Bekleyen Rezervasyonlarım</span>
+                    <span class="nav-link-text ms-1">Bekleyen Rezervasyon</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link  " href="/Member/Reservation/MyOldReservation">
                     <div class="fas fa-plane-arrival icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     </div>
-                    <span class="nav-link-text ms-1">Geçmiş Rezervasyonlarım</span>
+                    <span class="nav-link-text ms-1">Geçmiş Rezervasyon</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
@@ -82,7 +83,7 @@
                 <a class="nav-link  " href="~/Member/Profile/Index">
                     <div class="fas fa-user icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     </div>
-                    <span class="nav-link-text ms-1">Profilim</span>
+                    <span class="nav-link-text ms-1">@localizer["Profilim"]</span>
                 </a>
             </li>
             <li class="nav-item">
