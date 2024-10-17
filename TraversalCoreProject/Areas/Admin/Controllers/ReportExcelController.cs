@@ -12,6 +12,7 @@ namespace TraversalCoreProject.Areas.Controllers
     [AllowAnonymous]
     [Area("Admin")]
     [Route("Admin/[controller]")]
+    [Authorize(Roles = "Admin")]
     public class ReportExcelController : Controller
     {
         TraversalContext context = new TraversalContext();

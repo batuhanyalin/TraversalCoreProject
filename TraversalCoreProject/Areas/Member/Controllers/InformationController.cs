@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TraversalCoreProject.Areas.Member.Controllers
 {
     [Area("Member")]
     [Route("Member/[controller]")]
+    [Authorize(Roles = "Guide,Member")]
     public class InformationController : Controller
     {
         [Route("Index")]

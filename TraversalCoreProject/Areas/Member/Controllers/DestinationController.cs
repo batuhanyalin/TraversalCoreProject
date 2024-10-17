@@ -11,6 +11,7 @@ namespace TraversalCoreProject.Areas.Member.Controllers
 {
     [Area("Member")]
     [Route("Member/[controller]")]
+    [Authorize(Roles = "Guide,Member")]
     public class DestinationController : Controller
     {
         private readonly IDestinationService _destinationService;

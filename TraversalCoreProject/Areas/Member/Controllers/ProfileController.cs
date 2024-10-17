@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TraversalCoreProject.BusinessLayer.ValidationRules;
@@ -10,6 +11,7 @@ namespace TraversalCoreProject.Areas.Member.Controllers
 {
     [Area("Member")]
     [Route("Member/[controller]")]
+    [Authorize(Roles = "Guide,Member")]
     public class ProfileController : Controller
     {
         private readonly UserManager<AppUser> _userManager;

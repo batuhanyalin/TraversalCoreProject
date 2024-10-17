@@ -12,11 +12,13 @@ using TraversalCoreProject.Areas.Admin.Models;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using TraversalCoreProject.BusinessLayer.Abstract.AbstractUow;
 using DocumentFormat.OpenXml.Presentation;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TraversalCoreProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/[controller]")]
+    [Authorize(Roles = "Admin")]
     public class DestinationController : Controller
     {
         private readonly ITagService _tagService;

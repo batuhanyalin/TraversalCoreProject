@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TraversalCoreProject.CQRS.Commands.ContactCommands;
 using TraversalCoreProject.CQRS.Queries.ContactQueries;
@@ -8,6 +9,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/[controller]")]
+    [Authorize(Roles = "Admin")]
     public class MediatRContactController : Controller
     {
         private readonly IMediator _mediator;

@@ -9,6 +9,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
     [AllowAnonymous]
     [Area("Admin")]
     [Route("Admin/[controller]")]
+    [Authorize(Roles = "Admin")]
     public class VisitorApiController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory; //CORS consume edebilmek için field oluşturuyoruz.
