@@ -7,6 +7,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/[controller]")]
+    []
     public class AboutController : Controller
     {
         private readonly IAboutService _aboutService;

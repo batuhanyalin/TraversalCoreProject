@@ -27,7 +27,27 @@ namespace TraversalCoreProject.Areas.Member.Controllers
             var values = _destinationService.TGetAllDestinationWithAllInfo();
             var map = _mapper.Map<List<DestinationListDto>>(values);
             return View(map);
-        }      
+        }
+        //Arama Metodu
+        [Route("GetCitiesSearchByName")]
+        public IActionResult GetCitiesSearchByName(string searchString)
+        {
+            ViewData["CurrentFilter"]=searchString;
+            var values = from x in _destinationService.TGetListAll() select x;
+            if (searchString==null)
+            {
+               return RedirectToAction("Index");
+            }
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var lowerSearchString = searchString.ToLower();
+                values = values.Where(x => x.City.ToLower().Contains(lowerSearchString) ||
+                              x.Country.ToLower().Contains(lowerSearchString));
+            }
+            var map = _mapper.Map<List<DestinationListDto>>(values.ToList());
+            return View(map);
+        }
     }
 }
+
 

@@ -118,54 +118,63 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Aktif Rezervasyonlar" xml:space="preserve">
-    <value>Reservas actuales</value>
+    <value>Current Reservations</value>
   </data>
   <data name="Aktif Rezervasyonunuz Bulunmamaktadır." xml:space="preserve">
-    <value>No tienes una reserva activa.</value>
+    <value>You do not have an active reservation.</value>
   </data>
   <data name="Bekleyen Rezervasyonlar" xml:space="preserve">
-    <value>Reservas pendientes</value>
+    <value>Pending reservations</value>
   </data>
   <data name="Bekleyen Rezervasyonunuz Bulunmamaktadır." xml:space="preserve">
-    <value>No tienes reservas pendientes.</value>
+    <value>You have no pending reservations.</value>
   </data>
   <data name="Detaylar" xml:space="preserve">
-    <value>Detalles</value>
+    <value>Details</value>
   </data>
   <data name="Fiyat" xml:space="preserve">
-    <value>Precio</value>
+    <value>Price</value>
   </data>
   <data name="Gece" xml:space="preserve">
-    <value>Noche</value>
+    <value>Night</value>
   </data>
   <data name="Geçmiş Rezervasyonlar" xml:space="preserve">
-    <value>Reservas anteriores</value>
+    <value>Old Reservations</value>
   </data>
   <data name="Görsel" xml:space="preserve">
-    <value>Imagen</value>
+    <value>Image</value>
   </data>
   <data name="Gün" xml:space="preserve">
-    <value>Día</value>
+    <value>Day</value>
   </data>
   <data name="Güncel Kapasite/Kişi Sayısı" xml:space="preserve">
-    <value>Capacidad actual/Número de personas</value>
+    <value>Current Capacity/Number of People</value>
   </data>
   <data name="Güncel Turlar" xml:space="preserve">
-    <value>Tours actuales</value>
+    <value>Current Tours</value>
   </data>
   <data name="Kapasite" xml:space="preserve">
-    <value>Capacidad</value>
+    <value>Capacity</value>
+  </data>
+  <data name="Lütfen Aranacak Şehri Giriniz" xml:space="preserve">
+    <value>Please enter the city to search</value>
   </data>
   <data name="Rezervasyon Tarihi" xml:space="preserve">
-    <value>Fecha de reserva</value>
+    <value>Reservation Date</value>
   </data>
   <data name="Süre/Tarih" xml:space="preserve">
-    <value>Duración/Fecha</value>
+    <value>Duration/Date</value>
+  </data>
+  <data name="Tur Rotası Arama Sayfası" xml:space="preserve">
+    <value>Tour Route Search Page</value>
   </data>
   <data name="Yer" xml:space="preserve">
-    <value>Lugar</value>
+    <value>Place</value>
+  </data>
+  <data name="İlgili Sonuçlar" xml:space="preserve">
+    <value>Related Results</value>
   </data>
   <data name="Şehir Ara" xml:space="preserve">
-    <value>Buscar ciudad</value>
+    <value>Search City</value>
   </data>
 </root>

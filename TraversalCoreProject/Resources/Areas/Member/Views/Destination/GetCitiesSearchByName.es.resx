@@ -156,14 +156,23 @@
   <data name="Kapasite" xml:space="preserve">
     <value>Capacidad</value>
   </data>
+  <data name="Lütfen Aranacak Şehri Giriniz" xml:space="preserve">
+    <value>Ingrese la ciudad para buscar</value>
+  </data>
   <data name="Rezervasyon Tarihi" xml:space="preserve">
     <value>Fecha de reserva</value>
   </data>
   <data name="Süre/Tarih" xml:space="preserve">
     <value>Duración/Fecha</value>
   </data>
+  <data name="Tur Rotası Arama Sayfası" xml:space="preserve">
+    <value>Página de búsqueda de ruta del tour</value>
+  </data>
   <data name="Yer" xml:space="preserve">
     <value>Lugar</value>
+  </data>
+  <data name="İlgili Sonuçlar" xml:space="preserve">
+    <value>Resultados relacionados</value>
   </data>
   <data name="Şehir Ara" xml:space="preserve">
     <value>Buscar ciudad</value>

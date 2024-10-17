@@ -1,7 +1,7 @@
 ﻿@model List<DestinationListDto>
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "GetCitiesSearchByName";
     Layout = "~/Areas/Member/Views/Shared/_UIMemberLayout.cshtml";
     int count = 0;
 }
@@ -10,7 +10,7 @@
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
-                <h6>@localizer["Güncel Turlar"]</h6>
+                <h6>@ViewData["CurrentFilter"] ile @localizer["İlgili Sonuçlar"]</h6>
                 <form method="get" asp-action="GetCitiesSearchByName" asp-area="Member">
                     <div class="row">
                         <div class="col col-md-2">
@@ -43,7 +43,7 @@
                             {
                                 count++;
                                 <tr>
-                               
+
                                     <td>@count</td>
                                     <td>
                                         <div class="d-flex px-2 py-1">
@@ -58,7 +58,7 @@
                                             <p class="text-xs text-secondary mb-0">@item.City</p>
                                         </div>
                                     </td>
-                                    <td class ="align-middle text-center">
+                                    <td class="align-middle text-center">
                                         <p class="text-xs font-weight-bold mb-0">@item.DayNight</p>
                                         <p class="text-xs text-secondary mb-0">@item.StartDate.ToString("dd.MM.yyy")</p>
                                     </td>

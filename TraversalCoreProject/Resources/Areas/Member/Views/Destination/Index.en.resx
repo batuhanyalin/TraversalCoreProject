@@ -165,4 +165,7 @@
   <data name="Yer" xml:space="preserve">
     <value>Place</value>
   </data>
+  <data name="Şehir Ara" xml:space="preserve">
+    <value>Search City</value>
+  </data>
 </root>
