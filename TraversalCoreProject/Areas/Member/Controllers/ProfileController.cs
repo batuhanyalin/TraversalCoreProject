@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TraversalCoreProject.BusinessLayer.ValidationRules;
 using TraversalCoreProject.DtoLayer.MemberAreaDtos.ProfileDtos;
+using TraversalCoreProject.DtoLayer.RegisterDtos;
 using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.Areas.Member.Controllers
@@ -34,11 +35,11 @@ namespace TraversalCoreProject.Areas.Member.Controllers
         public async Task<IActionResult> Index(MyProfileUpdateDto myProfileUpdateDto, IFormFile Image)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var validator = new MemberProfileUpdateValidator().Validate(myProfileUpdateDto);
-            if (!validator.IsValid)
+            var validation = new MemberProfileUpdateValidator().Validate(myProfileUpdateDto);
+            if (!validation.IsValid)
             {
                 myProfileUpdateDto.ImageUrl = user.ImageUrl;
-                foreach (var error in validator.Errors)
+                foreach (var error in validation.Errors)
                 {
                     ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                 }

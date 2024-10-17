@@ -1,4 +1,5 @@
-﻿@model MyProfileUpdateDto
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@model MyProfileUpdateDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Member/Views/Shared/_UIMemberLayout.cshtml";
@@ -8,29 +9,29 @@
         <div class="col-md-6 mt-4">
             <div class="card">
                 <div class="card-header pb-0 px-3">
-                    <h6 class="mb-0">Profilim</h6>
+                    <h6 class="mb-0">@localizer["Profilim"]</h6>
                 </div>
                 <div class="card-body pt-4 p-3">
                     <input type="hidden" asp-for="Id" />
                     <div class="form-group row">
                         <div class="col">
-                            <label class="form-text">Kullanıcı Adı</label>
+                            <label class="form-text">@localizer["Kullanıcı Adı"]</label>
                             <input class="form-control" type="text" readonly asp-for="UserName" />
                         </div>
                         <div class="col">
-                            <label class="form-text">Parola</label>
-                            <input class="form-control" type="text" placeholder="Parolanızı değiştirmek istemezseniz boş bırakın." asp-for="Password" />
+                            <label class="form-text">@localizer["Parola"]</label>
+                            <input class="form-control" type="text" style="font-size:x-small" placeholder="@localizer["Parolanızı değiştirmek istemezseniz boş bırakın."]" asp-for="Password" />
                         </div>
 
                     </div>
                     <div class="form-group row">
                         <div class="col">
-                            <label class="form-text">Ad</label>
+                            <label class="form-text">@localizer["Ad"]</label>
                             <input class="form-control" type="text" asp-for="Name" />
-                            <span style="color:darkred;font-size:smaller" asp-validation-for="Name"></span>
+                            <span asp-validation-for="Name" style="color:darkred;font-size:smaller"></span>
                         </div>
                         <div class="col">
-                            <label class="form-text">Soyadı</label>
+                            <label class="form-text">@localizer["Soyad"]</label>
                             <input class="form-control" type="text" asp-for="Surname" />
                             <span style="color:darkred;font-size:smaller" asp-validation-for="Surname"></span>
                         </div>
@@ -38,23 +39,23 @@
                     </div>
                     <div class="form-group row">
                         <div class="col">
-                            <label class="form-text">E-posta</label>
+                            <label class="form-text">@localizer["E-posta"]</label>
                             <input class="form-control" type="e" asp-for="Email" />
                             <span style="color:darkred;font-size:smaller" asp-validation-for="Email"></span>
                         </div>
                         <div class="col">
-                            <label class="form-text">Telefon</label>
+                            <label class="form-text">@localizer["Telefon"]</label>
                             <input class="form-control" type="text" asp-for="Phone" />
                             <span style="color:darkred;font-size:smaller" asp-validation-for="Phone"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-text">Meslek</label>
+                        <label class="form-text">@localizer["Meslek"]</label>
                         <input class="form-control" type="text" asp-for="Profession" />
                         <span style="color:darkred;font-size:smaller" asp-validation-for="Profession"></span>
                     </div>
                     <div class="form-group">
-                        <label class="form-text">Hakkında</label>
+                        <label class="form-text">@localizer["Hakkında"]</label>
                         <textarea class="form-control" asp-for="About"></textarea>
                         <span style="color:darkred;font-size:smaller" asp-validation-for="About"></span>
                     </div>
@@ -66,7 +67,7 @@
                 <div class="card-header pb-0 px-3">
                     <div class="row">
                         <div class="col-md-6">
-                            <h6 class="mb-0">Güncel Görsel</h6>
+                            <h6 class="mb-0">@localizer["Güncel Görsel"]</h6>
                             <br />
                         </div>
                         <div class="form-group row">
@@ -74,19 +75,19 @@
                                 <img height="150" width="110" src="@Model.ImageUrl" />
                             </div>
                             <div class="col">
-                                <label class="form-text">Görseli Değiştir</label>
+                                <label class="form-text">@localizer["Görseli Değiştir"]</label>
                                 <input type="file" class="form-control" name="Image">
                             </div>
                         </div>
                         <hr />
                         <div class="form-group row">
                             <div class="col">
-                                <label class="form-text">Ana Dil</label>
+                                <label class="form-text">@localizer["Ana Dil"]</label>
                                 <input class="form-control" type="text" asp-for="MainLanguage" />
                                 <span style="color:darkred;font-size:smaller" asp-validation-for="MainLanguage"></span>
                             </div>
                             <div class="col">
-                                <label class="form-text">Diğer Diller</label>
+                                <label class="form-text">@localizer["Diğer Diller"]</label>
                                 <input class="form-control" type="text" asp-for="OtherLanguage" />
                                 <span style="color:darkred;font-size:smaller" asp-validation-for="OtherLanguage"></span>
                             </div>
@@ -105,18 +106,18 @@
                         </div>
                         <div class="form-group row">
                             <div class="col">
-                                <label class="form-text">Doğum Yeri</label>
+                                <label class="form-text">@localizer["Doğum Yeri"]</label>
                                 <input class="form-control" type="text" asp-for="HomeTown" />
                                 <span style="color:darkred;font-size:smaller" asp-validation-for="HomeTown"></span>
                             </div>
                             <div class="col">
-                                <label class="form-text">Doğum Tarihi</label>
+                                <label class="form-text">@localizer["Doğum Tarihi"]</label>
                                 <input class="form-control" type="date" asp-for="Birtday" />
                                 <span style="color:darkred;font-size:smaller" asp-validation-for="Birtday"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-success">Bilgileri Güncelle</button>
+                            <button class="btn btn-success">@localizer["Bilgileri Güncelle"]</button>
                         </div>
                     </div>
                 </div>

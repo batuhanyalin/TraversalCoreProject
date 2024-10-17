@@ -1,6 +1,7 @@
-﻿@model List<DestinationMatchGuide>
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@model List<DestinationMatchGuide>
 <div class="d-flex align-items-center justify-content-between">
-    <a href="/Destination/DestinationDetail/@ViewBag.destinationId" class="btn btn-outline-primary btn-sm mb-0">Tur Detayları</a>
+    <a href="/Destination/DestinationDetail/@ViewBag.destinationId" class="btn btn-outline-primary btn-sm mb-0">@localizer["Tur Detayları"]</a>
     <div class="avatar-group mt-2">
         @foreach (var item in Model)
         {

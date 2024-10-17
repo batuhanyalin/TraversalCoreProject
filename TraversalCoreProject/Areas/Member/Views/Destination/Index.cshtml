@@ -1,4 +1,5 @@
 ﻿@model List<DestinationListDto>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Member/Views/Shared/_UIMemberLayout.cshtml";
@@ -9,7 +10,7 @@
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
-                <h6>Güncel Turlar</h6>
+                <h6>@localizer["Güncel Turlar"]</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -17,12 +18,12 @@
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Görsel</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Yer</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Süre/Tarih</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kapasite</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fiyat</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detaylar</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@localizer["Görsel"]</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">@localizer["Yer"]</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@localizer["Süre/Tarih"]</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@localizer["Kapasite"]</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@localizer["Fiyat"]</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@localizer["Detaylar"]</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,11 +32,11 @@
                                 count++;
                                 <tr>
                                
-                                    <td>@item.DestinationId</td>
+                                    <td>@count</td>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="@item.ImageUrl" class="avatar avatar-sm me-3" alt="user1">
+                                                <img src="@item.ImageUrl" class="avatar avatar-sm me-3">
                                             </div>
                                         </div>
                                     </td>

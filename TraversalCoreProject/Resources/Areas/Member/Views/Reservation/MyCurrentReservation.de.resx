@@ -129,8 +129,14 @@
   <data name="Fiyat" xml:space="preserve">
     <value>Preis</value>
   </data>
+  <data name="Gece" xml:space="preserve">
+    <value>Nacht</value>
+  </data>
   <data name="Görsel" xml:space="preserve">
     <value>Bild</value>
+  </data>
+  <data name="Gün" xml:space="preserve">
+    <value>Tag</value>
   </data>
   <data name="Güncel Kapasite/Kişi Sayısı" xml:space="preserve">
     <value>Aktuelle Kapazität/Personenzahl</value>

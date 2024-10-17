@@ -120,6 +120,9 @@
   <data name="Almanca" xml:space="preserve">
     <value>Allemand</value>
   </data>
+  <data name="Dil" xml:space="preserve">
+    <value>Langue</value>
+  </data>
   <data name="Fransızca" xml:space="preserve">
     <value>Français</value>
   </data>

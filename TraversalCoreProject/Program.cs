@@ -1,5 +1,6 @@
 using FluentValidation.AspNetCore;
 using MediatR;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -18,6 +19,7 @@ using TraversalCoreProject.DataAccessLayer.Context;
 using TraversalCoreProject.DataAccessLayer.EntityFramework;
 using TraversalCoreProject.DataAccessLayer.UnitOfWork;
 using TraversalCoreProject.EntityLayer.Concrete;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient(); //CORS için ekleniyor.
@@ -27,6 +29,7 @@ builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<validatorFinder>()); //Burada fluentvalidationý sisteme tanýmlýyoruz. Burada validator olarak oluþturduðum sýnýflarý bulabilmesi için validationFinder sýnýfýný Business katmaný içinde oluþturup burada tanýmlýyorum.
+
 builder.Services.AddScoped<IAboutDAL, EFAboutDAL>();
 builder.Services.AddScoped<IIndexBannerDAL, EFIndexBannerDAL>();
 builder.Services.AddScoped<IContactDAL, EFContactDAL>();

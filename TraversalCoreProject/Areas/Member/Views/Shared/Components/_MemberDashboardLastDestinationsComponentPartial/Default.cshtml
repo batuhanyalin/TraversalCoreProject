@@ -1,9 +1,10 @@
-﻿@model List<DestinationListDto>
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@model List<DestinationListDto>
 <div class="col-12 mt-4">
     <div class="card mb-4">
         <div class="card-header pb-0 p-3">
-            <h6 class="mb-1">Son Rotalar</h6>
-            <p class="text-sm">Traversal Şirketinin En Son Eklenen Seyahat Rotaları</p>
+            <h6 class="mb-1">@localizer["Son Rotalar"]</h6>
+            <p class="text-sm">@localizer["Traversal Şirketinin En Son Eklenen Seyahat Rotaları"]</p>
         </div>
         <div class="card-body p-3">
             <div class="row">
