@@ -1,0 +1,100 @@
+﻿@model List<SocialMediaListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+    int count = 0;
+}
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="/Admin/Dashboard/Index">Anasayfa</a> /</span> Sosyal Medyalar</h4>
+    <div class="card">
+        <h5 class="card-header">Sosyal Medya Listesi</h5>
+        <div class="table-responsive text-nowrap" id="socialMediaList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Sosyal Medya</th>
+                        <th>Logo</th>
+                        <th>LinkUrl</th>
+                        <th>Durum</th>
+                        <th>Aksiyon</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@item.Name</td>
+                            <td>@item.LogoUrl</td>
+                            <td>@item.LinkUrl</td>
+                            <td>
+                                <a href="/Admin/SocialMedia/IsApproved/@item.SocialMediaId">
+                                    @{
+                                        if (item.IsActive == true)
+                                        {
+                                            <span style="font-size:medium" class="badge bg-label-success me-1"><i class="fas fa-thumbs-up"></i></span>
+                                        }
+                                        else
+                                        {
+                                            <span style="font-size:medium" class="badge bg-label-danger me-1"><i class="fas fa-thumbs-down"></i></span>
+                                        }
+                                    }
+                                </a>
+
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a href="/Admin/SocialMedia/UpdateSocialMedia/@item.SocialMediaId" class="dropdown-item btn-updateComment"><i class="bx bx-sync me-1"></i> Güncelle</a>
+                                        <button class="dropdown-item btn-deleteSocialMedia" data-id=@item.SocialMediaId><i class="bx bx-trash me-1"></i> Sil</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $("#socialMediaList").on('click', '.btn-deleteSocialMedia', function () {
+        let socialMediaId = $(this).data('id');
+        Swal.fire({
+            title: "Sosyal Medyayı Silmek İstediğinizden Emin Misiniz?",
+            text: "Bu işlemin geri dönüşü olmayacaktır.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, sil.",
+            cancelButtonText: "İptal Et."
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "/Admin/SocialMedia/DeleteSocialMedia/" + socialMediaId,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (response) {
+                        Swal.fire({
+                            title: "İşlem Başarılı!",
+                            text: "Seçtiğiniz sosyal medya başarılı bir şekilde silindi.",
+                            icon: "success"
+                        }).then(() => {
+                            // Sayfayı yenile
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>

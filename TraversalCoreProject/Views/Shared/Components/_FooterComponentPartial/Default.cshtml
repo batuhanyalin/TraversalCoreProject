@@ -60,9 +60,9 @@
                         <h3>E-posta Bültenine Kayıt Olun </h3>
                         <div class="end-column">
                             <h4>En son güncellemeleri ve teklifleri alın.</h4>
-                            <form action="#" class="subscribe" method="post">
-                                <input type="email" name="email" placeholder="E-posta Adresiniz" required="">
-                                <button type="submit">Abone Ol</button>
+                            <form asp-action="SubscribeMail" class="subscribe" method="post">
+                                <input type="email" id="Email" name="Email" placeholder="E-posta Adresiniz" required="">
+                                <button id="btnSubscribeMail" type="submit">Abone Ol</button>
                             </form>
                             <p>En son haberlerimiz ve makalelerimiz için kaydolun. Size spam mailleri göndermeyeceğiz.</p>
                         </div>
@@ -82,7 +82,7 @@
         </div>
 
         <!-- move top -->
-        <button onclick="topFunction()" id="movetop" title="Go to top">
+        <button onclick="topFunction()" id="movetop" title="Yukarı Çık">
             <span class="fa fa-angle-up"></span>
         </button>
         <script>
@@ -112,6 +112,60 @@
                     $('body').toggleClass('noscroll');
                 })
             });
+            $("#btnSubscribeMail").click(function (e) {
+                e.preventDefault(); // Sayfanın yenilenmesini önlemek için
+                var formData = new FormData();
+                formData.append("Email", $("#Email").val());
+
+                Swal.fire({
+                    title: "Mail Aboneliği",
+                    text: "Mail Bültenimize Abone Olmak İstediğinize Emin Misiniz? (Spam mesaj atılmayacaktır)",
+                    icon: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Evet",
+                    cancelButtonText: "İptal Et."
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/Default/SubscribeMail/",
+                            contentType: false,
+                            processData: false,
+                            data: formData,
+                            success: function (response) {
+                                // Eğer işlem başarılı ise:
+                                if (response.success) {
+                                    Swal.fire({
+                                        title: "İşlem Başarılı!",
+                                        text: "Mail bültenimize başarılı bir şekilde abone oldunuz. Lütfen mailinizi kontrol edin. ",
+                                        icon: "success"
+                                    }).then(() => {
+                                        // Sayfayı yenile
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: "Hata!",
+                                        text: response.message, // Controller'dan gelen hata mesajı
+                                        icon: "error"
+                                    });
+                                }
+                            },
+                            error: function () {
+                                Swal.fire({
+                                    title: "Beklenmeyen Hata!",
+                                    text: "Bir hata oluştu, lütfen tekrar deneyin.",
+                                    icon: "error"
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+
         </script>
     </section>
     <!-- //footer -->

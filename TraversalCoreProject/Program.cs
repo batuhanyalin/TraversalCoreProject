@@ -24,7 +24,7 @@ using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient(); //CORS için ekleniyor.
 builder.Services.AddDbContext<TraversalContext>();
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<TraversalContext>().AddErrorDescriber<CustomIdentityValidator>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider).AddEntityFrameworkStores<TraversalContext>().AddErrorDescriber<CustomIdentityValidator>().AddEntityFrameworkStores<TraversalContext>(); //Þifremi unuttum mu kýsmý için Token iþlemi
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 // Add services to the container.
@@ -149,7 +149,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Login}/{action=Index}/{id?}");
+    pattern: "{controller=Default}/{action=Index}/{id?}");
 
 app.Run();
 

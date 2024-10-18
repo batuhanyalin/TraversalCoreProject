@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TraversalCoreProject.BusinessLayer.Abstract;
+using TraversalCoreProject.DtoLayer.AdminAreaDtos.SocialMediaDtos;
 
 namespace TraversalCoreProject.Areas.Admin.Controllers
 {
@@ -8,9 +11,20 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class SocialMediaController : Controller
     {
+        private readonly ISocialMediaService _socialMediaService;
+        private readonly IMapper _mapper;
+        public SocialMediaController(ISocialMediaService socialMediaService, IMapper mapper)
+        {
+            _socialMediaService = socialMediaService;
+            _mapper = mapper;
+        }
+
+        [Route("Index")]
         public IActionResult Index()
         {
-            return View();
+            var values= _socialMediaService.TGetListAll();
+            var map = _mapper.Map<List<SocialMediaListDto>>(values);
+            return View(map);
         }
     }
 }

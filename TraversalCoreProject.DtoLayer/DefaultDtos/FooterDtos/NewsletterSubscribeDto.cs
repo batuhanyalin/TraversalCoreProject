@@ -8,7 +8,6 @@ namespace TraversalCoreProject.DtoLayer.DefaultDtos.FooterDtos
 {
     public class NewsletterSubscribeDto
     {
-        public int NewsletterId { get; set; }
         public string Email { get; set; }
     }
 }
