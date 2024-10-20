@@ -9,5 +9,6 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
 {
     public interface ISocialMediaDAL : IGenericDAL<SocialMedia>
     {
+        public SocialMedia IsApprovedBySocialMediaId(int id);
     }
 }

@@ -32,8 +32,8 @@
                         <tr>
                             <td>@count</td>
                             <td><a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.ImageUrl" style="height:50px;width:40px;border-radius:10%;" /></a></td>
-                            <td>@item.Country</td>
-                            <td>@item.City</td>
+                            <td>@item.City.Country.CountryName</td>
+                            <td>@item.City.CityName</td>
                             <td>@item.DayNight</td>
                             <td>@item.Capacity</td>
                             <td>

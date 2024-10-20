@@ -11,8 +11,8 @@ namespace TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos
     public class DestinationListDto
     {
         public int DestinationId { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
+        public int CityId { get; set; }
+        public City City { get; set; }
         public string DayNight { get; set; }
         public DateTime StartDate { get; set; }
         public double Price { get; set; }

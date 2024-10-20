@@ -38,6 +38,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _socialMediaDAL.Insert(entity);
         }
 
+        public SocialMedia TIsApprovedBySocialMediaId(int id)
+        {
+           return _socialMediaDAL.IsApprovedBySocialMediaId(id);
+        }
+
         public void TMultiUpdate(List<SocialMedia> t)
         {
             _socialMediaDAL.MultiUpdate(t);

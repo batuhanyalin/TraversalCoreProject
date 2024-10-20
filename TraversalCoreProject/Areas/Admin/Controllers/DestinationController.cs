@@ -312,8 +312,8 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             }
 
             thisDestination.Capacity = destinationUpdateDto.Capacity;
-            thisDestination.Country = destinationUpdateDto.Country;
-            thisDestination.City = destinationUpdateDto.City;
+            //thisDestination.Country = destinationUpdateDto.Country;
+            thisDestination.CityId = destinationUpdateDto.CityId;
             thisDestination.DayNight = destinationUpdateDto.DayNight;
             thisDestination.Description = destinationUpdateDto.Description;
             thisDestination.Text1 = destinationUpdateDto.Text1;

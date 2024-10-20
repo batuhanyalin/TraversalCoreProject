@@ -17,7 +17,7 @@
 
     <!-- Title Page-->
     <title>Traversal - Yeni Üyelik Oluştur</title>
-
+    <link rel="icon" type="image/png" href="~/images/icons/register-icon.ico" />
     <!-- Icons font CSS-->
     <link href="~/colorlib-regform-4/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="~/colorlib-regform-4/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -126,8 +126,27 @@
                         </div>
                         <div class="text-danger" asp-validation-summary="ModelOnly">
                         </div>
-                        <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit">Hesap Oluştur</button>
+                        <div class="row row-space">
+                            <div class="col-1">
+                            </div>
+                            <div class="col-2 p-t-15">
+                                <button class="btn btn--radius-2 btn--blue" type="submit">Hesap Oluştur</button>
+                            </div>
+                            <div class="col-1">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row row-space">
+
+                            <div class="col-1">
+                            </div>
+                            <div class="col-2">
+                                <label>
+                                    Zaten bir hesabın var mı? <a href="/Login/Index">Giriş Yap <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i></a>
+                                </label>
+                            </div>
+                            <div class="col-1">
+                            </div>                                    
                         </div>
                     </form>
                 </div>

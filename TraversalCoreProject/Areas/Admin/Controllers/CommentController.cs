@@ -56,5 +56,13 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             _commentService.TIsApprovedByCommentId(id);
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        [Route("ReadComment/{id:int}")]
+        public async Task<IActionResult> ReadComment(int id)
+        {
+            var values = _commentService.TGetCommenById(id);
+            var map = _mapper.Map<CommentListDto>(values);
+            return View(map);
+        }
     }
 }

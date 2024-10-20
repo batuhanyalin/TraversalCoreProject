@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TraversalCoreProject.DataAccessLayer.Context;
 
@@ -11,9 +12,10 @@ using TraversalCoreProject.DataAccessLayer.Context;
 namespace TraversalCoreProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(TraversalContext))]
-    partial class TraversalContextModelSnapshot : ModelSnapshot
+    [Migration("20241020005132_mig27")]
+    partial class mig27
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -513,18 +515,10 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CountryId"), 1L, 1);
 
-                    b.Property<string>("AreaCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ContinentId")
                         .HasColumnType("int");
 
                     b.Property<string>("CountryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReWrite")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -546,8 +540,13 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CoverImage")
                         .IsRequired()
@@ -586,8 +585,6 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DestinationId");
-
-                    b.HasIndex("CityId");
 
                     b.ToTable("Destinations");
                 });
@@ -906,17 +903,6 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
                     b.Navigation("Continent");
                 });
 
-            modelBuilder.Entity("TraversalCoreProject.EntityLayer.Concrete.Destination", b =>
-                {
-                    b.HasOne("TraversalCoreProject.EntityLayer.Concrete.City", "City")
-                        .WithMany("Destinations")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("City");
-                });
-
             modelBuilder.Entity("TraversalCoreProject.EntityLayer.Concrete.DestinationMatchGuide", b =>
                 {
                     b.HasOne("TraversalCoreProject.EntityLayer.Concrete.Destination", "Destination")
@@ -989,11 +975,6 @@ namespace TraversalCoreProject.DataAccessLayer.Migrations
                     b.Navigation("DestinationMatchGuides");
 
                     b.Navigation("Reservations");
-                });
-
-            modelBuilder.Entity("TraversalCoreProject.EntityLayer.Concrete.City", b =>
-                {
-                    b.Navigation("Destinations");
                 });
 
             modelBuilder.Entity("TraversalCoreProject.EntityLayer.Concrete.Country", b =>

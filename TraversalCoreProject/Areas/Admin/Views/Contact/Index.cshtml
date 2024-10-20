@@ -15,12 +15,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Kişi</th>
-                        <th>E-posta</th>
-                        <th>Telefon</th>
-                        <th>Tarih</th>
+                        <th>Kişi</th>                                       
                         <th>Konu</th>
                         <th>Mesaj</th>
+                        <th>Tarih</th>
                         <th>Durum</th>
                         <th>Aksiyon</th>
                     </tr>
@@ -32,9 +30,6 @@
                         <tr>
                             <td>@count</td>
                             <td>@item.Name @item.Surname</td>
-                            <td>@item.Email</td>
-                            <td>@item.Phone</td>
-                            <td>@item.SendingDate</td>
                             <td>@item.Subject</td>
                             <td>
                                 @{
@@ -48,6 +43,7 @@
                                     }
                                 }...                             
                             </td>
+                            <td>@item.SendingDate.ToString("dd.MM.yyy HH:ss")</td>
                             <td>
                                 <a href="/Admin/Contact/IsApproved/@item.ContactId">
                                     @{

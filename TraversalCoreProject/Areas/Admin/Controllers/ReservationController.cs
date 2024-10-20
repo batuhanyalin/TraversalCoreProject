@@ -74,7 +74,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             List<SelectListItem> destinationListItem = (from x in destin.ToList()
                                                         select new SelectListItem
                                                         {
-                                                            Text = $"{x.Country} - {x.City} Tarih: {x.StartDate.ToString("dd.MM.yyy")} | Fiyat: {x.Price}$ | Güncel Kapasite: {x.Capacity} ",
+                                                            Text = $" Kıta - Ülke - {x.CityId} Tarih: {x.StartDate.ToString("dd.MM.yyy")} | Fiyat: {x.Price}$ | Güncel Kapasite: {x.Capacity} ",
                                                             Value = x.DestinationId.ToString()
                                                         }).ToList();
             List<SelectListItem> memberListItem = (from x in member.ToList()
@@ -107,7 +107,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             List<SelectListItem> destinationListItem = (from x in destin.ToList()
                                                         select new SelectListItem
                                                         {
-                                                            Text = $"{x.Country} - {x.City} Tarih: {x.StartDate.ToString("dd.MM.yyy")} | Fiyat: {x.Price}$ | Güncel Kapasite: {x.Capacity} ",
+                                                            Text = $" Kıta - Ülke - {x.CityId} Tarih: {x.StartDate.ToString("dd.MM.yyy")} | Fiyat: {x.Price}$ | Güncel Kapasite: {x.Capacity} ",
                                                             Value = x.DestinationId.ToString()
                                                         }).ToList();
             ViewBag.destinationList = destinationListItem;

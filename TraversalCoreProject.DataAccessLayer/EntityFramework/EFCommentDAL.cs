@@ -31,6 +31,11 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
             var values = context.Comments.Where(x=>x.MemberId==id).Include(x => x.Member).Include(x => x.Destination).ToList();
             return values;
         }
+        public Comment GetCommenById(int id)
+        {
+            var value = context.Comments.Where(x => x.CommentId == id).Include(x => x.Member).Include(x => x.Destination).FirstOrDefault();
+            return value;
+        }
         public Comment IsApprovedByCommentId(int id)
         {
             var value = context.Comments.Where(x => x.CommentId == id).FirstOrDefault();

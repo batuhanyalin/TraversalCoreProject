@@ -31,5 +31,8 @@ namespace TraversalCoreProject.DataAccessLayer.Context
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<ReservationStatus> ReservationStatuses { get; set; }
+        public DbSet<Continent> Continents { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<City>Cities  { get; set; }
     }
 }

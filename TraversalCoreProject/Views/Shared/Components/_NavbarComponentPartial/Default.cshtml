@@ -1,4 +1,5 @@
-﻿<header id="site-header" class="fixed-top">
+﻿@model FooterAuthenticationControllerModel
+<header id="site-header" class="fixed-top">
     <div class="container">
         <nav class="navbar navbar-expand-lg stroke">
             <h1>
@@ -41,6 +42,32 @@
                     <li class="nav-item">
                         <a href="/Register/Index" class="btn btn-style btn-secondary">Üye Ol</a>
                     </li>
+                    @{
+                        if (Model.IdentityName != null)
+                        {
+                            if (Model.Role == "Admin")
+                            {
+                                <div class="dropdown-divider"></div>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Admin/Profile/Index"><i style="font-size:larger" class="fas fa-user"></i> Profilim</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <div class="dropdown-divider"></div>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Member/Profile/Index"><i style="font-size:larger" class="fas fa-user"></i> Profilim</a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <div class="dropdown-divider"></div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Login/Index"><i style="font-size:medium" class="fas fa-user"></i> Giriş Yap</a>
+                            </li>
+                        }
+                    }
 
                 </ul>
             </div>

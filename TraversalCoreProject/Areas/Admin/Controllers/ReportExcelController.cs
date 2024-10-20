@@ -34,10 +34,10 @@ namespace TraversalCoreProject.Areas.Controllers
             List<DestinationReportModel> destinationReportModels = new List<DestinationReportModel>();
             destinationReportModels = context.Destinations.Select(x => new DestinationReportModel
             {
-                City = x.City,
+                CityId = x.CityId,
                 DayNight = x.DayNight,
                 Price = x.Price,
-                Country = x.Country,
+                //Country = x.Country,
                 Capacity = x.Capacity,
             }).ToList();
             return destinationReportModels;

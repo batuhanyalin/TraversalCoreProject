@@ -19,7 +19,7 @@ namespace TraversalCoreProject.CQRS.Handlers.DestinationHandlers
             {
                 Id = x.DestinationId,
                 Capacity = x.Capacity,
-                City = x.City,
+                CityId = x.CityId,
                 DayNight = x.DayNight,
                 Price = x.Price
             }).AsNoTracking().ToList();

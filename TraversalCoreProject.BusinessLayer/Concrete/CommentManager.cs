@@ -28,6 +28,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _commentDAL.GetById(id);
         }
 
+        public Comment TGetCommenById(int id)
+        {
+            return _commentDAL.GetCommenById(id);
+        }
+
         public List<Comment> TGetListAll()
         {
             return _commentDAL.GetListAll();

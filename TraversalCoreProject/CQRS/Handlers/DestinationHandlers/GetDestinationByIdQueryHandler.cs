@@ -17,11 +17,11 @@ namespace TraversalCoreProject.CQRS.Handlers.DestinationHandlers
             var values = _context.Destinations.Find(query.id);
             return new GetDestinationByIdQueryResult
             {
-                City = values.City,
+                CityId = values.CityId,
                 DestinationId = values.DestinationId,
                 DayNight = values.DayNight,
                 Price = values.Price,
-                Country = values.Country,
+                //Country = values.Country,
             };
         }
     }

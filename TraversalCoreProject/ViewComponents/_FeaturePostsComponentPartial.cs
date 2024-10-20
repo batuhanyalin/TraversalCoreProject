@@ -28,8 +28,8 @@ namespace TraversalCoreProject.ViewComponents
             else
             {
                 ViewBag.fpDestinationId=featurePostFirst.DestinationId;
-                ViewBag.fpCountry = featurePostFirst.Country;
-                ViewBag.fpCity = featurePostFirst.City;
+                ViewBag.fpCountry = "KITA - ÜLKE";
+                ViewBag.fpCity = featurePostFirst.CityId;
                 ViewBag.fpPrice = featurePostFirst.Price;
                 ViewBag.fpDayNight = featurePostFirst.DayNight;
                 ViewBag.fpImageUrl = featurePostFirst.ImageUrl;

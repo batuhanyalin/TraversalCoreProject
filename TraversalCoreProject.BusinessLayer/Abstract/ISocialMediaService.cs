@@ -9,5 +9,6 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
 {
     public interface ISocialMediaService:IGenericService<SocialMedia>
     {
+        public SocialMedia TIsApprovedBySocialMediaId(int id);
     }
 }

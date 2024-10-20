@@ -29,7 +29,7 @@
                         <tr>
                             <td>@count</td>
                             <td><a href="/Admin/Comment/GetCommentListByMember/@item.MemberId"><img src="@item.Member.ImageUrl" style="height:50px;width:auto;border-radius:10%;" />  @item.Member.Name @item.Member.Surname </a></td>
-                            <td><a href="/Destination/DestinationDetail/@item.DestinationId">@item.Destination.Country - @item.Destination.City</a></td>
+                            <td><a href="/Destination/DestinationDetail/@item.DestinationId">KITA - ÜLKE - @item.Destination.CityId</a></td>
                             <td>@item.Text</td>
                             <td>@item.CommentDate.ToString("dd.MM.yyy HH:MM")</td>
                             <td>
@@ -53,6 +53,8 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/Admin/Comment/ReadComment/@item.CommentId"><i style="font-size:larger" class="fab fa-readme"></i> Oku</a>
+
                                         <button class="dropdown-item btn-deleteComment" data-id=@item.CommentId><i class="bx bx-trash me-1"></i> Sil</button>
                                     </div>
                                 </div>

@@ -10,8 +10,8 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
 {
     public class DestinationCreateDto
     {
-        public string Country { get; set; }
-        public string City { get; set; }
+        public int City { get; set; }
+        //public City City { get; set; }
         public string DayNight { get; set; }
         public DateTime StartDate { get; set; }
         public double Price { get; set; }

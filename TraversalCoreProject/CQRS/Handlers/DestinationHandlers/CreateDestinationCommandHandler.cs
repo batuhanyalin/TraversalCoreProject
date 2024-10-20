@@ -17,8 +17,8 @@ namespace TraversalCoreProject.CQRS.Handlers.DestinationHandlers
             _context.Destinations.Add(new Destination
             {
                 Capacity = createDestinationCommand.Capacity,
-                City = createDestinationCommand.City,
-                Country = createDestinationCommand.Country,
+                CityId = createDestinationCommand.CityId,
+                //Country = createDestinationCommand.Country,
                 DayNight = createDestinationCommand.DayNight,
                 Price = createDestinationCommand.Price,
                 Status = true,

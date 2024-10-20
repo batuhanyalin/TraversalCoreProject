@@ -1,8 +1,55 @@
-﻿
+﻿@model ContactListDto
 @{
     ViewData["Title"] = "ReadContactMessage";
     Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
 }
 
-<h1>ReadContactMessage</h1>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="/Admin/Contact/Index">Mesajlar</a> /</span> Mesaj Okuma</h4>
+    <div class="row">
+        <h5 class="card-header">Mesaj Bilgileri </h5>
+        <!-- Form controls -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <input type="hidden" asp-for="ContactId" />
+                    <div class="mb-1">
+                        <label class="form-label">Yorum Yapan</label>
+                        <input type="text" readonly class="form-control" value="@Model.Name @Model.Surname" />
+                    </div>
+                    <div class="mb-1">
+                        <label class="form-label">Telefon</label>
+                        <input type="text" readonly class="form-control" value="@Model.Phone" />
+                    </div>
+                    <div class="mb-1">
+                        <label class="form-label">Telefon</label>
+                        <input type="text" readonly class="form-control" value="@Model.Email" />
+                    </div>
+                    <div class="mb-1">
+                        <label class="form-label">Tarih</label>
+                        <input type="text" readonly class="form-control" value="@Model.SendingDate.ToString("dd.MM.yyy HH:ss")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Konu</label>
+                        <input type="text" readonly class="form-control" value="@Model.Subject" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Yorum İçeriği</label>
+                        <textarea style="height:170px" readonly class="form-control" asp-for="Text"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="mb-3">
+            <a href="/Admin/Contact/Index" class="btn btn-primary">Geri Dön</a>
+        </div>
+    </div>
+</div>
 

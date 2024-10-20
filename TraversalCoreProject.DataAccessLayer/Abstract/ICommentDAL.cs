@@ -12,6 +12,7 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
         public List<Comment> GetListAllWithAllInfoByDestinationId(int id);
         public List<Comment> GetListCommentWithAllInfo();
         public List<Comment> GetListCommentWithAllInfoByMemberId(int id);
+        public Comment GetCommenById(int id);
         public Comment IsApprovedByCommentId(int id);
     }
 }

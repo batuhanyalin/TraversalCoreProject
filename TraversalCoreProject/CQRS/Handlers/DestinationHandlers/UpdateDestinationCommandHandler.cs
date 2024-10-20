@@ -19,8 +19,8 @@ namespace TraversalCoreProject.CQRS.Handlers.DestinationHandlers
             var values = _context.Destinations.Find(command.DestinationId);
             values.DayNight = command.DayNight;
             values.Price = command.Price;
-            values.Country = command.Country;
-            values.City = command.City;
+            //values.Country = command.Country;
+            values.CityId = command.CityId;
             _context.SaveChanges();
         }
     }

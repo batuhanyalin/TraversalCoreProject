@@ -5,6 +5,32 @@
     int count = 0;
 }
 
+<div class="modal fade" id="updateSocialMedia" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="staticBackdropLabel">Rol Güncelle</h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col col-md-6">
+                        <input type="hidden" id="SocialMediaId" />
+                        <label for="Name" class="mt-1">Sosyal Medya Adı</label>
+                        <input tabindex="0" type="text" id="Name" class="form-control mb-2" />
+                        <label for="LogoUrl" class="mt-1">Logo Url</label>
+                        <input tabindex="0" type="text" id="LogoUrl" class="form-control mb-2" />
+                        <label for="LinkUrl" class="mt-1">Link Url</label>
+                        <input tabindex="0" type="text" id="LinkUrl" class="form-control mb-2" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnUpdateSocialMediaClose" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                <button type="button" id="btnUpdateSocialMedia" class="btn btn-success">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="/Admin/Dashboard/Index">Anasayfa</a> /</span> Sosyal Medyalar</h4>
@@ -52,7 +78,7 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a href="/Admin/SocialMedia/UpdateSocialMedia/@item.SocialMediaId" class="dropdown-item btn-updateComment"><i class="bx bx-sync me-1"></i> Güncelle</a>
+                                        <button class="dropdown-item btn-updateSocialMedia" data-toggle="modal" data-target="#updateSocialMedia" data-id=@item.SocialMediaId><i class="fas fa-sync"></i> Güncelle</button>
                                         <button class="dropdown-item btn-deleteSocialMedia" data-id=@item.SocialMediaId><i class="bx bx-trash me-1"></i> Sil</button>
                                     </div>
                                 </div>
@@ -97,4 +123,72 @@
             }
         });
     });
+
+    $("#socialMediaList").on('click', '.btn-updateSocialMedia', function () {
+        let Id = $(this).data("id");
+        console.log(Id);
+        $.ajax({
+            url: "/Admin/SocialMedia/GetSocialMedia/" + Id,
+            type: "GET",
+            dataType: "json",
+            success: function (funkGetSocialMedia) {
+                let response = JSON.parse(funkGetSocialMedia);
+                console.log(response);
+                // Blgileri popup içinde doldur
+                $("#Name").val(response.Name);
+                $("#SocialMediaId").val(response.SocialMediaId);
+                $("#LogoUrl").val(response.LogoUrl);
+                $("#LinkUrl").val(response.LinkUrl);
+                // Popup'ı göster
+            },
+            error: function () {
+                Swal.fire({
+                    title: "HATA",
+                    text: "Duyuru bilgileri yüklenemedi.",
+                    icon: "warning"
+                });
+            }
+        });
+    });
+    $("#btnUpdateSocialMedia").click(function () {
+        var formData = new FormData();
+        formData.append("SocialMediaId", $("#SocialMediaId").val());
+        formData.append("Name", $("#Name").val());
+        formData.append("LogoUrl", $("#LogoUrl").val());
+        formData.append("LinkUrl", $("#LinkUrl").val());
+
+        $.ajax({
+            url: "/Admin/SocialMedia/UpdateSocialMedia/",
+            data: formData,
+            contentType: false,
+            processData: false,
+            type: "POST",
+            success: function (funkUpdateSocialMedia) {
+                if (funkUpdateSocialMedia.success) {
+                    Swal.fire({
+                        title: "Rol Güncelleme İşlemi Başarılı!",
+                        text: "Yeni rol başarıyla oluşturuldu.",
+                        icon: "success",
+                    }).then(() => {
+                        location.reload();
+                    });
+                    $("#btnUpdateSocialMediaClose").click();
+                } else {
+                    Swal.fire({
+                        title: "Hata!",
+                        text: funkUpdateSocialMedia.message,
+                        icon: "error"
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    title: "Beklenmeyen Hata!",
+                    text: "Bir hata oluştu, lütfen tekrar deneyin.",
+                    icon: "error"
+                });
+            }
+        });
+    });
+
 </script>
