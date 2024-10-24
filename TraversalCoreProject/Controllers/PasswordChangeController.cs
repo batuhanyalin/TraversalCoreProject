@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
+using TraversalCoreProject.BusinessLayer.ValidationRules;
 using TraversalCoreProject.DataAccessLayer.Context;
+using TraversalCoreProject.DtoLayer.DefaultDtos.PasswordDtos;
+using TraversalCoreProject.DtoLayer.RegisterDtos;
 using TraversalCoreProject.EntityLayer.Concrete;
 using TraversalCoreProject.Models;
 
@@ -78,21 +81,34 @@ namespace TraversalCoreProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto model)
         {
-            var userId = TempData["userId"];
-            var token = TempData["token"];
-            if (userId == null || token == null)
+            var validator = new ResetPasswordValidator().Validate(model);
+            if (!validator.IsValid)
             {
-                return Json(new { success = false,message="" });
+                foreach (var item in validator.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return Json(new { success = false, message = "Parola tekrarıyla parola aynı olmalıdır." });
             }
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            var result= await _userManager.ResetPasswordAsync(user,token.ToString(),model.Password);
-            if (result.Succeeded)
+            else
             {
-                return Json(new { success = true, message = "Yeni parola başarıyla oluşturuldu." });
+                var userId = TempData["userId"];
+                var token = TempData["token"];
+                if (userId == null || token == null)
+                {
+                    return Json(new { success = false, message = "" });
+                }
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                var result = await _userManager.ResetPasswordAsync(user, token.ToString(), model.Password);
+                if (result.Succeeded)
+                {
+                    return Json(new { success = true, message = "Yeni parola başarıyla oluşturuldu." });
+                }
+                return View();
             }
-            return View();
+
         }
 
     }

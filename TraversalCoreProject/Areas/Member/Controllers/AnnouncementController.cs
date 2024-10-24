@@ -28,6 +28,7 @@ namespace TraversalCoreProject.Areas.Member.Controllers
             var map= _mapper.Map<List<MemberAnnouncementListDto>>(values);
             return View(map);
         }
+
         [Route("AnnouncementDetail/{id:int}")]
         public IActionResult AnnouncementDetail(int id)
         {

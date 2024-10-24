@@ -1,8 +1,41 @@
-﻿
+﻿@model MemberAnnouncementListDto
 @{
     ViewData["Title"] = "AnnouncementDetail";
     Layout = "~/Areas/Member/Views/Shared/_UIMemberLayout.cshtml";
 }
 
-<h1>AnnouncementDetail</h1>
+<div class="row">
+    <div class="col-md-6 mt-4">
+        <div class="card">
+            <div class="card-header pb-0 px-3">
+                <h6 class="mb-0">Bildirim</h6>
+            </div>
+            <div class="card-body pt-4 p-3">
+                <input type="hidden" asp-for="AnnouncementId" />
+                <div class="form-group row">
+                    <div class="col col-md-8">
+                        <label class="form-text">Başlık</label>
+                        <input class="form-control" type="text" readonly asp-for="Title" />
+                    </div>
+                    <div class="col col-md-4">
+                        <label class="form-text">Tarih</label>
+                        <input class="form-control" type="text" readonly asp-for="Date" />
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group row">
+                    <div class="col">
+                        <label class="form-text">İçerik</label>
+                        <br />
+                        <span class="form-text">@Model.Content</span>            
+                    </div>
+                </div>    
+                <hr />
+                <div class="form-group">
+                    <a href="/Member/Announcement/Index" class="btn btn-success">Geri Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 

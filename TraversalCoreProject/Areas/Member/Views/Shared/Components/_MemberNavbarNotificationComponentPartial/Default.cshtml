@@ -1,12 +1,21 @@
 ﻿@model List<MemberAnnouncementListDto>
+@{
+    int count = 0;
+}
 <li class="nav-item dropdown pe-2 d-flex align-items-center">
     <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
 
         @{
-            if (Model.Count()>1)
+            if (Model.Count() < 3)
             {
                 <i class="text-success fa fa-bell cursor-pointer">
                     <span class="text-primary" style="font-size:8px">@Model.Count()</span>
+                </i>
+            }
+            else if (Model.Count() > 3)
+            {
+                <i class="text-warning fa fa-bell cursor-pointer">
+                    <span class="text-primary" style="font-size:9px">3+</span>
                 </i>
             }
             else
@@ -24,36 +33,46 @@
 
         @foreach (var item in Model)
         {
-            <li class="mb-2">
-                <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                        <div class="my-auto">
-                            <i class="avatar avatar-sm  me-3  text-primary @item.Icon" style="font-size:xx-large"></i>
+            if (count < 3)
+            {
+                count++;
+                <li class="mb-2">
+                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                        <div class="d-flex py-1">
+                            <div class="my-auto">
+                                <i class="avatar avatar-sm  me-3  text-primary @item.Icon" style="font-size:xx-large"></i>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="text-sm font-weight-normal mb-1">
+                                    <span class="font-weight-bold">@item.Title</span>
+                                </h6>
+                                <p style="font-size:small">
+                                    @{
+                                        if (item.Content?.Length > 20)
+                                        {
+                                            @item.Content.Substring(0, 20)
+                                            ;
+                                        }
+                                        else
+                                        {
+                                            @item.Content?.ToString()
+                                            ;
+                                        }
+                                    }...
+                                </p>
+                                <p class="text-xs text-secondary mb-0">
+                                    <i class="fa fa-clock me-1"></i>
+                                    @item.Date.ToString("dd.MM.yyy HH:ss")
+                                </p>
+                            </div>
                         </div>
-                        <div class="d-flex flex-column justify-content-center">
-                            <h6 class="text-sm font-weight-normal mb-1">
-                                <span class="font-weight-bold">@item.Title</span>
-                            </h6>
-                            <p style="font-size:small">
-                                @{
-                                    if (item.Content?.Length>20)
-                                    {
-                                        @item.Content.Substring(0,20);
-                                    }
-                                    else
-                                    {
-                                        @item.Content?.ToString();
-                                    }
-                                }...
-                            </p>
-                            <p class="text-xs text-secondary mb-0">
-                                <i class="fa fa-clock me-1"></i>
-                                @item.Date.ToString("dd.MM.yyy HH:ss")
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </li>
+                    </a>
+                </li>
+            }
+
         }
+        <div style="text-align:center" class="text-secondary">
+            <a href="/Member/Announcement/Index"><span style="font-size:smaller" class="text-primary">Tüm Duyuruları Görüntüle</span></a>
+        </div>
     </ul>
 </li>

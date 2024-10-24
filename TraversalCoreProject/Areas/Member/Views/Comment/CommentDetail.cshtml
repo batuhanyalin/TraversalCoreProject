@@ -1,0 +1,53 @@
+﻿@model CommentListDto
+@{
+    ViewData["Title"] = "CommentDetail";
+    Layout = "~/Areas/Member/Views/Shared/_UIMemberLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8 mt-4">
+        <div class="card">
+            <div class="card-header pb-0 px-3">
+                <h6 class="mb-0">Yorum Detayları</h6>
+            </div>
+            <div class="card-body pt-4 p-3">
+                <input type="hidden" asp-for="CommentId" />
+                <div class="form-group row">
+                    <label class="form-text">Gönderilen Tur Bilgileri</label>
+                    <div class="col col-md-3">
+                        <label class="form-text">Kıta</label>
+                        <input class="form-control" type="text" readonly value="@Model.Destination.City.Country.Continent.ContinentName" />
+                    </div>
+                    <div class="col col-md-3">
+                        <label class="form-text">Ülke</label>
+                        <input class="form-control" type="text" readonly value="@Model.Destination.City.Country.CountryName" />
+
+                    </div>
+                    <div class="col col-md-3">
+                        <label class="form-text">Şehir</label>
+                        <input class="form-control" type="text" readonly value="@Model.Destination.City.CityName" />
+
+                    </div>
+                    <div class="col col-md-3">
+                        <label class="form-text">Tarih</label>
+                        <input class="form-control" type="text" readonly value="@Model.CommentDate.ToString("dd.MM.yyy HH:ss")" />
+
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group row">
+                    <div class="col">
+                        <label class="form-text">İçerik</label>
+                        <br />
+                        <span class="form-text">@Model.Text</span>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <a href="/Member/Comment/Index" class="btn btn-success">Geri Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
