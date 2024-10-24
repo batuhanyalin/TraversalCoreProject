@@ -18,9 +18,20 @@ namespace TraversalCoreProject.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var value = _indexBannerService.TGetListAll().FirstOrDefault();
+            var value = _indexBannerService.TGetListAll().Where(x => x.IsApproved == true).OrderBy(x => x.IndexBannerId).FirstOrDefault();
             var map = _mapper.Map<IndexBannerShowDto>(value);
-            return View(map);
+            if (map != null)
+            {
+                return View(map);
+            }
+            else
+            {
+                IndexBannerShowDto nullModel= new IndexBannerShowDto();
+                nullModel.Title= string.Empty;
+                nullModel.Description= string.Empty;
+                return View(nullModel);
+            }
+          
         }
     }
 }

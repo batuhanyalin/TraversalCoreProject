@@ -15,5 +15,7 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
         public Destination TIsApprovedByDestinationId(int id);
         public List<Destination> TGetAllDestinationByApproved();
         public List<Destination> TGetLastDestinationForMemberDashboard();
+        public Destination TGetDestinationById(int id);
+        public List<Destination> TGetDestinationListById(int id);
     }
 }

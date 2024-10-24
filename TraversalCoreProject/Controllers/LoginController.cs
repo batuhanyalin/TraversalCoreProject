@@ -59,22 +59,21 @@ namespace TraversalCoreProject.Controllers
 					{
 						return RedirectToAction("Index", "Dashboard", new { area = "Member" });
 					}
-                    if (userRole.FirstOrDefault() == "Guide")
-                    {
-                        return RedirectToAction("Index", "Dashboard", new { area = "Member" });
-                    }
-                    if (userRole.FirstOrDefault() == "GuideApplication")
+					if (userRole.FirstOrDefault() == "Guide")
+					{
+						return RedirectToAction("Index", "Dashboard", new { area = "Member" });
+					}
+					if (userRole.FirstOrDefault() == "GuideApplication")
 					{
 						await _signInManager.SignOutAsync();
 						return RedirectToAction("GuideApplicationCheck", "Login");
 					}
 
-				}
-				else
-				{
-						ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı");
-				}
+				}		
+					ModelState.AddModelError("errorMessage", "Kullanıcı adı veya şifre hatalı.");
+					return View();				
 			}
+			ModelState.AddModelError("errorMessage", "Bilgileri eksiksiz ve doğru giriniz.");
 			return View();
 		}
 		public async Task<IActionResult> LogOut()

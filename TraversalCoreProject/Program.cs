@@ -46,6 +46,9 @@ builder.Services.AddScoped<ICommentDAL, EFCommentDAL>();
 builder.Services.AddScoped<IReservationDAL, EFReservationDAL>();
 builder.Services.AddScoped<IAnnouncementDAL, EFAnnouncementDAL>();
 builder.Services.AddScoped<IReservationStatusDAL, EFReservationStatusDAL>();
+builder.Services.AddScoped<ICityDAL, EFCityDAL>();
+builder.Services.AddScoped<ICountryDAL, EFCountryDAL>();
+builder.Services.AddScoped<IContinentDAL, EFContinentDAL>();
 
 builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IContactService, ContactManager>();
@@ -65,6 +68,9 @@ builder.Services.AddScoped<IExcelService, ExcelManager>();
 builder.Services.AddScoped<IPDFService, PDFManager>();
 builder.Services.AddScoped<IAnnouncementService, AnnouncementManager>();
 builder.Services.AddScoped<IReservationStatusService, ReservationStatusManager>();
+builder.Services.AddScoped<ICityService, CityManager>();
+builder.Services.AddScoped<ICountryService, CountryManager>();
+builder.Services.AddScoped<IContinentService, ContinentManager>();
 
 builder.Services.AddLocalization(opt =>
 {

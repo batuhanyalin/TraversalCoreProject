@@ -38,6 +38,11 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             _testimonialDAL.Insert(entity);
         }
 
+        public Testimonial TIsApprovedByTestimonialId(int id)
+        {
+           return _testimonialDAL.IsApprovedByTestimonialId(id);
+        }
+
         public void TMultiUpdate(List<Testimonial> t)
         {
             _testimonialDAL.MultiUpdate(t);

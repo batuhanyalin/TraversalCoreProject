@@ -30,24 +30,24 @@ namespace TraversalCoreProject.Areas.Member.Controllers
             return View(map);
         }
         //Arama Metodu
-        //[Route("GetCitiesSearchByName")]
-        //public IActionResult GetCitiesSearchByName(string searchString)
-        //{
-        //    ViewData["CurrentFilter"]=searchString;
-        //    var values = from x in _destinationService.TGetListAll() select x;
-        //    if (searchString==null)
-        //    {
-        //       return RedirectToAction("Index");
-        //    }
-        //    if (!string.IsNullOrEmpty(searchString))
-        //    {
-        //        var lowerSearchString = searchString.ToLower();
-        //        values = values.Where(x => x.City.ToLower().Contains(lowerSearchString) ||
-        //                      x.Country.ToLower().Contains(lowerSearchString));
-        //    }
-        //    var map = _mapper.Map<List<DestinationListDto>>(values.ToList());
-        //    return View(map);
-        //}
+        [Route("GetCitiesSearchByName")]
+        public IActionResult GetCitiesSearchByName(string searchString)
+        {
+            ViewData["CurrentFilter"] = searchString;
+            var values = from x in _destinationService.TGetAllDestinationWithAllInfo() select x;
+            if (searchString == null)
+            {
+                return RedirectToAction("Index");
+            }
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var lowerSearchString = searchString.ToLower();
+                values = values.Where(x => x.City.CityName.ToLower().Contains(lowerSearchString) ||
+                              x.City.Country.CountryName.ToLower().Contains(lowerSearchString));
+            }
+            var map = _mapper.Map<List<DestinationListDto>>(values.ToList());
+            return View(map);
+        }
     }
 }
 

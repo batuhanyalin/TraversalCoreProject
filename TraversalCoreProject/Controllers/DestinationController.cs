@@ -13,14 +13,16 @@ namespace TraversalCoreProject.Controllers
     public class DestinationController : Controller
     {
         private readonly IDestinationService _destinationService;
+        private readonly ITagService _tagService;
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
 
-        public DestinationController(IDestinationService destinationService, IMapper mapper, UserManager<AppUser> userManager)
+        public DestinationController(IDestinationService destinationService, IMapper mapper, UserManager<AppUser> userManager, ITagService tagService)
         {
             _destinationService = destinationService;
             _mapper = mapper;
             _userManager = userManager;
+            _tagService = tagService;
         }
 
         public IActionResult Index()
@@ -33,13 +35,15 @@ namespace TraversalCoreProject.Controllers
         {
             ViewBag.user = User.Identity.Name;
             ViewBag.id = id;
-            var value = _destinationService.TGetById(id);
+            var value = _destinationService.TGetDestinationById(id);
             var map = _mapper.Map<DestinationListDto>(value);
             return View(map);
         }
         public async Task<IActionResult> DestinationListForTag(int id)
         {
+            var tag = _tagService.TGetById (id);
             var values = _destinationService.TGetAllDestinationByTagId(id);
+            ViewBag.tagName=tag.TagName;
             return View(values);
         }
     }

@@ -8,5 +8,6 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.TagDtos
 {
     public class TagCreateDto
     {
+        public string TagName { get; set; }
     }
 }

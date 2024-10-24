@@ -29,7 +29,7 @@
                         <tr>
                             <td>@count</td>
                             <td><a href="/Admin/Comment/GetCommentListByMember/@item.MemberId"><img src="@item.Member.ImageUrl" style="height:50px;width:auto;border-radius:10%;" />  @item.Member.Name @item.Member.Surname </a></td>
-                            <td><a href="/Destination/DestinationDetail/@item.DestinationId">KITA - ÜLKE - @item.Destination.CityId</a></td>
+                            <td><a href="/Destination/DestinationDetail/@item.DestinationId">@item.Destination.City.Country.Continent.ContinentName | @item.Destination.City.Country.CountryName - @item.Destination.City.CityName</a></td>
                             <td>@item.Text</td>
                             <td>@item.CommentDate.ToString("dd.MM.yyy HH:MM")</td>
                             <td>

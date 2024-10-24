@@ -9,5 +9,6 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
 {
     public interface IIndexBannerDAL:IGenericDAL<IndexBanner>
     {
+        public IndexBanner IsApprovedByIndexBannerId(int id);
     }
 }

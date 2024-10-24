@@ -27,9 +27,9 @@
                 {
                     <div class="col-lg-4 col-md-4 col-6 mt-md-0 mt-4">
                         <divaf class="column">
-                            <a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.ImageUrl" style="height:365px;width:410px" alt="" class="img-fluid"></a>
+                            <a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.ImageUrl" style="height:365px;width:410px" alt="" class="img-fluid"> </a>
                             <div class="info">
-                                <h4><a href="blog-single.html">KITA - ÜLKE - @item.City</a></h4>
+                                    <h4><a href="/Destination/DestinationDetail/@item.DestinationId">@item.City.Country.CountryName - @item.City.CityName</a></h4>
                                 <p>@item.DayNight </p>
                                 <div class="dst-btm">
                                     <h6 class="">Fiyat: </h6>
@@ -37,6 +37,7 @@
                                     <small style="color:darkred">Kontenjan: @item.Capacity</small>
                                 </div>
                             </div>
+                           
                         </divaf>
                     </div>
                 }

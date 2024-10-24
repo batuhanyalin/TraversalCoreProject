@@ -6,7 +6,7 @@
 }
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Anasayfa /</span> @ViewBag.name Kullanıcısının Yaptığı Yorumlar </h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="/Admin/Comment/Index">Yorumlar</a> /</span> @ViewBag.name Kullanıcısının Yaptığı Yorumlar </h4>
     <div class="card">
         <h5 class="card-header"> </h5>
         <div class="table-responsive text-nowrap" id="commentListByMember">
@@ -27,7 +27,7 @@
                         count++;
                         <tr>
                             <td>@count</td>
-                            <td><a href="/Destination/DestinationDetail/@item.DestinationId">KITA - ÜLKE - @item.Destination.CityId</a></td>
+                            <td><a href="/Destination/DestinationDetail/@item.DestinationId">@item.Destination.City.Country.Continent.ContinentName | @item.Destination.City.Country.CountryName - @item.Destination.City.CityName</a></td>
                             <td>@item.Text</td>
                             <td>@item.CommentDate.ToString("dd.MM.yyy HH:MM")</td>
                             <td>
@@ -51,6 +51,7 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/Admin/Comment/ReadComment/@item.CommentId"><i style="font-size:larger" class="fab fa-readme"></i> Oku</a>
                                         <button class="dropdown-item btn-deleteComment2" data-id=@item.CommentId><i class="bx bx-trash me-1"></i> Sil</button>
                                     </div>
                                 </div>

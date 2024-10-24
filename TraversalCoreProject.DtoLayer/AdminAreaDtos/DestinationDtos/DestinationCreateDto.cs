@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
 {
     public class DestinationCreateDto
     {
-        public int City { get; set; }
-        //public City City { get; set; }
+        public int CityId { get; set; }
+        public City City { get; set; }
         public string DayNight { get; set; }
         public DateTime StartDate { get; set; }
         public double Price { get; set; }
@@ -47,6 +48,5 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
             public bool TagExist { get; set; }
 
         }
-
     }
 }

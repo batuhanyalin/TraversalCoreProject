@@ -13,6 +13,8 @@ using DocumentFormat.OpenXml.Office2010.Excel;
 using TraversalCoreProject.BusinessLayer.Abstract.AbstractUow;
 using DocumentFormat.OpenXml.Presentation;
 using Microsoft.AspNetCore.Authorization;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Destination = TraversalCoreProject.EntityLayer.Concrete.Destination;
 
 namespace TraversalCoreProject.Areas.Admin.Controllers
 {
@@ -21,6 +23,9 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class DestinationController : Controller
     {
+        private readonly ICityService _cityService;
+        private readonly ICountryService _countyService;
+        private readonly IContinentService _continentService;
         private readonly ITagService _tagService;
         private readonly IDestinationService _destinationService;
         private readonly UserManager<AppUser> _userManager;
@@ -28,7 +33,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         private readonly IMapper _mapper;
         private readonly IDestinationTagService _destinationTagService;
 
-        public DestinationController(IDestinationService destinationService, IMapper mapper, UserManager<AppUser> userManager, ITagService tagService, IDestinationMatchGuideService destinationMatchGuideService, IDestinationTagService destinationTagService)
+        public DestinationController(IDestinationService destinationService, IMapper mapper, UserManager<AppUser> userManager, ITagService tagService, IDestinationMatchGuideService destinationMatchGuideService, IDestinationTagService destinationTagService, ICityService cityService, ICountryService countyService, IContinentService continentService)
         {
             _destinationService = destinationService;
             _mapper = mapper;
@@ -36,6 +41,9 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             _tagService = tagService;
             _destinationMatchGuideService = destinationMatchGuideService;
             _destinationTagService = destinationTagService;
+            _cityService = cityService;
+            _countyService = countyService;
+            _continentService = continentService;
         }
         [Route("IsApproved/{id:int}")]
         public IActionResult IsApproved(int id)
@@ -58,6 +66,16 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             // 1. DestinationCreateDto Nesnesi Başlatılıyor
             var destinationCreateDto = new DestinationCreateDto();
             destinationCreateDto.GuideMatchList = new List<DestinationCreateDto.DestinationGuide>();
+            var city = _cityService.TGetListAll();
+            var country = _countyService.TGetListAll();
+            var continent = _continentService.TGetListAll();
+
+            ViewBag.continent = _continentService.TGetListAll().Select(c => new SelectListItem
+            {
+                Text = c.ContinentName,
+                Value = c.ContinentId.ToString()
+            }).ToList();
+
 
             // 2. Rehber Listesi Getiriliyor
             var guideList = await _userManager.GetUsersInRoleAsync("Guide");
@@ -213,8 +231,34 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             // 7. Geri dönüş
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        [Route("GetCountriesByContinent")]
+        public JsonResult GetCountriesByContinent(int continentId)
+        {
+            var countries = _countyService.TGetListAll()
+                .Where(c => c.ContinentId == continentId)
+                .Select(c => new SelectListItem
+                {
+                    Value = c.CountryId.ToString(),
+                    Text = c.CountryName
+                }).ToList();
 
+            return Json(countries);
+        }
+        [HttpGet]
+        [Route("GetCitiesByCountry")]
+        public JsonResult GetCitiesByCountry(int countryId)
+        {
+            var cities = _cityService.TGetListAll()
+                .Where(c => c.CountryId == countryId)
+                .Select(c => new SelectListItem
+                {
+                    Value = c.CityId.ToString(),
+                    Text = c.CityName
+                }).ToList();
 
+            return Json(cities);
+        }
         [Route("DeleteDestination/{id:int}")]
         [HttpPost]
         public IActionResult DeleteDestination(int id)
@@ -226,7 +270,18 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateDestination(int id)
         {
-            var value = _destinationService.TGetById(id);
+            var value = _destinationService.TGetDestinationById(id);
+
+            // Şehir, ülke ve kıta dropdown list'lerini oluştur
+            var cityList = _cityService.TGetAllCity().ToList();
+            var countryList = _countyService.TGetListAll().ToList();
+            var continentList = _continentService.TGetListAll().ToList();
+
+            ViewBag.CityList = new SelectList(cityList, "CityId", "CityName", value.CityId);
+            ViewBag.CountryList = new SelectList(countryList, "CountryId", "CountryName", value.City.CountryId);
+            ViewBag.ContinentList = new SelectList(continentList, "ContinentId", "ContinentName", value.City.Country.ContinentId);
+
+
 
             var guideList = await _userManager.GetUsersInRoleAsync("Guide");
             var matchGuideList = _destinationMatchGuideService.TGetGuideAllByDestinationId(id);
@@ -255,7 +310,6 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
                 model2.TagExist = matchTagList.Select(x => x.TagId).Contains(item.TagId);
                 destinationMatchTagViewModels.Add(model2);
             }
-
             var map = _mapper.Map<DestinationUpdateDto>(value);
             map.GuideMatchList = destinationMatchGuideViewModels;
             map.TagMatchList = destinationMatchTagViewModels;

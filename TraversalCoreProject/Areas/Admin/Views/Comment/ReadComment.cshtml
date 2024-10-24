@@ -24,7 +24,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label">Tur</label>
-                                <input type="text" readonly id="ReceiverMail" class="form-control" value="KITA - ÜLKE - @Model.Destination.CityId" />
+                                <input type="text" readonly id="ReceiverMail" class="form-control" value="@Model.Destination.City.Country.Continent.ContinentName | - @Model.Destination.City.Country.CountryName - @Model.Destination.City.CityName" />
 
                             </div>
                             <div class="mb-1">

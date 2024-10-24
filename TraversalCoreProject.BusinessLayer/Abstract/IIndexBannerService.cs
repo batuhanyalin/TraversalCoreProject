@@ -9,5 +9,6 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
 {
     public interface IIndexBannerService:IGenericService<IndexBanner>
     {
+        public IndexBanner TIsApprovedByIndexBannerId(int id);
     }
 }

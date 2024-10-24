@@ -9,5 +9,6 @@ namespace TraversalCoreProject.BusinessLayer.Abstract
 {
     public interface ITestimonialService : IGenericService<Testimonial>
     {
+        public Testimonial TIsApprovedByTestimonialId(int id);
     }
 }

@@ -14,6 +14,7 @@
                     <tr>
                         <th>#</th>
                         <th>Görsel</th>
+                        <th>Kıta</th>
                         <th>Ülke</th>
                         <th>Şehir</th>
                         <th>Gün</th>
@@ -32,9 +33,10 @@
                         <tr>
                             <td>@count</td>
                             <td><a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.ImageUrl" style="height:50px;width:40px;border-radius:10%;" /></a></td>
+                            <td>@item.City.Country.Continent.ContinentName</td>
                             <td>@item.City.Country.CountryName</td>
                             <td>@item.City.CityName</td>
-                            <td>@item.DayNight</td>
+                            <td>@item.DayNight</td> 
                             <td>@item.Capacity</td>
                             <td>
                                 @await Component.InvokeAsync("_AdminDestinationListGuideComponentPartial", new { id = item.DestinationId })

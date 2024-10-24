@@ -15,5 +15,8 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
         public Destination IsApprovedByDestinationId(int id);
         public List<Destination> GetAllDestinationByApproved();
         public List<Destination> GetLastDestinationForMemberDashboard();
+        public Destination GetDestinationById(int id);
+        public List<Destination> GetDestinationListById(int id);
+
     }
 }

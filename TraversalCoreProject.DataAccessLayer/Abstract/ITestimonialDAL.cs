@@ -9,5 +9,6 @@ namespace TraversalCoreProject.DataAccessLayer.Abstract
 {
     public interface ITestimonialDAL:IGenericDAL<Testimonial>
     {
+        public Testimonial IsApprovedByTestimonialId(int id);
     }
 }

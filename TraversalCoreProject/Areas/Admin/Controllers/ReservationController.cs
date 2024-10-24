@@ -55,6 +55,104 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Route("CreateReservation")]
+        public async Task<IActionResult> CreateReservation()
+        {
+
+            var reservationStatus = _reservationStatusService.TGetListAll();
+            List<SelectListItem> rezStat = (from x in reservationStatus.ToList()
+                                            select new SelectListItem
+                                            {
+                                                Text = x.ReservationStatusName,
+                                                Value = x.ReservationStatusId.ToString()
+                                            }).ToList();
+
+            ViewBag.reservationStatus = rezStat;
+            var member = _userManager.Users.ToList();
+            var destin = _destinationService.TGetAllDestinationWithAllInfo();
+            List<SelectListItem> destinationListItem = (from x in destin.ToList()
+                                                        select new SelectListItem
+                                                        {
+                                                            Text = $" {x.City.Country.Continent.ContinentName} | {x.City.Country.CountryName} - {x.City.CityName} Tarih: {x.StartDate.ToString("dd.MM.yyy")} | Fiyat: {x.Price}$ | Güncel Kapasite: {x.Capacity} ",
+                                                            Value = x.DestinationId.ToString()
+                                                        }).ToList();
+            List<SelectListItem> memberListItem = (from x in member.ToList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = $"{x.Name} {x.Surname} | Eposta: {x.Email} | Telefon: {x.Phone}",
+                                                       Value = x.Id.ToString()
+                                                   }).ToList();
+            ViewBag.destinationList = destinationListItem;
+            ViewBag.memberList = memberListItem;
+            return View();
+        }
+        [HttpPost]
+        [Route("CreateReservation")]
+        public async Task<IActionResult> CreateReservation(AdminReservationCreateDto memberNewReservationDto)
+        {
+            var reservationStatus = _reservationStatusService.TGetListAll();
+            List<SelectListItem> rezStat = (from x in reservationStatus.ToList()
+                                            select new SelectListItem
+                                            {
+                                                Text = x.ReservationStatusName,
+                                                Value = x.ReservationStatusId.ToString()
+                                            }).ToList();
+
+            ViewBag.reservationStatus = rezStat;
+
+            var member = _userManager.Users.ToList();
+            var destin = _destinationService.TGetAllDestinationWithAllInfo();
+            List<SelectListItem> destinationListItem = (from x in destin.ToList()
+                                                        select new SelectListItem
+                                                        {
+                                                            Text = $"{x.City.Country.Continent.ContinentName} | {x.City.Country.CountryName} - {x.City.CityName} Tarih: {x.StartDate.ToString("dd.MM.yyy")} | Fiyat: {x.Price}$ | Güncel Kapasite: {x.Capacity} ",
+                                                            Value = x.DestinationId.ToString()
+                                                        }).ToList();
+            ViewBag.destinationList = destinationListItem;
+            List<SelectListItem> memberListItem = (from x in member.ToList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = $"{x.Name} {x.Surname} | Eposta: {x.Email} | Telefon: {x.Phone}",
+                                                       Value = x.Id.ToString()
+                                                   }).ToList();
+            ViewBag.memberList = memberListItem;
+
+            var validator = new AdminCreateReservationValidator().Validate(memberNewReservationDto);
+            if (!validator.IsValid)
+            {
+                foreach (var item in validator.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View(memberNewReservationDto);
+            }
+            var findDestination = _destinationService.TGetById(memberNewReservationDto.DestinationId);
+            if (findDestination.Capacity < memberNewReservationDto.PersonCount)
+            {
+                //Burada dto içerisine ekstra validationCode alanı açarak özel olarak istenen mesajı validasyon hatası olarak span içerisine gönderiyorum.
+                ModelState.AddModelError("ReservationError", "Kişi sayısı kapasitenin üzerinde olamaz.");
+                return View();
+            }
+            if (memberNewReservationDto.ReservationStatusId == 3)
+            {
+                int capacity1 = findDestination.Capacity;
+                int personCount = memberNewReservationDto.PersonCount;
+                int newCapacity = (capacity1 - personCount);
+                findDestination.Capacity = newCapacity;
+                _destinationService.TUpdate(findDestination);
+            }
+            Reservation reservation = new Reservation();
+            reservation.ReservationStatusId = memberNewReservationDto.ReservationStatusId;
+            reservation.PersonCount = memberNewReservationDto.PersonCount;
+            reservation.ReservationDate = memberNewReservationDto.ReservationDate;
+            reservation.DestinationId = memberNewReservationDto.DestinationId;
+            reservation.Description = memberNewReservationDto.Description;
+            reservation.MemberId = memberNewReservationDto.MemberId;
+            _reservationService.TUpdate(reservation);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         [Route("UpdateReservation/{id:int}")]
         public async Task<IActionResult> UpdateReservation(int id)
         {
@@ -74,7 +172,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             List<SelectListItem> destinationListItem = (from x in destin.ToList()
                                                         select new SelectListItem
                                                         {
-                                                            Text = $" Kıta - Ülke - {x.CityId} Tarih: {x.StartDate.ToString("dd.MM.yyy")} | Fiyat: {x.Price}$ | Güncel Kapasite: {x.Capacity} ",
+                                                            Text = $" {x.City.Country.Continent.ContinentName} | {x.City.Country.CountryName} - {x.City.CityName} Tarih: {x.StartDate.ToString("dd.MM.yyy")} | Fiyat: {x.Price}$ | Güncel Kapasite: {x.Capacity} ",
                                                             Value = x.DestinationId.ToString()
                                                         }).ToList();
             List<SelectListItem> memberListItem = (from x in member.ToList()
@@ -107,7 +205,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             List<SelectListItem> destinationListItem = (from x in destin.ToList()
                                                         select new SelectListItem
                                                         {
-                                                            Text = $" Kıta - Ülke - {x.CityId} Tarih: {x.StartDate.ToString("dd.MM.yyy")} | Fiyat: {x.Price}$ | Güncel Kapasite: {x.Capacity} ",
+                                                            Text = $"{x.City.Country.Continent.ContinentName} | {x.City.Country.CountryName} - {x.City.CityName} Tarih: {x.StartDate.ToString("dd.MM.yyy")} | Fiyat: {x.Price}$ | Güncel Kapasite: {x.Capacity} ",
                                                             Value = x.DestinationId.ToString()
                                                         }).ToList();
             ViewBag.destinationList = destinationListItem;

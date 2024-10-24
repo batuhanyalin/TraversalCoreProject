@@ -1,0 +1,73 @@
+﻿@model TestimonialCreateDto
+@{
+    ViewData["Title"] = "CreateTestimonial";
+    Layout = "~/Areas/Admin/Views/Shared/_UIAdminLayout.cshtml";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="/Admin/Testimonial/Index">Referanslar</a> /</span> Referans Oluştur</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <!-- Account -->
+                    <div class="row">
+                        <div class="col col-md-4">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                    <div class="button-wrapper">
+                                        <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                            <span class="d-none d-sm-block">Fotoğraf Yükle</span>
+                                            <i class="bx bx-upload d-block d-sm-none"></i>
+                                            <input type="file" name="Image"
+                                                   id="upload"
+                                                   class="account-file-input"
+                                                   hidden
+                                                   accept="image/png, image/jpeg" />
+                                        </label>
+                                        <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                            <i class="bx bx-reset d-block d-sm-none"></i>
+                                            <span class="d-none d-sm-block">Reset</span>
+                                        </button>
+
+                                        <p class="text-muted mb-0">JPG, GIF ya da PNG. Max boyut 800K</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-md-8">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Adı</label>
+                                        <input class="form-control" type="text" asp-for="ClientName" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="ClientName"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Soyadı</label>
+                                        <input class="form-control" type="text" asp-for="ClientSurname" />
+                                        <span style="color:darkred;font-size:smaller" asp-validation-for="ClientSurname"></span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="form-label">Metin</label>
+                                            <textarea style="height:100px" class="form-control" asp-for="Text"></textarea>
+                                            <span style="color:darkred;font-size:smaller" asp-validation-for="Text"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <button class="btn btn-primary me-2">Referans Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /Account -->
+            </div>
+        </div>
+    </div>
+
+</form>
+

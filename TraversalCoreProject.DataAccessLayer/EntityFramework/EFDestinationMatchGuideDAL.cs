@@ -21,7 +21,7 @@ namespace TraversalCoreProject.DataAccessLayer.EntityFramework
         }
         public List<DestinationMatchGuide> GetDestinationAllByGuideId(int id)
         {
-            var values = context.DestinationMatchGuides.Where(x => x.GuideId == id).Include(x => x.Guide).Include(x => x.Destination).ToList();
+            var values = context.DestinationMatchGuides.Where(x => x.GuideId == id).Include(x => x.Guide).Include(x => x.Destination).Include(x=>x.Destination.City).ThenInclude(x=>x.Country).ThenInclude(x=>x.Continent).ToList();
             return values;
         }
 

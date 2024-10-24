@@ -13,7 +13,6 @@ namespace TraversalCoreProject.BusinessLayer.ValidationRules
         public LoginValidator()
         {
             RuleFor(x => x.UserName).NotEmpty().WithMessage("Kullanıcı adı boş geçilemez");
-            RuleFor(x => x.Password).NotEmpty().WithMessage("Kullanıcı adı boş geçilemez");
         }
     }
 }

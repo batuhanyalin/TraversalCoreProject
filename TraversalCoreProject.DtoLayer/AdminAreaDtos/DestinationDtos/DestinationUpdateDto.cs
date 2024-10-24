@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using TraversalCoreProject.EntityLayer.Concrete;
 
 namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
@@ -11,9 +12,8 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
     public class DestinationUpdateDto
     {
         public int DestinationId { get; set; }
-        public int City { get; set; }
+        public City City { get; set; }
         public int CityId { get; set; }
-
         public string DayNight { get; set; }
         public DateTime StartDate { get; set; }
         public double Price { get; set; }
@@ -33,6 +33,7 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
         public IFormFile CoverImageUpload { get; set; }
         public List<DestinationGuide> GuideMatchList { get; set; }
         public List<DestinationTag> TagMatchList { get; set; }
+        public List<CityCountryContinent> CityCountryContinentList { get; set; }
 
         public class DestinationGuide
         {
@@ -48,7 +49,15 @@ namespace TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos
             public string TagName { get; set; }
             public int DestinationId { get; set; }
             public bool TagExist { get; set; }
+        }
+        public class CityCountryContinent
+        {
+            public int CityId { get; set; }
+            public City City { get; set; }
+            public int ContinentId { get; set; }
+            public int CountryId { get; set; }
 
         }
+
     }
 }

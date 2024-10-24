@@ -43,6 +43,16 @@ namespace TraversalCoreProject.BusinessLayer.Concrete
             return _destinationDAL.GetById(id);
         }
 
+        public Destination TGetDestinationById(int id)
+        {
+            return _destinationDAL.GetDestinationById(id);
+        }
+
+        public List<Destination> TGetDestinationListById(int id)
+        {
+            return _destinationDAL.GetDestinationListById(id);
+        }
+
         public List<Destination> TGetFeaturePosts()
         {
             return _destinationDAL.GetFeaturePosts();
