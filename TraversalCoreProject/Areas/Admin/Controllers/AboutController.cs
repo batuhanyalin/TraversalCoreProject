@@ -8,7 +8,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/[controller]")]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AboutController : Controller
     {
         private readonly IAboutService _aboutService;
@@ -19,12 +19,23 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             _aboutService = aboutService;
             _mapper = mapper;
         }
-
-        public IActionResult ListAbout()
+        [HttpGet]
+        [Route("Index")]
+        public IActionResult Index()
         {
             var values = _aboutService.TGetListAll();
-            var map = _mapper.Map<List<AboutListDto>>(values);
+            var about = values.FirstOrDefault();
+            var map = _mapper.Map<AboutUpdateDto>(about);
             return View(map);
+        }
+        [HttpPost]
+        [Route("Index")]
+        public IActionResult Index(AboutUpdateDto dto)
+        {
+            var value= _aboutService.TGetById(dto.AboutId);
+            value.Description = dto.Description;
+            _aboutService.TUpdate(value);
+            return RedirectToAction("Index");
         }
     }
 }

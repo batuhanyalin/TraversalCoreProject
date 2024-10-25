@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DocumentFormat.OpenXml.Presentation;
+using TraversalCoreProject.DtoLayer.AdminAreaDtos.AboutDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.AnnouncementDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.ContactDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.DestinationDtos;
@@ -12,6 +13,7 @@ using TraversalCoreProject.DtoLayer.AdminAreaDtos.RoleDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.SocialMediaDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.TagDtos;
 using TraversalCoreProject.DtoLayer.AdminAreaDtos.TestimonialDtos;
+using TraversalCoreProject.DtoLayer.DefaultDtos.AboutDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.CommentDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.ContactDtos;
 using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
@@ -90,6 +92,9 @@ namespace TraversalCoreProject.Mapping
             CreateMap<IndexBanner, IndexBannerListDto>().ReverseMap();
             CreateMap<IndexBanner, IndexBannerCreateDto>().ReverseMap();
             CreateMap<IndexBanner, IndexBannerUpdateDto>().ReverseMap();
+
+            CreateMap<About, AboutUpdateDto>().ReverseMap();
+            CreateMap<About, AboutShowDto>().ReverseMap();
 
             CreateMap<SocialMedia, SocialMediaListDto>().ReverseMap();
 

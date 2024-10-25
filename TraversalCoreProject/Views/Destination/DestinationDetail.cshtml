@@ -46,21 +46,13 @@
             </div>
             <div class="single-post-content">
                 <p id="summernote" class="mb-4">@Html.Raw(Model.Text1)</p>
-                <blockquote class="blockquote my-5">
-                    <div class="icon-quote"><span class="fa fa-quote-left" aria-hidden="true"></span></div>
-                    "Dünyayı dolaşın. Görebileceğiniz bütün rüyaların en muhteşemi!"
-                    <footer class="blockquote-footer mt-3">
-                        Ray Bradbury
-                    </footer>
-                </blockquote>
-
                 <div class="d-grid left-right mt-5 pb-md-5">
                     @await Component.InvokeAsync("_DestinationDetailTagsComponentPartial", new { id = ViewBag.id })
                     <div class="buttons-singles">
-                        <h4>Share :</h4>
+                        <h4>Paylaş :</h4>
                         <a href="#blog-share"><span class="fa fa-facebook" aria-hidden="true"></span></a>
                         <a href="#blog-share"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                        <a href="#blog-share"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
+                        <a href="#blog-share"><span class="fa fa-instagram" aria-hidden="true"></span></a>
                         <a href="#blog-share"><span class="fa fa-pinterest-p" aria-hidden="true"></span></a>
                     </div>
                 </div>
@@ -98,8 +90,6 @@
             toolbar: true, // Toolbar'ı gizler
             airMode: true, // Sadece görüntüleme modu
             height: 'auto', // Yüksekliği içeriğe göre ayarlar
-            minHeight: 200, // Minimum yüksekliği ayarlar
-            maxHeight: 800, // Maksimum yüksekliği ayarlar
             focus: true // Başlangıçta odaklanır
         });
     });
