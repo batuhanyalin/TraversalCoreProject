@@ -17,7 +17,7 @@ namespace TraversalCoreProject.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var values = _destinationService.TGetListAll();
+            var values = _destinationService.TGetAllDestinationWithAllInfo();
             var map = _mapper.Map<List<PopularDestinationListDto>>(values);
             return View(map);
         }

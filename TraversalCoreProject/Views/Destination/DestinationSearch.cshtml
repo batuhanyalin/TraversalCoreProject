@@ -1,6 +1,6 @@
 ﻿@model List<DestinationListDto>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "DestinationSearch";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
 
@@ -21,15 +21,16 @@
 <section class="grids-1 py-5">
     <div class="grids py-lg-5 py-md-4">
         <div class="container">
-            <h3 class="hny-title mb-5">Turlar</h3> 
+            <h3 class="hny-title mb-5">Turlar</h3>
             <div class="row">
                 @foreach (var item in Model)
                 {
+
                     <div class="col-lg-4 col-md-4 col-6 mt-md-0 mt-4">
                         <divaf class="column">
                             <a href="/Destination/DestinationDetail/@item.DestinationId"><img src="@item.ImageUrl" style="height:365px;width:410px" alt="" class="img-fluid"> </a>
                             <div class="info">
-                                    <h4><a href="/Destination/DestinationDetail/@item.DestinationId">@item.City.Country.CountryName - @item.City.CityName</a></h4>
+                                <h4><a href="/Destination/DestinationDetail/@item.DestinationId">@item.City.Country.CountryName - @item.City.CityName</a></h4>
                                 <p>@item.DayNight </p>
                                 <div class="dst-btm">
                                     <h6 class="">Fiyat: </h6>
@@ -37,9 +38,17 @@
                                     <small style="color:darkred">Kontenjan: @item.Capacity</small>
                                 </div>
                             </div>
-                           
                         </divaf>
                     </div>
+
+                }
+                @{
+                    if (ViewBag.count == 0)
+                    {
+                        <div class="col-lg-12 col-md-12 col-12 mt-md-0 mt-4">
+                            <span>Aradığınız tarihte seçtiğiniz kıta için şu anda tur bulunmamaktadır.</span>
+                        </div>
+                    }
                 }
             </div>
         </div>

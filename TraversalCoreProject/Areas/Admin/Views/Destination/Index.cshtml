@@ -8,8 +8,8 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="/Admin/Dashboard/Index">Anasayfa</a> /</span> Turlar <a class="btn btn-success" href="/Admin/Destination/CreateDestination"><i class="fas fa-circle-plus"></i> Yeni Tur</a></h4>
     <div class="card">
         <h5 class="card-header">Tur Listesi</h5>
-        <div class="table-responsive text-nowrap" id="destinationList">
-            <table class="table">
+        <div style="font-size:small" class="table-responsive text-nowrap" id="destinationList">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -17,7 +17,8 @@
                         <th>Kıta</th>
                         <th>Ülke</th>
                         <th>Şehir</th>
-                        <th>Gün</th>
+                        <th>Gün</th>                     
+                        <th>Tarih</th>
                         <th>Kapasite</th>
                         <th>Tur Rehberleri</th>
                         <th>Öne Çıkarıldı</th>
@@ -36,7 +37,8 @@
                             <td>@item.City.Country.Continent.ContinentName</td>
                             <td>@item.City.Country.CountryName</td>
                             <td>@item.City.CityName</td>
-                            <td>@item.DayNight</td> 
+                            <td>@item.DayNight</td>
+                            <td>@item.StartDate.ToString("dd.MM.yyy")</td>
                             <td>@item.Capacity</td>
                             <td>
                                 @await Component.InvokeAsync("_AdminDestinationListGuideComponentPartial", new { id = item.DestinationId })

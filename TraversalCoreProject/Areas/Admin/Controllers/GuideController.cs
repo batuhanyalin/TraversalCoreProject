@@ -39,6 +39,13 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             var map = _mapper.Map<List<GuideListDto>>(values);
             return View(map);
         }
+        [Route("GuideApplicationIndex")]
+        public async Task<IActionResult> GuideApplicationIndex()
+        {
+            var values = await _userManager.GetUsersInRoleAsync("GuideApplication");
+            var map = _mapper.Map<List<GuideListDto>>(values);
+            return View(map);
+        }
         [HttpGet]
         [Route("CreateGuide")]
         public IActionResult CreateGuide()
@@ -93,6 +100,18 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         public IActionResult IsApproved(int id)
         {
             _guideService.TIsApprovedByUserId(id);
+            return RedirectToAction("Index");
+        }
+        [Route("ApproveGuide/{id:int}")]
+        public async Task<IActionResult> ApproveGuide(int id)
+        {
+            var user= await _userManager.FindByIdAsync(id.ToString());
+            //Rol değiştirme işlemi--
+            var currentRole = await _userManager.GetRolesAsync(user);         
+            await _userManager.RemoveFromRolesAsync(user, currentRole);
+            await _userManager.AddToRoleAsync(user,"Guide");
+            //Rol değiştirme işlemi--
+        
             return RedirectToAction("Index");
         }
         [Route("DeleteGuide/{id:int}")]

@@ -19,10 +19,6 @@ namespace TraversalCoreProject.Controllers
 			_userManager = userManager;
 			_signInManager = signInManager;
 		}
-		public IActionResult ApprovedCheck()
-		{
-			return View();
-		}
 		public IActionResult GuideApplicationCheck()
 		{
 			return View();

@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using TraversalCoreProject.BusinessLayer.Abstract;
 using TraversalCoreProject.DtoLayer.DefaultDtos.DestinationDtos;
 using TraversalCoreProject.EntityLayer.Concrete;
+using TraversalCoreProject.Models;
 
 namespace TraversalCoreProject.Controllers
 {
@@ -41,10 +42,22 @@ namespace TraversalCoreProject.Controllers
         }
         public async Task<IActionResult> DestinationListForTag(int id)
         {
-            var tag = _tagService.TGetById (id);
+            var tag = _tagService.TGetById(id);
             var values = _destinationService.TGetAllDestinationByTagId(id);
-            ViewBag.tagName=tag.TagName;
+            ViewBag.tagName = tag.TagName;
             return View(values);
+        }
+
+        public IActionResult DestinationSearch(SearchReservationDefaultViewModel model)
+        {
+            var values = _destinationService.TGetAllDestinationWithAllInfo().Where(x => x.City.Country.ContinentId == model.ContinentId && x.StartDate == model.DestinationDate);
+            var map = _mapper.Map<List<DestinationListDto>>(values);
+            if (map == null)
+            {
+               map.DefaultIfEmpty();
+            }
+            ViewBag.count = map.Count();
+            return View(map);
         }
     }
 }
