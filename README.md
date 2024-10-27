@@ -39,19 +39,21 @@ Murat YÜCEDAĞ' ın youtubeda sunduğu 38 saatlik Traversal Tatil Seyahat Rezer
 
 # Veritabanı
 ![Veritabanı](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject.PresentationLayer/wwwroot/images/projectScreenshots/database.png?raw=true)
-# Giriş
+### Giriş
 ![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject.PresentationLayer/wwwroot/images/projectScreenshots/login.png?raw=true)
-# Onay Bekleyen Kullanıcı
+### Onay Bekleyen Kullanıcı
 ![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject.PresentationLayer/wwwroot/images/projectScreenshots/onay.png?raw=true)
-# Yetkisiz Giriş
+### Yetkisiz Giriş
 ![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject.PresentationLayer/wwwroot/images/projectScreenshots/error403forbidden.png?raw=true)
-# Sayfa Bulunamadı
+### Sayfa Bulunamadı
 ![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject.PresentationLayer/wwwroot/images/projectScreenshots/error404.png?raw=true)
-# Yeni Üyelik
+### Yeni Üyelik
 ![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject.PresentationLayer/wwwroot/images/projectScreenshots/registerValidation.png?raw=true)
+### Parola Sıfırlama
+![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject.PresentationLayer/wwwroot/images/projectScreenshots/forgetPassword.png?raw=true)
 
 #### Dashboard
-![Dashboard](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject.PresentationLayer/wwwroot/images/projectScreenshots/dashboard.png?raw=true)
+![Dashboard](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject.PresentationLayer/wwwroot/images/projectScreenshots/1.png?raw=true)
 #### Kullanıcı Listesi
 ![Kullanıcı Listesi](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject.PresentationLayer/wwwroot/images/projectScreenshots/userList.png?raw=true)
 #### Kullanıcı Silme
