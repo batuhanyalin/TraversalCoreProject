@@ -52,60 +52,15 @@ Murat YÜCEDAĞ' ın youtubeda sunduğu 38 saatlik Traversal Tatil Seyahat Rezer
 ### Parola Sıfırlama
 ![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/forgetPassword.png?raw=true)
 
-#### Dashboard
-![Dashboard](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/1.png?raw=true)
-#### Kullanıcı Listesi
-![Kullanıcı Listesi](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/userList.png?raw=true)
-#### Kullanıcı Silme
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/deleteUser.png?raw=true)
-#### Kullanıcı Güncelleme
-![Kullanıcı Güncelleme](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/updateUser.png?raw=true)
-##### Kullanıcı Detay
-![Bütün Mesajlar](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/userDetail.png?raw=true)
-#### Profilim - Kullanıcı Paneli
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/myProfileUserPanel.png?raw=true)
-#### Şifre Değiştirme
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/updatePassword.png?raw=true)
-#### Şifre Değiştirme 
-###### Güncel Parola Yanlış
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/updatePasswordError.png?raw=true)
-#### Şifre Değiştirme
-###### Girilen Şifreler Birbirleriyle Eşleşmiyor
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/updatePasswordError2.png?raw=true)
-#### Gelen Mesajlar
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/inboxMessageList.png?raw=true)
-#### Gelen Mesajlar - Kullanıcı Paneli
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/inboxUserPanel.png?raw=true)
-#### Gönderilen Mesajlar
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/sentMessageList.png?raw=true)
-#### Taslak Mesajlar
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/draftMessageList.png?raw=true)
-#### Mesaj Okuma
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/readMessage.png?raw=true)
-#### Mesajları Çöp Kutusuna Taşı
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/moveTrash.png?raw=true)
-#### Mesajlar Çöp Kutusuna Taşındı
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/correctTrash.png?raw=true)
-#### Mesajlar Çöp Kutusundan Alma
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/moveInbox.png?raw=true)
-#### Mesajları Önemli Kutusuna Taşı
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/moveImport.png?raw=true)
-#### Mesajlar Önemli Kutusuna Taşındı
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/correctImport.png?raw=true)
-#### Yeni Mesaj Gönderme İşlemi
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/correctSendingMessageUserPanel.png?raw=true)
-#### Yeni Mesaj Gönderme - Kendine Mesaj Gönderemezsin Hatası
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/cantSendingYourselfError.png?raw=true)
-#### Taslak Mesaj Kaydetme
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/editDraftMessageSave.png?raw=true)
-#### Taslak Mesajı Gönderme
-![Profilim](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/editDraftMessageSending.png?raw=true)
-##### Yeni Rol Ekleme
-![Yeni Rol Ekleme](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/newRole.png?raw=true)
-##### Rol Güncelleme
-![Rol Güncelleme](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/updateRole.png?raw=true)
-##### Rol Silme
-![Rol Silme](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/deleteRole.png?raw=true)
-
-
-
+####
+![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/1.png?raw=true)
+#### 
+![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/2.png?raw=true)
+#### 
+![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/3.png?raw=true)
+####
+![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/4.png?raw=true)
+####
+![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/5.png?raw=true)
+####
+![](https://github.com/batuhanyalin/TraversalCoreProject/blob/master/TraversalCoreProject/wwwroot/images/projectScreenshots/6.png?raw=true)
