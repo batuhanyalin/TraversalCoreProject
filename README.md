@@ -1,6 +1,7 @@
 # Asp.Net Core 6 MVC CodeFirst - Traver Seyahat Sitesi Rezervasyon Projesi
 Murat YÜCEDAĞ' ın youtubeda sunduğu 38 saatlik Traversal Tatil Seyahat Rezervasyon Sitesi eğitimi kapsamında geliştirmiş olduğum projeyi tam anlamıyla tamamlayıp canlıya taşımış bulunmaktayım. Projenin tanıtım videosuna <a href="https://www.youtube.com/watch?v=S6IFD3fg1_4&ab_channel=BatuhanYALIN">buraya</a> tıklayarak ulaşabilirsiniz. Proje tatil seyahat sitesinin bütün ihtiyaçlarına cevap vermektedir. Turlar incelenebilir, üye olunup rezervasyon oluşturulabilir.
-##### Proje Tanıtım Linki: https://www.youtube.com/watch?v=S6IFD3fg1_4&ab_channel=BatuhanYALIN
+##### Proje Tanıtım Videosu: https://www.youtube.com/watch?v=S6IFD3fg1_4&ab_channel=BatuhanYALIN
+##### Proje Canlı Linki: https://batuhanyalinsoftware.com.tr/
 ## Projeye Ait Bazı Özellikler;
 * Proje Asp.Net 6.0 MVC mimarisinde CodeFirst yaklaşımıyla yapıldı.
 * Identity kütüphanesiyle login-logout-register-role sistemi kullanıldı.
