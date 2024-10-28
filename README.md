@@ -19,6 +19,8 @@ Murat YÜCEDAĞ' ın youtubeda sunduğu 38 saatlik Traversal Tatil Seyahat Rezer
 
 ### Kullanılan Bazı Teknolojiler
 * Structural Repository design pattern ile oluşturulmuştur.
+* Proje N tier Architecture ile oluşturuldu.
+* Eğitim içerisinde API bölümünde Swagger, Postman kullanıldı.
 * Cascading ile 3lü dropdownlist listelemesi yapıldı.
 * Ana projeye ek olarak eğitim içerisinde SignalR ve API teknolojileri proje içerisinde çalışılmıştır.
 * DbCodeFirst ile MSSQL veritabanı oluşturulup yönetimi sağlandı.
